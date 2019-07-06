@@ -173,45 +173,7 @@ namespace KorOptik_v1
                     }
                     else if (comboBoxRaporSinavTuru.SelectedIndex == 3)//ayt
                     {
-                        List<OgrenciSonuclari> ogrenciPuanliSonuclari = new List<OgrenciSonuclari>();
-
-                        for (int i = 1; i < ogrencilerPuansiz.Count; i++)
-                        {
-                            String[] ogrSonuclari = ogrencilerPuansiz[i].Split('|');
-
-                            double turkceNeti = Convert.ToDouble(ogrSonuclari[9]);
-                            double sosNeti = Convert.ToDouble(ogrSonuclari[12]);
-                            double mat1Neti = Convert.ToDouble(ogrSonuclari[15]);
-                            double fen1Neti = Convert.ToDouble(ogrSonuclari[18]);
-                            double TDE_SB_1_Neti = Convert.ToDouble(ogrSonuclari[21]);
-                            double SB_2Neti = Convert.ToDouble(ogrSonuclari[24]);
-                            double mat2Neti = Convert.ToDouble(ogrSonuclari[27]);
-                            double fen2Neti = Convert.ToDouble(ogrSonuclari[30]);
-
-
-                            double puanTYT = 100 + turkceNeti * 3.3 + sosNeti * 3.3 + mat1Neti * 3.4 + fen1Neti * 3.4;
-                            puanTYT = Math.Round(puanTYT, 2);
-
-                            double puanSAY= 100 + turkceNeti * 3.3 + sosNeti * 3.3 + mat1Neti * 3.4 + fen1Neti * 3.4;
-                            puanSAY = Math.Round(puanSAY, 2);
-
-                            List<String> ogrenciPuanli = new List<string>();
-
-                            for (int j = 1; j < ogrSonuclari.Length; j++)
-                            {
-                                ogrenciPuanli.Add(ogrSonuclari[j]);
-                            }
-
-                            OgrenciSonuclari ogrenciSonuclari = new OgrenciSonuclari();
-                            ogrenciSonuclari.addOgrenciSonuclari(ogrenciPuanli);
-                            //ogrenciSonuclari.setPuan(puan);
-                            ogrenciPuanliSonuclari.Add(ogrenciSonuclari);
-                        }
-
-                        List<OgrenciSonuclari> ogrenciSonuclariPuanSirali = ogrenciPuanliSonuclari.OrderBy(o => o.puan).ToList<OgrenciSonuclari>();
-                        ogrenciSonuclariPuanSirali.Reverse();
-
-                        this.pdfyeAktar(ogrencilerPuansiz, ogrenciSonuclariPuanSirali, "PUANI", 26);
+                       
                     }
                     else
                     {
