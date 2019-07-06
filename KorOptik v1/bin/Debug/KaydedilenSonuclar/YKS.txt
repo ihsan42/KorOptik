@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal| | |Temel Matematik| | |Fen Bilimleri| | |TDE-SB-1| | |Sosyal Bilimler 2| | |Matematik| | |Fen Bilimleri| | |
+1|ALİ                 |0001|10H|A|000012| |4|4|3|3|3|2,25|2|2|1,5|1|1|0,75|8|4|7|3|4|2|3|2|2,5|2|1|1,75|

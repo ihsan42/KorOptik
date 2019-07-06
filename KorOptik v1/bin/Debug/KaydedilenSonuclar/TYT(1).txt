@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilimler| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|ALİ                 |0001|10H|A|000012| |4|4|3|3|3|2,25|2|2|1,5|1|1|0,75|10|10|7,5|

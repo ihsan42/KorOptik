@@ -1,0 +1,3 @@
+Sýra|Ad-Soyad|Öðrenci No|Sýnýf-Þube|Kitapçýk Türü|Okul Kodu|&&&|Türkçe| | |Ýnkýlap| | |Din Kültürü| | |Yabancý Dil| | |TOPLAM| | |
+1|ÝHSAN YILMAZ        |0123|8F|C|123456| |10|0|10|10|0|10|10|0|10|10|0|10|40|0|40|
+1|ALÝ YILMAZ        |0223|8F|C|123456| |11|0|11|10|0|10|10|0|10|10|0|10|41|0|41|

@@ -1,0 +1,4 @@
+Sýra|Ad-Soyad|Öðrenci No|Sýnýf-Þube|Kitapçýk Türü|Okul Kodu|&&&|Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|ÝHSAN YILMAZ        |0123|8F|C|123456| |1|0|10|10|0|10|11|0|11|
+1|ALÝ YILMAZ        |0223|8F|C|123456| |2|0|11|10|0|10|12|0|12|
+1|VELÝ YILMAZ        |0323|8F|C|123456| |3|0|12|10|0|10|13|0|13|
