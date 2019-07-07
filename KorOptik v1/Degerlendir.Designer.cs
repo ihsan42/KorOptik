@@ -330,8 +330,7 @@
             // 
             // Degerlendir
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1077, 585);
             this.Controls.Add(this.labelKayitIsmi);
@@ -359,7 +358,6 @@
             this.Name = "Degerlendir";
             this.Text = "Degerlendir";
             this.TopMost = true;
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Degerlendir_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCevapAnahtariA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCevapAnahtariB)).EndInit();

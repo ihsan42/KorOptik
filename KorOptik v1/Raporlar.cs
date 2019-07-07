@@ -92,7 +92,11 @@ namespace KorOptik_v1
                         List<OgrenciSonuclari> ogrenciSonuclariPuanSirali = ogrenciPuanliSonuclari.OrderBy(o => o.puan).ToList<OgrenciSonuclari>();
                         ogrenciSonuclariPuanSirali.Reverse();
 
-                        this.pdfyeAktar(ogrencilerPuansiz, ogrenciSonuclariPuanSirali, "PUANI", 26);
+                         PdfPTable tablo= this.pdfyeAktar(ogrencilerPuansiz, ogrenciSonuclariPuanSirali, "PUANI", 26,false);
+
+                        String s_dosyaadi = textBox1.Text.ToString() + ".pdf";
+                        pfdKaydetDialogla(s_dosyaadi,tablo);
+
                     }
                     else if (comboBoxRaporSinavTuru.SelectedIndex == 1)//lgs
                     {
@@ -128,7 +132,11 @@ namespace KorOptik_v1
                         List<OgrenciSonuclari> ogrenciSonuclariPuanSirali = ogrenciPuanliSonuclari.OrderBy(o => o.puan).ToList<OgrenciSonuclari>();
                         ogrenciSonuclariPuanSirali.Reverse();
 
-                        this.pdfyeAktar(ogrencilerPuansiz, ogrenciSonuclariPuanSirali, "LGS PUANI", 32);
+                        PdfPTable tablo= this.pdfyeAktar(ogrencilerPuansiz, ogrenciSonuclariPuanSirali, "LGS PUANI", 32,false);
+
+                        String s_dosyaadi = textBox1.Text.ToString() + ".pdf";
+                        pfdKaydetDialogla(s_dosyaadi, tablo);
+
                     }
                     else if (comboBoxRaporSinavTuru.SelectedIndex == 2)//sadece tyt
                     {
@@ -150,6 +158,7 @@ namespace KorOptik_v1
                                                  Convert.ToDouble(ogrSonuclari[27]) * 3.4 +//FİZİK
                                                  Convert.ToDouble(ogrSonuclari[30]) * 3.4 +//KİMYA
                                                  Convert.ToDouble(ogrSonuclari[33]) * 3.4;//BİYOLOJİ 
+                                puan = Math.Round(puan, 1);
                             }                            
 
                             List <String> ogrenciPuanli = new List<string>();
@@ -168,12 +177,154 @@ namespace KorOptik_v1
                         List<OgrenciSonuclari> ogrenciSonuclariPuanSirali = ogrenciPuanliSonuclari.OrderBy(o=>o.puan).ToList<OgrenciSonuclari>();
                         ogrenciSonuclariPuanSirali.Reverse();
 
-                        this.pdfyeAktar(ogrencilerPuansiz, ogrenciSonuclariPuanSirali, "TYT PUANI",41);
+                        PdfPTable tablo= this.pdfyeAktar(ogrencilerPuansiz, ogrenciSonuclariPuanSirali, "TYT PUANI",41,false);
+
+                        String s_dosyaadi = textBox1.Text.ToString() + ".pdf";
+                        pfdKaydetDialogla(s_dosyaadi, tablo);
 
                     }
                     else if (comboBoxRaporSinavTuru.SelectedIndex == 3)//ayt
                     {
-                       
+                        List<OgrenciSonuclari> ogrenciPuanliSonuclari = new List<OgrenciSonuclari>();
+
+                        for (int i = 1; i < ogrencilerPuansiz.Count; i++)
+                        {
+                            String[] ogrSonuclari = ogrencilerPuansiz[i].Split('|');
+
+                            double puan = 0;
+                            double puanSAY = 0;
+                            double puanEA = 0;
+                            double puanSOZ = 0;                           
+
+                            //SAY PUANI
+                            double MAT2neti = Convert.ToDouble(ogrSonuclari[57]);
+                            double FEN2neti = Convert.ToDouble(ogrSonuclari[60]) +//AYT-FİZİK
+                                             Convert.ToDouble(ogrSonuclari[63]) +//AYT-KİMYA
+                                             Convert.ToDouble(ogrSonuclari[66]);//AYT-BİYOLOJİ
+
+                            if (Convert.ToDouble(ogrSonuclari[9]) >= 0.5 || Convert.ToDouble(ogrSonuclari[24]) >= 0.5)//türkçe veya matematik neti 0.5 ten küçükse puan hesabı yapılmaz
+                            {
+                                if (MAT2neti >= 0.5 || FEN2neti >= 0.5)//mat2 veya fen2 neti 0.5 ten küçükse puan hesabı yapılmaz
+                                {
+                                    puanSAY = 100 + Convert.ToDouble(ogrSonuclari[9]) * 1.32 +//TYT-TÜRKCE
+                                                 Convert.ToDouble(ogrSonuclari[12]) * 1.36 +//TYT-TARİH
+                                                 Convert.ToDouble(ogrSonuclari[15]) * 1.36 +//TYT-COĞRAFYA
+                                                 Convert.ToDouble(ogrSonuclari[18]) * 1.36 +//TYT-FELSEFE
+                                                 Convert.ToDouble(ogrSonuclari[21]) * 1.36 +//TYT-DİN
+                                                 Convert.ToDouble(ogrSonuclari[24]) * 1.32 +//TYT-MATEMATİK
+                                                 Convert.ToDouble(ogrSonuclari[27]) * 1.36 +//TYT-FİZİK
+                                                 Convert.ToDouble(ogrSonuclari[30]) * 1.36 +//TYT-KİMYA
+                                                 Convert.ToDouble(ogrSonuclari[33]) * 1.36 +//TYT-BİYOLOJİ 
+                                               
+                                                 Convert.ToDouble(ogrSonuclari[57]) * 3.0 +//AYT-MATEMATİK
+                                                 Convert.ToDouble(ogrSonuclari[60]) * 2.85 +//AYT-FİZİK
+                                                 Convert.ToDouble(ogrSonuclari[63]) * 3.07 +//AYT-KİMYA
+                                                 Convert.ToDouble(ogrSonuclari[66]) * 3.07;//AYT-BİYOLOJİ 
+
+                                    puanSAY = Math.Round(puanSAY, 1);
+                                }
+                            }
+
+                            //EA PUANI                            
+                            double TDE_SB_1_neti = Convert.ToDouble(ogrSonuclari[36]) +//AYT-TDE
+                                                   Convert.ToDouble(ogrSonuclari[39]) +//AYT-TARİH1
+                                                   Convert.ToDouble(ogrSonuclari[42]) ;//AYT-COĞRAFYA1
+
+                            if (Convert.ToDouble(ogrSonuclari[9]) >= 0.5 || Convert.ToDouble(ogrSonuclari[24]) >= 0.5)//türkçe veya matematik neti 0.5 ten küçükse puan hesabı yapılmaz
+                            {
+                                if (MAT2neti >= 0.5 || TDE_SB_1_neti >= 0.5)//mat2 veya TDE_SB_1_neti neti 0.5 ten küçükse puan hesabı yapılmaz
+                                {
+                                    puanEA = 100 + Convert.ToDouble(ogrSonuclari[9]) * 1.32 +//TYT-TÜRKCE
+                                                 Convert.ToDouble(ogrSonuclari[12]) * 1.36 +//TYT-TARİH
+                                                 Convert.ToDouble(ogrSonuclari[15]) * 1.36 +//TYT-COĞRAFYA
+                                                 Convert.ToDouble(ogrSonuclari[18]) * 1.36 +//TYT-FELSEFE
+                                                 Convert.ToDouble(ogrSonuclari[21]) * 1.36 +//TYT-DİN
+                                                 Convert.ToDouble(ogrSonuclari[24]) * 1.32 +//TYT-MATEMATİK
+                                                 Convert.ToDouble(ogrSonuclari[27]) * 1.36 +//TYT-FİZİK
+                                                 Convert.ToDouble(ogrSonuclari[30]) * 1.36 +//TYT-KİMYA
+                                                 Convert.ToDouble(ogrSonuclari[33]) * 1.36 +//TYT-BİYOLOJİ 
+
+                                                 Convert.ToDouble(ogrSonuclari[36]) * 3.0 +//AYT-TDE
+                                                 Convert.ToDouble(ogrSonuclari[39]) * 2.8 +//AYT-TARİH1
+                                                 Convert.ToDouble(ogrSonuclari[42]) * 3.33 +//AYT-COĞRAFYA1                                                 
+                                                 Convert.ToDouble(ogrSonuclari[57]) * 3.0 ;//AYT-MATEMATİK   
+
+                                    puanEA = Math.Round(puanEA, 1);
+                                }
+                            }
+
+                            //SOZ PUANI                            
+                            double SB2neti = Convert.ToDouble(ogrSonuclari[45]) +//AYT-TARİH2
+                                             Convert.ToDouble(ogrSonuclari[48]) +//AYT-COĞRAFYA2
+                                             Convert.ToDouble(ogrSonuclari[51]) +//AYT-FELSEFE
+                                             Convert.ToDouble(ogrSonuclari[54]) ;//AYT-DİN
+
+                            if (Convert.ToDouble(ogrSonuclari[9]) >= 0.5 || Convert.ToDouble(ogrSonuclari[24]) >= 0.5)//türkçe veya matematik neti 0.5 ten küçükse puan hesabı yapılmaz
+                            {
+                                if (TDE_SB_1_neti >= 0.5 || SB2neti >= 0.5)//mat2 veya SB2neti neti 0.5 ten küçükse puan hesabı yapılmaz
+                                {
+                                    puanSOZ = 100 + Convert.ToDouble(ogrSonuclari[9]) * 1.32 +//TYT-TÜRKCE
+                                                 Convert.ToDouble(ogrSonuclari[12]) * 1.36 +//TYT-TARİH
+                                                 Convert.ToDouble(ogrSonuclari[15]) * 1.36 +//TYT-COĞRAFYA
+                                                 Convert.ToDouble(ogrSonuclari[18]) * 1.36 +//TYT-FELSEFE
+                                                 Convert.ToDouble(ogrSonuclari[21]) * 1.36 +//TYT-DİN
+                                                 Convert.ToDouble(ogrSonuclari[24]) * 1.32 +//TYT-MATEMATİK
+                                                 Convert.ToDouble(ogrSonuclari[27]) * 1.36 +//TYT-FİZİK
+                                                 Convert.ToDouble(ogrSonuclari[30]) * 1.36 +//TYT-KİMYA
+                                                 Convert.ToDouble(ogrSonuclari[33]) * 1.36 +//TYT-BİYOLOJİ 
+
+                                                 Convert.ToDouble(ogrSonuclari[36]) * 3.0  +//AYT-TDE
+                                                 Convert.ToDouble(ogrSonuclari[39]) * 2.8  +//AYT-TARİH1
+                                                 Convert.ToDouble(ogrSonuclari[42]) * 3.33 +//AYT-COĞRAFYA1  
+                                                 Convert.ToDouble(ogrSonuclari[45]) * 2.91 +//AYT-TARİH2
+                                                 Convert.ToDouble(ogrSonuclari[48]) * 2.91 +//AYT-COĞRAFYA2
+                                                 Convert.ToDouble(ogrSonuclari[51]) * 3.0  +//AYT-FELSEFE
+                                                 Convert.ToDouble(ogrSonuclari[54]) * 3.33 ;//AYT-DİN 
+
+                                    puanSOZ = Math.Round(puanSOZ, 1);
+                                }
+                            }
+
+                            List<String> ogrenciPuanli = new List<string>();
+
+                            for (int j = 1; j < ogrSonuclari.Length; j++)
+                            {
+                                ogrenciPuanli.Add(ogrSonuclari[j]);
+                            }
+
+                            OgrenciSonuclari ogrenciSonuclari = new OgrenciSonuclari();
+                            ogrenciSonuclari.addOgrenciSonuclari(ogrenciPuanli);
+                            ogrenciSonuclari.setPuan(puan);
+                            ogrenciSonuclari.setPuanSAY(puanSAY);
+                            ogrenciSonuclari.setPuanEA(puanEA);
+                            ogrenciSonuclari.setPuanSOZ(puanSOZ);
+                            ogrenciPuanliSonuclari.Add(ogrenciSonuclari);
+                        }
+
+                        List<OgrenciSonuclari> ogrenciSonuclariPuanSirali = ogrenciPuanliSonuclari.OrderBy(o => o.puanSAY).ToList<OgrenciSonuclari>();
+                        ogrenciSonuclariPuanSirali.Reverse();
+
+                        PdfPTable tablo= this.pdfyeAktar(ogrencilerPuansiz, ogrenciSonuclariPuanSirali, "TYT PUANI", 42,true);
+
+                        String s_dosyaadi = textBox1.Text.ToString()+"(SAY Puan Sıralı)" + ".pdf";
+                        string dizin= pfdKaydetDialogla(s_dosyaadi, tablo);
+
+                        ogrenciSonuclariPuanSirali.Clear();
+
+                        ogrenciSonuclariPuanSirali = ogrenciPuanliSonuclari.OrderBy(o => o.puanEA).ToList<OgrenciSonuclari>();
+                        ogrenciSonuclariPuanSirali.Reverse();
+
+                        tablo = this.pdfyeAktar(ogrencilerPuansiz, ogrenciSonuclariPuanSirali, "TYT PUANI", 42, true);
+                        pdfKaydet(dizin+ "(EA Puan Sıralı).pdf", tablo);
+
+                        ogrenciSonuclariPuanSirali.Clear();
+
+                        ogrenciSonuclariPuanSirali = ogrenciPuanliSonuclari.OrderBy(o => o.puanSOZ).ToList<OgrenciSonuclari>();
+                        ogrenciSonuclariPuanSirali.Reverse();
+
+                        tablo = this.pdfyeAktar(ogrencilerPuansiz, ogrenciSonuclariPuanSirali, "TYT PUANI", 42, true);
+                        pdfKaydet(dizin + "(SOZ Puan Sıralı).pdf", tablo);
+
                     }
                     else
                     {
@@ -212,7 +363,7 @@ namespace KorOptik_v1
             }
         }
 
-        private void pdfyeAktar(List<String> ogrencilerPuansiz, List<OgrenciSonuclari> ogrenciSonuclariPuanSirali, String puanTuruAdi, int colspan) {
+        private PdfPTable pdfyeAktar(List<String> ogrencilerPuansiz, List<OgrenciSonuclari> ogrenciSonuclariPuanSirali, String puanTuruAdi, int colspan, bool YKSmi) {
             /// PDFYE AKTARMA/////
             /// 
             String[] ogrBilgileri = ogrencilerPuansiz[0].Split('|');
@@ -222,7 +373,7 @@ namespace KorOptik_v1
             iTextSharp.text.Font başlıkfont = new iTextSharp.text.Font(arial, 10, iTextSharp.text.Font.NORMAL);
 
             PdfPTable tablo = new PdfPTable(1);
-            tablo.TotalWidth = 800f;
+            tablo.TotalWidth = 820f;
             tablo.LockedWidth = true;
 
             PdfPCell başlık = new PdfPCell(new Phrase(textBox1.Text, başlıkfont));
@@ -234,18 +385,10 @@ namespace KorOptik_v1
             ///ilk satır///
             PdfPTable tableOgrenci = new PdfPTable(colspan);
             PdfPCell satır = null;
-            int index = -1;
-            for (int i = 0; i < 7; i++)
-            {
-                if (ogrBilgileri[i].Equals("&&&"))
-                {
-                    index = i;
 
-                    satır = new PdfPCell(new Phrase(" ", font));
-                    satır.HorizontalAlignment = 1;
-                    tableOgrenci.AddCell(satır);
-                }
-                else if (ogrBilgileri[i].Equals("Ad-Soyad"))
+            for (int i = 0; i < 4; i++)
+            {                
+                 if (ogrBilgileri[i].Equals("Ad-Soyad"))
                 {
                     satır = new PdfPCell(new Phrase(ogrBilgileri[i], font));
                     satır.HorizontalAlignment = 1;
@@ -260,21 +403,64 @@ namespace KorOptik_v1
                 }
             }
 
-            for (int i = 7; i < ogrBilgileri.Length-3; i += 3)
+            if (YKSmi==false)
             {
-                satır = new PdfPCell(new Phrase(ogrBilgileri[i], font));
+                satır = new PdfPCell(new Phrase(ogrBilgileri[4], font));
                 satır.HorizontalAlignment = 1;
-                satır.Colspan = 3;
+                tableOgrenci.AddCell(satır);
+
+                satır = new PdfPCell(new Phrase(ogrBilgileri[5], font));
+                satır.HorizontalAlignment = 1;
+                tableOgrenci.AddCell(satır);
+
+                satır = new PdfPCell(new Phrase(" ", font));
+                satır.HorizontalAlignment = 1;
                 tableOgrenci.AddCell(satır);
             }
 
-            satır = new PdfPCell(new Phrase(" ", font));
-            satır.HorizontalAlignment = 1;
-            tableOgrenci.AddCell(satır);
+            if (YKSmi == true)
+            {
+                for (int i = 34; i < ogrBilgileri.Length - 3; i += 3)
+                {
+                    satır = new PdfPCell(new Phrase(ogrBilgileri[i], font));
+                    satır.HorizontalAlignment = 1;
+                    satır.Colspan = 3;
+                    tableOgrenci.AddCell(satır);
+                }
+            }
+            else
+            {
+                for (int i = 7; i < ogrBilgileri.Length - 3; i += 3)
+                {
+                    satır = new PdfPCell(new Phrase(ogrBilgileri[i], font));
+                    satır.HorizontalAlignment = 1;
+                    satır.Colspan = 3;
+                    tableOgrenci.AddCell(satır);
+                }
 
-            satır = new PdfPCell(new Phrase(puanTuruAdi, font));
-            satır.HorizontalAlignment = 1;
-            tableOgrenci.AddCell(satır);
+                satır = new PdfPCell(new Phrase(" ", font));
+                satır.HorizontalAlignment = 1;
+                tableOgrenci.AddCell(satır);
+
+                satır = new PdfPCell(new Phrase(puanTuruAdi, font));
+                satır.HorizontalAlignment = 1;
+                tableOgrenci.AddCell(satır);
+            }
+                                   
+            if (YKSmi == true)
+            {
+                satır = new PdfPCell(new Phrase("SAY", font));
+                satır.HorizontalAlignment = 1;
+                tableOgrenci.AddCell(satır);
+
+                satır = new PdfPCell(new Phrase("EA", font));
+                satır.HorizontalAlignment = 1;
+                tableOgrenci.AddCell(satır);
+
+                satır = new PdfPCell(new Phrase("SOZ", font));
+                satır.HorizontalAlignment = 1;
+                tableOgrenci.AddCell(satır);
+            }
 
             PdfPCell cellOgrenci = new PdfPCell(tableOgrenci);
             tablo.AddCell(cellOgrenci);
@@ -290,34 +476,71 @@ namespace KorOptik_v1
             satır.HorizontalAlignment = 1;
             satır.Colspan = 3;
             tabloDYN.AddCell(satır);
-
-            for (int i = 0; i < 5; i++)
+           
+            if (YKSmi == true)
             {
-                satır = new PdfPCell(new Phrase(" ", font));
-                satır.HorizontalAlignment = 1;
-                tabloDYN.AddCell(satır);
+                for (int i = 0; i < 2; i++)
+                {
+                    satır = new PdfPCell(new Phrase(" ", font));
+                    satır.HorizontalAlignment = 1;
+                    tabloDYN.AddCell(satır);
+                }
+
+                for (int i = 0; i < 11; i ++)
+                {
+                    satır = new PdfPCell(new Phrase("D", font));
+                    satır.HorizontalAlignment = 1;
+                    tabloDYN.AddCell(satır);
+
+                    satır = new PdfPCell(new Phrase("Y", font));
+                    satır.HorizontalAlignment = 1;
+                    tabloDYN.AddCell(satır);
+
+                    satır = new PdfPCell(new Phrase("N", font));
+                    satır.HorizontalAlignment = 1;
+                    tabloDYN.AddCell(satır);
+                }
             }
-
-            for (int i = 0; i < ogrBilgileri.Length-8; i += 3)
+            else
             {
-                satır = new PdfPCell(new Phrase("D", font));
-                satır.HorizontalAlignment = 1;
-                tabloDYN.AddCell(satır);
+                for (int i = 0; i < 5; i++)
+                {
+                    satır = new PdfPCell(new Phrase(" ", font));
+                    satır.HorizontalAlignment = 1;
+                    tabloDYN.AddCell(satır);
+                }
 
-                satır = new PdfPCell(new Phrase("Y", font));
-                satır.HorizontalAlignment = 1;
-                tabloDYN.AddCell(satır);
+                for (int i = 0; i < ogrBilgileri.Length-8; i += 3)
+                {
+                    satır = new PdfPCell(new Phrase("D", font));
+                    satır.HorizontalAlignment = 1;
+                    tabloDYN.AddCell(satır);
 
-                satır = new PdfPCell(new Phrase("N", font));
-                satır.HorizontalAlignment = 1;
-                tabloDYN.AddCell(satır);
+                    satır = new PdfPCell(new Phrase("Y", font));
+                    satır.HorizontalAlignment = 1;
+                    tabloDYN.AddCell(satır);
+
+                    satır = new PdfPCell(new Phrase("N", font));
+                    satır.HorizontalAlignment = 1;
+                    tabloDYN.AddCell(satır);
+                }
+
+                for (int i = 0; i < 2; i++)
+                {
+                    satır = new PdfPCell(new Phrase(" ", font));
+                    satır.HorizontalAlignment = 1;
+                    tabloDYN.AddCell(satır);
+                }
             }
-
-            for (int i = 0; i < 2; i++)
+                        
+            if (YKSmi == true)
             {
-                satır = new PdfPCell(new Phrase(" ", font));
-                satır.HorizontalAlignment = 1;
-                tabloDYN.AddCell(satır);
+                for (int i = 0; i < 3; i++)
+                {
+                    satır = new PdfPCell(new Phrase(" ", font));
+                    satır.HorizontalAlignment = 1;
+                    tabloDYN.AddCell(satır);
+                }
             }
 
             PdfPCell cellDYN = new PdfPCell(tabloDYN);
@@ -339,26 +562,67 @@ namespace KorOptik_v1
                 satır.Colspan = 3;
                 tableOgr.AddCell(satır);
 
-                for (int j = 1; j < ogrSonuclari.Count; j++)
+                if (YKSmi==true)
                 {
-                    satır = new PdfPCell(new Phrase(ogrSonuclari[j], font));
+                    for (int j = 1; j < 3; j++)
+                    {
+                        satır = new PdfPCell(new Phrase(ogrSonuclari[j], font));
+                        satır.HorizontalAlignment = 1;
+                        tableOgr.AddCell(satır);
+                    }
+
+                    for (int j = 33; j < 66; j++)
+                    {
+                        satır = new PdfPCell(new Phrase(ogrSonuclari[j], font));
+                        satır.HorizontalAlignment = 1;
+                        tableOgr.AddCell(satır);
+                    }
+                }
+                else
+                {
+                    for (int j = 1; j < ogrSonuclari.Count; j++)
+                    {
+                        satır = new PdfPCell(new Phrase(ogrSonuclari[j], font));
+                        satır.HorizontalAlignment = 1;
+                        tableOgr.AddCell(satır);
+                    }
+
+                    satır = new PdfPCell(new Phrase(ogrenciSonuclariPuanSirali[i].getPuan().ToString(), font));
+                    satır.HorizontalAlignment = 1;
+                    tableOgr.AddCell(satır);
+                }                              
+
+                if (YKSmi == true)
+                {
+                    satır = new PdfPCell(new Phrase(ogrenciSonuclariPuanSirali[i].getPuanSAY().ToString(), font));
+                    satır.HorizontalAlignment = 1;
+                    tableOgr.AddCell(satır);
+
+                    satır = new PdfPCell(new Phrase(ogrenciSonuclariPuanSirali[i].getPuanEA().ToString(), font));
+                    satır.HorizontalAlignment = 1;
+                    tableOgr.AddCell(satır);
+
+                    satır = new PdfPCell(new Phrase(ogrenciSonuclariPuanSirali[i].getPuanSOZ().ToString(), font));
                     satır.HorizontalAlignment = 1;
                     tableOgr.AddCell(satır);
                 }
-
-                satır = new PdfPCell(new Phrase(ogrenciSonuclariPuanSirali[i].getPuan().ToString(), font));
-                satır.HorizontalAlignment = 1;
-                tableOgr.AddCell(satır);
 
                 PdfPCell cellOgr = new PdfPCell(tableOgr);
                 tablo.AddCell(cellOgr);
             }
 
+            return tablo;
+        }
+
+        private String pfdKaydetDialogla(string s_dosyaadi, PdfPTable tablo )
+        {
             ///PDF kaydet///
-            String s_dosyaadi = textBox1.Text.ToString() + ".pdf";
+            ///
+            string yol = "";            
             SaveFileDialog kaydet = new SaveFileDialog();
             kaydet.FileName = s_dosyaadi;
             kaydet.Filter = "PDF Dosyası|.pdf";
+
             if (kaydet.ShowDialog() == DialogResult.OK)
             {
                 using (FileStream stream = new FileStream(kaydet.FileName, FileMode.Create))
@@ -368,8 +632,25 @@ namespace KorOptik_v1
                     pdfDoc.Open();
                     pdfDoc.Add(tablo);
                     pdfDoc.Close();
-                    stream.Close();
+                    stream.Close();                    
                 }
+            }
+
+            yol = kaydet.FileName;
+
+            return yol;
+        }
+
+        private void pdfKaydet(String yol ,PdfPTable tablo)
+        {
+            using (FileStream stream = new FileStream(yol, FileMode.Create))
+            {
+                Document pdfDoc = new Document(PageSize.A4.Rotate(), 10f, 10f, 30f, 10f);
+                PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+                pdfDoc.Add(tablo);
+                pdfDoc.Close();
+                stream.Close();               
             }
         }
     }

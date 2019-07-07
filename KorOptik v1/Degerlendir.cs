@@ -334,7 +334,7 @@ namespace KorOptik_v1
                     kitapcikTuru = "A";
                 }
 
-                if (formadi.Equals("TYT"))
+                if (formadi.Equals("TYT"))// tyt formu seçiliyse
                 {
                     Char[] turkceCevaplar = ogrenci.getOkunanCevaplar()[0].ToCharArray();
                     Char[] sosyalCevaplar = ogrenci.getOkunanCevaplar()[1].ToCharArray();
@@ -712,12 +712,471 @@ namespace KorOptik_v1
                     listViewSonuclar.Items[m + 1].SubItems[31].Text = dogruSayisiBiyoloji.ToString();
                     listViewSonuclar.Items[m + 1].SubItems[32].Text = yanlisSayisiBiyoloji.ToString();
                     listViewSonuclar.Items[m + 1].SubItems[33].Text = netSayisiBiyoloji.ToString();
-                }
-                else if (formadi.Equals("AYT"))
-                {
 
+                    //toplamları ekle
+                    listViewSonuclar.Items[m + 1].SubItems[34].Text = toplamDogru.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[35].Text = toplamYanlis.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[36].Text = toplamNet.ToString();
                 }
-                else
+                else if (formadi.Equals("AYT"))// ayt formu seçiliyse
+                {
+                    Char[] TDE_SB_1_Cevaplar = ogrenci.getOkunanCevaplar()[0].ToCharArray();
+                    Char[] sosyalCevaplar = ogrenci.getOkunanCevaplar()[1].ToCharArray();
+                    Char[] matematikCevaplar = ogrenci.getOkunanCevaplar()[2].ToCharArray();
+                    Char[] fenCevaplar = ogrenci.getOkunanCevaplar()[3].ToCharArray();
+
+                    double dogruSayisiTDE = 0;
+                    double yanlisSayisiTDE = 0;
+
+                    double dogruSayisiTarih1 = 0;
+                    double yanlisSayisiTarih1 = 0;
+
+                    double dogruSayisiCografya1 = 0;
+                    double yanlisSayisicografya1 = 0;
+
+                    double dogruSayisiTarih2 = 0;
+                    double yanlisSayisiTarih2 = 0;
+
+                    double dogruSayisiCografya2 = 0;
+                    double yanlisSayisicografya2 = 0;
+
+                    double dogruSayisiFelsefe = 0;
+                    double yanlisSayisiFelsefe = 0;
+
+                    double dogruSayisiDin = 0;
+                    double yanlisSayisiDin = 0;
+
+                    double dogruSayisiMatematik = 0;
+                    double yanlisSayisiMatematik = 0;
+
+                    double dogruSayisiFizik = 0;
+                    double yanlisSayisiFizik = 0;
+
+                    double dogruSayisiKimya = 0;
+                    double yanlisSayisiKimya = 0;
+
+                    double dogruSayisiBiyoloji = 0;
+                    double yanlisSayisiBiyoloji = 0;
+
+                    DataGridView dataGridView = null;
+                    if (kitapcikTuru.Equals("A"))
+                    {
+                        dataGridView = dataGridViewCevapAnahtariA;
+                    }
+                    else if (kitapcikTuru.Equals("B"))
+                    {
+                        dataGridView = dataGridViewCevapAnahtariB;
+                    }
+                    else if (kitapcikTuru.Equals("C"))
+                    {
+                        dataGridView = dataGridViewCevapAnahtariC;
+                    }
+                    else if (kitapcikTuru.Equals("D"))
+                    {
+                        dataGridView = dataGridViewCevapAnahtariD;
+                    }
+
+
+                    for (int j = 1; j < 25; j++)//TDE
+                    {
+                        if (dataGridView.Rows[0].Cells[j].Value != null)
+                        {
+                            if (TDE_SB_1_Cevaplar[j - 1].ToString().Equals(dataGridView.Rows[0].Cells[j].Value.ToString()))
+                            {
+                                dogruSayisiTDE++;
+                            }
+                            else if (TDE_SB_1_Cevaplar[j - 1].ToString().Equals(" ")) { }
+                            else
+                            {
+                                yanlisSayisiTDE++;
+                            }
+                        }
+                    }
+
+                    double netSayisiTDE = 0;
+                    if (radioButtonGotursun.Checked)
+                    {
+                        netSayisiTDE = Math.Round(dogruSayisiTDE - yanlisSayisiTDE / 4, 2);
+                    }
+                    else if (radioButtonGoturmesin.Checked)
+                    {
+                        netSayisiTDE = dogruSayisiTDE;
+                    }
+
+                    toplamDogru += dogruSayisiTDE;
+                    toplamYanlis += yanlisSayisiTDE;
+                    toplamNet += netSayisiTDE;
+
+                    listViewSonuclar.Items[m + 1].SubItems[7].Text = dogruSayisiTDE.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[8].Text = yanlisSayisiTDE.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[9].Text = netSayisiTDE.ToString();
+
+                    for (int j = 25; j < 35; j++)//Tarih1
+                    {
+                        if (dataGridView.Rows[0].Cells[j].Value != null)
+                        {
+                            if (TDE_SB_1_Cevaplar[j - 1].ToString().Equals(dataGridView.Rows[0].Cells[j].Value.ToString()))
+                            {
+                                dogruSayisiTarih1++;
+                            }
+                            else if (TDE_SB_1_Cevaplar[j - 1].ToString().Equals(" ")) { }
+                            else
+                            {
+                                yanlisSayisiTarih1++;
+                            }
+                        }
+                    }
+
+                    double netSayisiTarih1 = 0;
+                    if (radioButtonGotursun.Checked)
+                    {
+                        netSayisiTarih1 = Math.Round(dogruSayisiTarih1 - yanlisSayisiTarih1 / 4, 2);
+                    }
+                    else if (radioButtonGoturmesin.Checked)
+                    {
+                        netSayisiTarih1 = dogruSayisiTarih1;
+                    }
+
+                    toplamDogru += dogruSayisiTarih1;
+                    toplamYanlis += yanlisSayisiTarih1;
+                    toplamNet += netSayisiTarih1;
+
+                    listViewSonuclar.Items[m + 1].SubItems[10].Text = dogruSayisiTarih1.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[11].Text = yanlisSayisiTarih1.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[12].Text = netSayisiTarih1.ToString();
+
+                    for (int j = 35; j < 41; j++)//Coğrajya1
+                    {
+                        if (dataGridView.Rows[0].Cells[j].Value != null)
+                        {
+                            if (TDE_SB_1_Cevaplar[j - 1].ToString().Equals(dataGridView.Rows[0].Cells[j].Value.ToString()))
+                            {
+                                dogruSayisiCografya1++;
+                            }
+                            else if (TDE_SB_1_Cevaplar[j - 1].ToString().Equals(" ")) { }
+                            else
+                            {
+                                yanlisSayisicografya1++;
+                            }
+                        }
+                    }
+
+                    double netSayisiCografya1 = 0;
+                    if (radioButtonGotursun.Checked)
+                    {
+                        netSayisiCografya1 = Math.Round(dogruSayisiCografya1 - yanlisSayisicografya1 / 4, 2);
+                    }
+                    else if (radioButtonGoturmesin.Checked)
+                    {
+                        netSayisiCografya1 = dogruSayisiCografya1;
+                    }
+
+                    toplamDogru += dogruSayisiCografya1;
+                    toplamYanlis += yanlisSayisicografya1;
+                    toplamNet += netSayisiCografya1;
+
+                    listViewSonuclar.Items[m + 1].SubItems[13].Text = dogruSayisiCografya1.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[14].Text = yanlisSayisicografya1.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[15].Text = netSayisiCografya1.ToString();
+
+                    for (int j = 1; j < 12; j++)//tarih2
+                    {
+                        if (dataGridView.Rows[1].Cells[j].Value != null)
+                        {
+                            if (sosyalCevaplar[j - 1].ToString().Equals(dataGridView.Rows[1].Cells[j].Value.ToString()))
+                            {
+                                dogruSayisiTarih2++;
+                            }
+                            else if (sosyalCevaplar[j - 1].ToString().Equals(" ")) { }
+                            else
+                            {
+                                yanlisSayisiTarih2++;
+                            }
+                        }
+                    }
+
+                    double netSayisiTarih = 0;
+                    if (radioButtonGotursun.Checked)
+                    {
+                        netSayisiTarih = Math.Round(dogruSayisiTarih2 - yanlisSayisiTarih2 / 4, 2);
+                    }
+                    else if (radioButtonGoturmesin.Checked)
+                    {
+                        netSayisiTarih = dogruSayisiTarih2;
+                    }
+
+                    toplamDogru += dogruSayisiTarih2;
+                    toplamYanlis += yanlisSayisiTarih2;
+                    toplamNet += netSayisiTarih;
+
+                    listViewSonuclar.Items[m + 1].SubItems[16].Text = dogruSayisiTarih2.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[17].Text = yanlisSayisiTarih2.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[18].Text = netSayisiTarih.ToString();
+
+                    for (int j = 11; j < 23; j++)//coğrafya
+                    {
+                        if (dataGridView.Rows[1].Cells[j].Value != null)
+                        {
+                            if (sosyalCevaplar[j - 1].ToString().Equals(dataGridView.Rows[1].Cells[j].Value.ToString()))
+                            {
+                                dogruSayisiCografya2++;
+                            }
+                            else if (sosyalCevaplar[j - 1].ToString().Equals(" ")) { }
+                            else
+                            {
+                                yanlisSayisicografya2++;
+                            }
+                        }
+                    }
+
+                    double netSayisiCografya = 0;
+                    if (radioButtonGotursun.Checked)
+                    {
+                        netSayisiCografya = Math.Round(dogruSayisiCografya2 - yanlisSayisicografya2 / 4, 2);
+                    }
+                    else if (radioButtonGoturmesin.Checked)
+                    {
+                        netSayisiCografya = dogruSayisiCografya2;
+                    }
+
+                    toplamDogru += dogruSayisiCografya2;
+                    toplamYanlis += yanlisSayisicografya2;
+                    toplamNet += netSayisiCografya;
+
+                    listViewSonuclar.Items[m + 1].SubItems[19].Text = dogruSayisiCografya2.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[20].Text = yanlisSayisicografya2.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[21].Text = netSayisiCografya.ToString();
+
+
+                    for (int j = 23; j < 35; j++)//felsefe 
+                    {
+                        if (dataGridView.Rows[1].Cells[j].Value != null)
+                        {
+                            if (sosyalCevaplar[j - 1].ToString().Equals(dataGridView.Rows[1].Cells[j].Value.ToString()))
+                            {
+                                dogruSayisiFelsefe++;
+                            }
+                            else if (sosyalCevaplar[j - 1].ToString().Equals(" ")) { }
+                            else
+                            {
+                                yanlisSayisiFelsefe++;
+                            }
+                        }
+                    }
+
+                    if (sosyalCevaplar[34].ToString().Equals(" ") && sosyalCevaplar[35].ToString().Equals(" ") && sosyalCevaplar[36].ToString().Equals(" ") && sosyalCevaplar[37].ToString().Equals(" ") && sosyalCevaplar[38].ToString().Equals(" ") && sosyalCevaplar[39].ToString().Equals(" "))
+                    {//din boş bırakılmış ise(dinden muaf olanlar için)
+                        for (int j = 41; j < 47; j++)
+                        {
+                            if (dataGridView.Rows[1].Cells[j].Value != null)
+                            {
+                                if (sosyalCevaplar[j - 1].ToString().Equals(dataGridView.Rows[1].Cells[j].Value.ToString()))
+                                {
+                                    dogruSayisiFelsefe++;
+                                }
+                                else if (sosyalCevaplar[j - 1].ToString().Equals(" ")) { }
+                                else
+                                {
+                                    yanlisSayisiFelsefe++;
+                                }
+                            }
+                        }
+                    }
+
+                    double netSayisiFelsefe = 0;
+                    if (radioButtonGotursun.Checked)
+                    {
+                        netSayisiFelsefe = Math.Round(dogruSayisiFelsefe - yanlisSayisiFelsefe / 4, 2);
+                    }
+                    else if (radioButtonGoturmesin.Checked)
+                    {
+                        netSayisiFelsefe = dogruSayisiFelsefe;
+                    }
+
+                    toplamDogru += dogruSayisiFelsefe;
+                    toplamYanlis += yanlisSayisiFelsefe;
+                    toplamNet += netSayisiFelsefe;
+
+                    listViewSonuclar.Items[m + 1].SubItems[22].Text = dogruSayisiFelsefe.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[23].Text = yanlisSayisiFelsefe.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[24].Text = netSayisiFelsefe.ToString();
+
+                    for (int j = 35; j < 41; j++)//din
+                    {
+                        if (dataGridView.Rows[1].Cells[j].Value != null)
+                        {
+                            if (sosyalCevaplar[j - 1].ToString().Equals(dataGridView.Rows[1].Cells[j].Value.ToString()))
+                            {
+                                dogruSayisiDin++;
+                            }
+                            else if (sosyalCevaplar[j - 1].ToString().Equals(" ")) { }
+                            else
+                            {
+                                yanlisSayisiDin++;
+                            }
+                        }
+                    }
+
+                    double netSayisiDin = 0;
+                    if (radioButtonGotursun.Checked)
+                    {
+                        netSayisiDin = Math.Round(dogruSayisiDin - yanlisSayisiDin / 4, 2);
+                    }
+                    else if (radioButtonGoturmesin.Checked)
+                    {
+                        netSayisiDin = dogruSayisiDin;
+                    }
+
+                    toplamDogru += dogruSayisiDin;
+                    toplamYanlis += yanlisSayisiDin;
+                    toplamNet += netSayisiDin;
+
+                    listViewSonuclar.Items[m + 1].SubItems[25].Text = dogruSayisiDin.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[26].Text = yanlisSayisiDin.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[27].Text = netSayisiDin.ToString();
+
+                    for (int j = 1; j < 41; j++)//matematik
+                    {
+                        if (dataGridView.Rows[2].Cells[j].Value != null)
+                        {
+                            if (matematikCevaplar[j - 1].ToString().Equals(dataGridView.Rows[2].Cells[j].Value.ToString()))
+                            {
+                                dogruSayisiMatematik++;
+                            }
+                            else if (matematikCevaplar[j - 1].ToString().Equals(" ")) { }
+                            else
+                            {
+                                yanlisSayisiMatematik++;
+                            }
+                        }
+                    }
+
+                    double netSayisiMatematik = 0;
+                    if (radioButtonGotursun.Checked)
+                    {
+                        netSayisiMatematik = Math.Round(dogruSayisiMatematik - yanlisSayisiMatematik / 4, 2);
+                    }
+                    else if (radioButtonGoturmesin.Checked)
+                    {
+                        netSayisiMatematik = dogruSayisiMatematik;
+                    }
+
+                    toplamDogru += dogruSayisiMatematik;
+                    toplamYanlis += yanlisSayisiMatematik;
+                    toplamNet += netSayisiMatematik;
+
+                    listViewSonuclar.Items[m + 1].SubItems[28].Text = dogruSayisiMatematik.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[29].Text = yanlisSayisiMatematik.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[30].Text = netSayisiMatematik.ToString();
+
+                    for (int j = 1; j < 15; j++)//fizik
+                    {
+                        if (dataGridView.Rows[3].Cells[j].Value != null)
+                        {
+                            if (fenCevaplar[j - 1].ToString().Equals(dataGridView.Rows[3].Cells[j].Value.ToString()))
+                            {
+                                dogruSayisiFizik++;
+                            }
+                            else if (fenCevaplar[j - 1].ToString().Equals(" ")) { }
+                            else
+                            {
+                                yanlisSayisiFizik++;
+                            }
+                        }
+                    }
+
+                    double netSayisiFizik = 0;
+                    if (radioButtonGotursun.Checked)
+                    {
+                        netSayisiFizik = Math.Round(dogruSayisiFizik - yanlisSayisiFizik / 4, 2);
+                    }
+                    else if (radioButtonGoturmesin.Checked)
+                    {
+                        netSayisiFizik = dogruSayisiFizik;
+                    }
+
+                    toplamDogru += dogruSayisiFizik;
+                    toplamYanlis += yanlisSayisiFizik;
+                    toplamNet += netSayisiFizik;
+
+                    listViewSonuclar.Items[m + 1].SubItems[31].Text = dogruSayisiFizik.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[32].Text = yanlisSayisiFizik.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[33].Text = netSayisiFizik.ToString();
+
+                    for (int j = 15; j < 28; j++)//kimya
+                    {
+                        if (dataGridView.Rows[3].Cells[j].Value != null)
+                        {
+                            if (fenCevaplar[j - 1].ToString().Equals(dataGridView.Rows[3].Cells[j].Value.ToString()))
+                            {
+                                dogruSayisiKimya++;
+                            }
+                            else if (fenCevaplar[j - 1].ToString().Equals(" ")) { }
+                            else
+                            {
+                                yanlisSayisiKimya++;
+                            }
+                        }
+                    }
+
+                    double netSayisiKimya = 0;
+                    if (radioButtonGotursun.Checked)
+                    {
+                        netSayisiKimya = Math.Round(dogruSayisiKimya - yanlisSayisiKimya / 4, 2);
+                    }
+                    else if (radioButtonGoturmesin.Checked)
+                    {
+                        netSayisiKimya = dogruSayisiKimya;
+                    }
+
+                    toplamDogru += dogruSayisiKimya;
+                    toplamYanlis += yanlisSayisiKimya;
+                    toplamNet += netSayisiKimya;
+
+                    listViewSonuclar.Items[m + 1].SubItems[34].Text = dogruSayisiKimya.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[35].Text = yanlisSayisiKimya.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[36].Text = netSayisiKimya.ToString();
+
+                    for (int j = 28; j < 41; j++)//biyoloji
+                    {
+                        if (dataGridView.Rows[3].Cells[j].Value != null)
+                        {
+                            if (fenCevaplar[j - 1].ToString().Equals(dataGridView.Rows[3].Cells[j].Value.ToString()))
+                            {
+                                dogruSayisiBiyoloji++;
+                            }
+                            else if (fenCevaplar[j - 1].ToString().Equals(" ")) { }
+                            else
+                            {
+                                yanlisSayisiBiyoloji++;
+                            }
+                        }
+                    }
+
+                    double netSayisiBiyoloji = 0;
+                    if (radioButtonGotursun.Checked)
+                    {
+                        netSayisiBiyoloji = Math.Round(dogruSayisiBiyoloji - yanlisSayisiBiyoloji / 4, 2);
+                    }
+                    else if (radioButtonGoturmesin.Checked)
+                    {
+                        netSayisiBiyoloji = dogruSayisiBiyoloji;
+                    }
+
+                    toplamDogru += dogruSayisiBiyoloji;
+                    toplamYanlis += yanlisSayisiBiyoloji;
+                    toplamNet += netSayisiBiyoloji;
+
+                    listViewSonuclar.Items[m + 1].SubItems[37].Text = dogruSayisiBiyoloji.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[38].Text = yanlisSayisiBiyoloji.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[39].Text = netSayisiBiyoloji.ToString();
+
+                    //toplamları ekle
+                    listViewSonuclar.Items[m + 1].SubItems[40].Text = toplamDogru.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[41].Text = toplamYanlis.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[42].Text = toplamNet.ToString();
+                }
+                else// seçilen form Tyt ve ayt değilse
                 {
                     for (int i = 0; i < ogrenci.getOkunanCevaplar().Count; i++)
                     {
@@ -793,11 +1252,10 @@ namespace KorOptik_v1
                         listViewSonuclar.Items[m + 1].SubItems[listViewDersColumnsStart + 3 * i + 1].Text = yanlisSayisi.ToString();
                         listViewSonuclar.Items[m + 1].SubItems[listViewDersColumnsStart + 3 * i + 2].Text = netSayisi.ToString();
                     }
-                }
-                
-                listViewSonuclar.Items[m + 1].SubItems[listViewDersColumnsStart + ogrenci.getOkunanCevaplar().Count * 3].Text = toplamDogru.ToString();
-                listViewSonuclar.Items[m + 1].SubItems[listViewDersColumnsStart + ogrenci.getOkunanCevaplar().Count * 3 + 1].Text = toplamYanlis.ToString();
-                listViewSonuclar.Items[m + 1].SubItems[listViewDersColumnsStart + ogrenci.getOkunanCevaplar().Count * 3 + 2].Text = toplamNet.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[listViewDersColumnsStart + ogrenci.getOkunanCevaplar().Count * 3].Text = toplamDogru.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[listViewDersColumnsStart + ogrenci.getOkunanCevaplar().Count * 3 + 1].Text = toplamYanlis.ToString();
+                    listViewSonuclar.Items[m + 1].SubItems[listViewDersColumnsStart + ogrenci.getOkunanCevaplar().Count * 3 + 2].Text = toplamNet.ToString();
+                }                             
             }
 
         }

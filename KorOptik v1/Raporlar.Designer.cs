@@ -109,7 +109,7 @@
             "İOKBS(Bursluluk)",
             "LGS",
             "YKS(Sadece TYT puanı)",
-            "YKS(TYT, SAY, SÖZ, EA, DİL)"});
+            "YKS(SAY, SÖZ, EA)"});
             this.comboBoxRaporSinavTuru.Location = new System.Drawing.Point(13, 192);
             this.comboBoxRaporSinavTuru.Name = "comboBoxRaporSinavTuru";
             this.comboBoxRaporSinavTuru.Size = new System.Drawing.Size(174, 21);

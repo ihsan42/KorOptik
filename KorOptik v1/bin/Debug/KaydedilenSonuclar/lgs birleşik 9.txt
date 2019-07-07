@@ -1,4 +1,0 @@
-Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |İnkılap| | |Din Kültürü| | |Yabancı Dil| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
-1|�HSAN YILMAZ        |0123|8F|C|123456| |10|0|10|10|0|10|10|0|10|10|0|10|1|0|10|10|0|10|51|0|51|
-1|AL� YILMAZ        |0223|8F|C|123456| |11|0|11|10|0|10|10|0|10|10|0|10|2|0|11|10|0|10|53|0|53|
-1|VEL� YILMAZ        |0323|8F|C|123456| |0|0|0|0|0|0|0|0|0|0|0|0|3|0|12|10|0|10|13|0|13|

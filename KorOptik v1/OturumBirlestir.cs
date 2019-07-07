@@ -402,7 +402,7 @@ namespace KorOptik_v1
 
                     ogrencilerBirleştirilmiş = new List<string>();
 
-                    string genelBilgiler = "Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal| | |Temel Matematik| | |Fen Bilimleri| | |TDE-SB-1| | |Sosyal Bilimler 2| | |Matematik| | |Fen Bilimleri| | |";
+                    string genelBilgiler = "Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu| |TYT-Türkçe| | |TYT-Tarih| | |TYT-Coğrafya| | |TYT-Felsefe| | |TYT-Din Kültürü| | |TYT-Matematik| | |TYT-Fizik| | |TYT-Kimya| | |TYT-Biyoloji| | |AYT-T.D.E| | |AYT-Tarih-1| | |AYT-Coğrafya-1| | |AYT-Tarih-2| | |AYT-Coğrafya-2| | |AYT-Felsefe| | |AYT-Din Kültürü| | |AYT-Matematik| | |AYT-Fizik| | |AYT-Kimya| | |AYT-Biyoloji| | |";
                     ogrencilerBirleştirilmiş.Add(genelBilgiler);
 
                     int toplamOgrTYT = ogrencilerTYT.Count;
@@ -446,7 +446,7 @@ namespace KorOptik_v1
                             }
                             else
                             {
-                                ogrenciBirleşik = ogrenciTYTToplamBolumuHaric + "0|0|0|0|0|0|0|0|0|0|0|0|";
+                                ogrenciBirleşik = ogrenciTYTToplamBolumuHaric + "0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|";
                             }
 
                             ogrencilerBirleştirilmiş.Add(ogrenciBirleşik);
@@ -497,7 +497,7 @@ namespace KorOptik_v1
                             }
                             else
                             {
-                                ogrenciBirleşik = ogrenciAYTToplamDerslerHaric + "0|0|0|0|0|0|0|0|0|0|0|0|" + ogrenciAYTDersBilgileriToplamHaric;
+                                ogrenciBirleşik = ogrenciAYTToplamDerslerHaric + "0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|" + ogrenciAYTDersBilgileriToplamHaric;
                             }
 
                             ogrencilerBirleştirilmiş.Add(ogrenciBirleşik);
