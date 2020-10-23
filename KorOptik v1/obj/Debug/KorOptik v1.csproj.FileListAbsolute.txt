@@ -32,10 +32,15 @@ C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\obj\Debug\KorOptik_v
 C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\obj\Debug\KorOptik_v1.Raporlar.resources
 C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\obj\Debug\KorOptik_v1.SinifSeviyeleri.resources
 C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.csproj.GenerateResource.cache
-C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.csproj.CoreCompileInputs.cache
 C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.csproj.CopyComplete
 C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.exe
 C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.pdb
 C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\bin\Debug\System.Data.SQLite.dll
 C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\bin\Debug\System.Data.SQLite.xml
 C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\bin\Debug\KorOptik v1.exe.manifest
+C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\bin\Debug\KorOptik v1.application
+C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.TrustInfo.xml
+C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.exe.manifest
+C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.application
+C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\bin\Debug\KorOptik v1.exe.config

@@ -52,6 +52,7 @@
             this.buttonSonucKaydetSon = new System.Windows.Forms.Button();
             this.textBoxKayitIsmi = new System.Windows.Forms.TextBox();
             this.labelKayitIsmi = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCevapAnahtariA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCevapAnahtariB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCevapAnahtariC)).BeginInit();
@@ -70,7 +71,7 @@
             // dataGridViewCevapAnahtariB
             // 
             this.dataGridViewCevapAnahtariB.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCevapAnahtariB.Location = new System.Drawing.Point(8, 128);
+            this.dataGridViewCevapAnahtariB.Location = new System.Drawing.Point(5, 128);
             this.dataGridViewCevapAnahtariB.Name = "dataGridViewCevapAnahtariB";
             this.dataGridViewCevapAnahtariB.Size = new System.Drawing.Size(574, 126);
             this.dataGridViewCevapAnahtariB.TabIndex = 2;
@@ -78,7 +79,7 @@
             // dataGridViewCevapAnahtariC
             // 
             this.dataGridViewCevapAnahtariC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCevapAnahtariC.Location = new System.Drawing.Point(8, 128);
+            this.dataGridViewCevapAnahtariC.Location = new System.Drawing.Point(5, 128);
             this.dataGridViewCevapAnahtariC.Name = "dataGridViewCevapAnahtariC";
             this.dataGridViewCevapAnahtariC.Size = new System.Drawing.Size(574, 126);
             this.dataGridViewCevapAnahtariC.TabIndex = 3;
@@ -86,9 +87,9 @@
             // dataGridViewCevapAnahtariD
             // 
             this.dataGridViewCevapAnahtariD.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCevapAnahtariD.Location = new System.Drawing.Point(8, 128);
+            this.dataGridViewCevapAnahtariD.Location = new System.Drawing.Point(5, 128);
             this.dataGridViewCevapAnahtariD.Name = "dataGridViewCevapAnahtariD";
-            this.dataGridViewCevapAnahtariD.Size = new System.Drawing.Size(574, 126);
+            this.dataGridViewCevapAnahtariD.Size = new System.Drawing.Size(577, 126);
             this.dataGridViewCevapAnahtariD.TabIndex = 4;
             this.dataGridViewCevapAnahtariD.Visible = false;
             // 
@@ -170,7 +171,8 @@
             this.listViewSonuclar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewSonuclar.Location = new System.Drawing.Point(8, 302);
+            this.listViewSonuclar.HideSelection = false;
+            this.listViewSonuclar.Location = new System.Drawing.Point(209, 378);
             this.listViewSonuclar.Name = "listViewSonuclar";
             this.listViewSonuclar.Size = new System.Drawing.Size(1057, 271);
             this.listViewSonuclar.TabIndex = 128;
@@ -328,11 +330,22 @@
             this.labelKayitIsmi.Text = "Kayıt ismini yazınız";
             this.labelKayitIsmi.Visible = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(297, 69);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(138, 28);
+            this.button1.TabIndex = 146;
+            this.button1.Text = "Cevap Anahtarını Temizle";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Degerlendir
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1077, 585);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.labelKayitIsmi);
             this.Controls.Add(this.textBoxKayitIsmi);
             this.Controls.Add(this.buttonSonucKaydetSon);
@@ -357,7 +370,8 @@
             this.Controls.Add(this.dataGridViewCevapAnahtariA);
             this.Name = "Degerlendir";
             this.Text = "Degerlendir";
-            this.TopMost = true;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Degerlendir_FormClosing);
             this.Load += new System.EventHandler(this.Degerlendir_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCevapAnahtariA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCevapAnahtariB)).EndInit();
@@ -395,5 +409,6 @@
         private System.Windows.Forms.Button buttonSonucKaydetSon;
         private System.Windows.Forms.TextBox textBoxKayitIsmi;
         private System.Windows.Forms.Label labelKayitIsmi;
+        private System.Windows.Forms.Button button1;
     }
 }

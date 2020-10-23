@@ -7,12 +7,12 @@ namespace KorOptik_v1
 {
     public class OgrenciOkunan
     {
-        List<String> okunanCevaplar;       
-        string okulkodu;
-        string ogrenciNo;
-        String adSoyad;
-        String sinifSube;
-        String kitapcikTürü;     
+        public List<String> okunanCevaplar;       
+        public string okulkodu;
+        public string ogrenciNo;
+        public string adSoyad;
+        public string sinifSube;
+        public string kitapcikTürü;     
 
         public List<String> getOkunanCevaplar()
         {

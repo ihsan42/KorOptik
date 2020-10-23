@@ -11,8 +11,11 @@ namespace KorOptik_v1
 {
     public class Veritabani
     {
-        SQLiteConnection baglanti = new SQLiteConnection(@"Data Source=tasarlananFormlar.db; Version=3; FailIfMissing=False;");
-        SQLiteCommand komut = new SQLiteCommand();       
+        SQLiteConnection baglantiFormBilgileri = new SQLiteConnection(@"Data Source=tasarlananFormlar.db; Version=3; FailIfMissing=False;");
+        SQLiteConnection baglantiCevapAnahtariA = new SQLiteConnection(@"Data Source=tasarlananFormlar.db; Version=3; FailIfMissing=False;");
+
+        SQLiteCommand komutFormBilgileri = new SQLiteCommand();
+        SQLiteCommand komutCevapAnahtariA = new SQLiteCommand();
 
         public void baglan()
         {
@@ -29,29 +32,47 @@ namespace KorOptik_v1
                 "sorusayisi1 TEXT, sorusayisi2 TEXT, sorusayisi3 TEXT, sorusayisi4 TEXT, sorusayisi5 TEXT, sorusayisi6 TEXT, sorusayisi7 TEXT, sorusayisi8 TEXT," +
                 "sorusayisi9 TEXT, sorusayisi10 TEXT, dersadi1 TEXT, dersadi2 TEXT, dersadi3 TEXT, dersadi4 TEXT, dersadi5 TEXT, dersadi6 TEXT, dersadi7 TEXT, dersadi8 TEXT," +
                 "dersadi9 TEXT, dersadi10 TEXT, grilikesigi TEXT, parlaklikesigi TEXT, sikokumahassasiyeti TEXT, widhtForm TEXT, heightForm TEXT);";
-               
-                baglanti.Open();
-                komut = new SQLiteCommand(sql, baglanti);
-                komut.ExecuteNonQuery();
-                baglanti.Close();
+
+                string sqlCevapAnahtariA = "CREATE TABLE table_cevap_anahtariA(ID INTEGER PRIMARY KEY AUTOINCREMENT, cevaplar TEXT);";
+                
+                baglantiFormBilgileri.Open();
+                komutFormBilgileri = new SQLiteCommand(sql, baglantiFormBilgileri);
+                komutFormBilgileri.ExecuteNonQuery();
+                baglantiFormBilgileri.Close();
+
+                baglantiCevapAnahtariA.Open();
+                komutCevapAnahtariA = new SQLiteCommand(sqlCevapAnahtariA, baglantiCevapAnahtariA);
+                komutCevapAnahtariA.ExecuteNonQuery();
+                baglantiCevapAnahtariA.Close();
+
             }
             else
             {
-                if (baglanti.State == ConnectionState.Closed)
+                if (baglantiFormBilgileri.State == ConnectionState.Closed)
                 {
-                    baglanti.Open();
+                    baglantiFormBilgileri.Open();
                 }
                 else
                 {
-                    baglanti.Close();
-                    baglanti.Open();
+                    baglantiFormBilgileri.Close();
+                    baglantiFormBilgileri.Open();
+                }
+
+                if (baglantiCevapAnahtariA.State == ConnectionState.Closed)
+                {
+                    baglantiCevapAnahtariA.Open();
+                }
+                else
+                {
+                    baglantiCevapAnahtariA.Close();
+                    baglantiCevapAnahtariA.Open();
                 }
             }            
         }
 
         public int grilikesigiGetir(String formadi)
         {
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT grilikesigi FROM table_tasarlananformlar WHERE formadi = '" + formadi + "'", baglanti);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT grilikesigi FROM table_tasarlananformlar WHERE formadi = '" + formadi + "'", baglantiFormBilgileri);
             DataTable tablo = new DataTable();
             adapter.Fill(tablo);
             int grilikesigi = Convert.ToInt32(tablo.Rows[0][0]);
@@ -62,7 +83,7 @@ namespace KorOptik_v1
 
         public int parlaklikesigiGetir(String formadi)
         {
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT parlaklikesigi FROM table_tasarlananformlar WHERE formadi = '" + formadi + "'", baglanti);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT parlaklikesigi FROM table_tasarlananformlar WHERE formadi = '" + formadi + "'", baglantiFormBilgileri);
             DataTable tablo = new DataTable();
             adapter.Fill(tablo);
             int parlaklikesigi = Convert.ToInt32(tablo.Rows[0][0]);
@@ -73,7 +94,7 @@ namespace KorOptik_v1
 
         public int sikokumahassasiyetiGetir(String formadi)
         {
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT sikokumahassasiyeti FROM table_tasarlananformlar WHERE formadi = '" + formadi + "'", baglanti);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT sikokumahassasiyeti FROM table_tasarlananformlar WHERE formadi = '" + formadi + "'", baglantiFormBilgileri);
             DataTable tablo = new DataTable();
             adapter.Fill(tablo);
             int sikokumahassasiyeti = Convert.ToInt32(tablo.Rows[0][0]);
@@ -84,7 +105,7 @@ namespace KorOptik_v1
 
         public Point formEbatlariniGetir(String formadi)
         {
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT widhtForm, heightForm FROM table_tasarlananformlar WHERE formadi = '" + formadi + "'", baglanti);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT widhtForm, heightForm FROM table_tasarlananformlar WHERE formadi = '" + formadi + "'", baglantiFormBilgileri);
             DataTable tablo = new DataTable();
             adapter.Fill(tablo);
             Point ebatlar =new Point(Convert.ToInt32(tablo.Rows[0][0]), Convert.ToInt32(tablo.Rows[0][1]));
@@ -95,20 +116,20 @@ namespace KorOptik_v1
         
         public void guncelleTasarlananFormu(String formadi, List<Point> baslangicNoktalari, int grilikesigi, int parlaklikesigi, int sikokumahassasiyeti,int widhtForm, int heightForm)
         {
-            komut.Connection = baglanti;
-            komut.CommandText = "UPDATE table_tasarlananformlar SET adisoyadiX='" + baslangicNoktalari[0].X + "',adisoyadiY='" + baslangicNoktalari[0].Y + "',ogrencinoX='" + baslangicNoktalari[1].X + "',ogrencinoY='" + baslangicNoktalari[1].Y + "',sinifsubeX='" + baslangicNoktalari[2].X + "',sinifsubeY='" + baslangicNoktalari[2].Y + "',kitapcikturuX='" + baslangicNoktalari[3].X + "',kitapcikturuY='" + baslangicNoktalari[3].Y + "',okulkoduX='" + baslangicNoktalari[4].X + "',okulkoduY='" + baslangicNoktalari[4].Y + "',baslikX='" + baslangicNoktalari[5].X + "', baslikY= '" + baslangicNoktalari[5].Y + "' " +
+            komutFormBilgileri.Connection = baglantiFormBilgileri;
+            komutFormBilgileri.CommandText = "UPDATE table_tasarlananformlar SET adisoyadiX='" + baslangicNoktalari[0].X + "',adisoyadiY='" + baslangicNoktalari[0].Y + "',ogrencinoX='" + baslangicNoktalari[1].X + "',ogrencinoY='" + baslangicNoktalari[1].Y + "',sinifsubeX='" + baslangicNoktalari[2].X + "',sinifsubeY='" + baslangicNoktalari[2].Y + "',kitapcikturuX='" + baslangicNoktalari[3].X + "',kitapcikturuY='" + baslangicNoktalari[3].Y + "',okulkoduX='" + baslangicNoktalari[4].X + "',okulkoduY='" + baslangicNoktalari[4].Y + "',baslikX='" + baslangicNoktalari[5].X + "', baslikY= '" + baslangicNoktalari[5].Y + "' " +
                 ",eklenenCevapAlani1X='" + baslangicNoktalari[6].X + "',eklenenCevapAlani1Y='" + baslangicNoktalari[6].Y + "',eklenenCevapAlani2X='" + baslangicNoktalari[7].X + "',eklenenCevapAlani2Y='" + baslangicNoktalari[7].Y + "',eklenenCevapAlani3X='" + baslangicNoktalari[8].X + "',eklenenCevapAlani3Y='" + baslangicNoktalari[8].Y + "',eklenenCevapAlani4X='" + baslangicNoktalari[9].X + "',eklenenCevapAlani4Y='" + baslangicNoktalari[9].Y + "',eklenenCevapAlani5X='" + baslangicNoktalari[10].X + "',eklenenCevapAlani5Y='" + baslangicNoktalari[10].Y + "'" +
                 ",eklenenCevapAlani6X='" + baslangicNoktalari[11].X + "',eklenenCevapAlani6Y='" + baslangicNoktalari[11].Y + "',eklenenCevapAlani7X='" + baslangicNoktalari[12].X + "',eklenenCevapAlani7Y='" + baslangicNoktalari[12].Y + "',eklenenCevapAlani8X='" + baslangicNoktalari[13].X + "',eklenenCevapAlani8Y='" + baslangicNoktalari[13].Y + "',eklenenCevapAlani9X='" + baslangicNoktalari[14].X + "',eklenenCevapAlani9Y='" + baslangicNoktalari[14].Y + "',eklenenCevapAlani10X='" + baslangicNoktalari[15].X + "',eklenenCevapAlani10Y='" + baslangicNoktalari[15].Y + "'" +
                 ",grilikesigi='" + grilikesigi + "', parlaklikesigi='" + parlaklikesigi + "', sikokumahassasiyeti='" + sikokumahassasiyeti + "', widhtForm='" + widhtForm + "', heightForm='" + heightForm + "' WHERE formadi='" + formadi + "'";
-            komut.ExecuteNonQuery();
-            komut.Dispose();
-            baglanti.Close();
+            komutFormBilgileri.ExecuteNonQuery();
+            komutFormBilgileri.Dispose();
+            baglantiFormBilgileri.Close();
         }
 
         public void kaydetTasarlananFormu(String formadi,String okulturu, List<Point> standartAlanlarBaslangicNoktalari, List<Point> cevapAlanlariBaslangicNoktalari, List<int> sorusayilari, List<String> dersAdlari)
         {
-            komut.Connection = baglanti;
-            komut.CommandText = "INSERT INTO table_tasarlananformlar " +
+            komutFormBilgileri.Connection = baglantiFormBilgileri;
+            komutFormBilgileri.CommandText = "INSERT INTO table_tasarlananformlar " +
                 "(formadi,okulturu,adisoyadiX,adisoyadiY,ogrencinoX,ogrencinoY,sinifsubeX,sinifsubeY,kitapcikturuX,kitapcikturuY,okulkoduX,okulkoduY,baslikX,baslikY" +
                 ",eklenenCevapAlani1X,eklenenCevapAlani1Y,eklenenCevapAlani2X,eklenenCevapAlani2Y,eklenenCevapAlani3X,eklenenCevapAlani3Y,eklenenCevapAlani4X,eklenenCevapAlani4Y,eklenenCevapAlani5X,eklenenCevapAlani5Y" +
                 ",eklenenCevapAlani6X,eklenenCevapAlani6Y,eklenenCevapAlani7X,eklenenCevapAlani7Y,eklenenCevapAlani8X,eklenenCevapAlani8Y,eklenenCevapAlani9X,eklenenCevapAlani9Y,eklenenCevapAlani10X,eklenenCevapAlani10Y," +
@@ -133,15 +154,15 @@ namespace KorOptik_v1
                 "','" + sorusayilari[0] + "','" + sorusayilari[1] + "','" + sorusayilari[2] + "','" + sorusayilari[3] + "','" + sorusayilari[4] + "','" + sorusayilari[5] +
                 "','" + sorusayilari[6] + "','" + sorusayilari[7] + "','" + sorusayilari[8] + "','" + sorusayilari[9] +
                 "','" + dersAdlari[0]+ "','" + dersAdlari[1] + "','" + dersAdlari[2] + "','" + dersAdlari[3] + "','" + dersAdlari[4] + "','" + dersAdlari[5] +
-                "','" + dersAdlari[6] + "','" + dersAdlari[7] + "','" + dersAdlari[8] + "','" + dersAdlari[9] +"',200,60,15,505,728)";
-            komut.ExecuteNonQuery();
-            komut.Dispose();
-            baglanti.Close();
+                "','" + dersAdlari[6] + "','" + dersAdlari[7] + "','" + dersAdlari[8] + "','" + dersAdlari[9] +"',195,60,15,523,742)";
+            komutFormBilgileri.ExecuteNonQuery();
+            komutFormBilgileri.Dispose();
+            baglantiFormBilgileri.Close();
         }
 
         public List<String> kayitliFormlarınIsimleriniGetir() {
             List<String> kayıtliFormAdlari = new List<string>();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT formadi FROM table_tasarlananformlar ORDER BY formadi ASC", baglanti);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT formadi FROM table_tasarlananformlar ORDER BY formadi ASC", baglantiFormBilgileri);
             DataTable tablo = new DataTable();
             adapter.Fill(tablo);
             for (int i = 0; i < tablo.Rows.Count; i++)
@@ -159,7 +180,7 @@ namespace KorOptik_v1
 
             SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT adisoyadiX,adisoyadiY,ogrencinoX,ogrencinoY,sinifsubeX,sinifsubeY,kitapcikturuX,kitapcikturuY,okulkoduX,okulkoduY,baslikX,baslikY" +
                 ",eklenenCevapAlani1X,eklenenCevapAlani1Y,eklenenCevapAlani2X,eklenenCevapAlani2Y,eklenenCevapAlani3X,eklenenCevapAlani3Y,eklenenCevapAlani4X,eklenenCevapAlani4Y,eklenenCevapAlani5X,eklenenCevapAlani5Y" +
-                ",eklenenCevapAlani6X,eklenenCevapAlani6Y,eklenenCevapAlani7X,eklenenCevapAlani7Y,eklenenCevapAlani8X,eklenenCevapAlani8Y,eklenenCevapAlani9X,eklenenCevapAlani9Y,eklenenCevapAlani10X,eklenenCevapAlani10Y FROM table_tasarlananformlar WHERE formadi = '" + formadi+"'", baglanti);
+                ",eklenenCevapAlani6X,eklenenCevapAlani6Y,eklenenCevapAlani7X,eklenenCevapAlani7Y,eklenenCevapAlani8X,eklenenCevapAlani8Y,eklenenCevapAlani9X,eklenenCevapAlani9Y,eklenenCevapAlani10X,eklenenCevapAlani10Y FROM table_tasarlananformlar WHERE formadi = '" + formadi+"'", baglantiFormBilgileri);
             DataTable tablo = new DataTable();
             adapter.Fill(tablo);
 
@@ -206,7 +227,7 @@ namespace KorOptik_v1
         {
             List<int> sorusayilari = new List<int>();
 
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT sorusayisi1,sorusayisi2,sorusayisi3,sorusayisi4,sorusayisi5,sorusayisi6,sorusayisi7,sorusayisi8,sorusayisi9,sorusayisi10 FROM table_tasarlananformlar WHERE formadi = '" + formadi+"'", baglanti);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT sorusayisi1,sorusayisi2,sorusayisi3,sorusayisi4,sorusayisi5,sorusayisi6,sorusayisi7,sorusayisi8,sorusayisi9,sorusayisi10 FROM table_tasarlananformlar WHERE formadi = '" + formadi+"'", baglantiFormBilgileri);
             DataTable tablo = new DataTable();
             adapter.Fill(tablo);
 
@@ -223,7 +244,7 @@ namespace KorOptik_v1
         {
             List<string> dersAdlari = new List<string>();
 
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT dersadi1,dersadi2,dersadi3,dersadi4,dersadi5,dersadi6,dersadi7,dersadi8,dersadi9,dersadi10 FROM table_tasarlananformlar WHERE formadi = '" + formadi+"'", baglanti);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT dersadi1,dersadi2,dersadi3,dersadi4,dersadi5,dersadi6,dersadi7,dersadi8,dersadi9,dersadi10 FROM table_tasarlananformlar WHERE formadi = '" + formadi+"'", baglantiFormBilgileri);
             DataTable tablo = new DataTable();
             adapter.Fill(tablo);
 
@@ -238,13 +259,58 @@ namespace KorOptik_v1
 
         public String okulTurunuGetir(String formadi)
         {
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT okulturu FROM table_tasarlananformlar WHERE formadi = '" + formadi + "'", baglanti);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT okulturu FROM table_tasarlananformlar WHERE formadi = '" + formadi + "'", baglantiFormBilgileri);
             DataTable tablo = new DataTable();
             adapter.Fill(tablo);
             String okulturu = tablo.Rows[0][0].ToString();
             adapter.Dispose();
             tablo.Dispose();
             return okulturu;
+        }
+
+        public void formuSil(string v)
+        {
+            komutFormBilgileri.Connection = baglantiFormBilgileri;
+            komutFormBilgileri.CommandText = "DELETE FROM table_tasarlananformlar WHERE formadi = '"+v+"'";
+            komutFormBilgileri.ExecuteNonQuery();
+            komutFormBilgileri.Dispose();
+            baglantiFormBilgileri.Close();
+        }
+
+        public void kaydetCevapAnahtariA(String cevaplar) {
+            komutCevapAnahtariA.Connection = baglantiCevapAnahtariA;
+            komutCevapAnahtariA.CommandText = "INSERT INTO table_cevap_anahtariA (cevaplar) VALUES('"+cevaplar+"')";
+            komutCevapAnahtariA.ExecuteNonQuery();
+            komutCevapAnahtariA.Dispose();
+            baglantiCevapAnahtariA.Close();
+        }
+
+        public List<String> getirCevapAnahtariA(){
+            List<string> cevaplar = new List<string>();
+
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT cevaplar FROM table_cevap_anahtariA", baglantiCevapAnahtariA);
+            DataTable tablo = new DataTable();
+            adapter.Fill(tablo);
+            if (tablo != null)
+            {
+                 for (int i = 0; i < tablo.Rows.Count; i++)
+                {
+                    cevaplar.Add(tablo.Rows[i][0].ToString());
+                }
+            }
+            
+            adapter.Dispose();
+            tablo.Dispose();
+            return cevaplar;
+        }
+
+        public void silCevapAnahtariA()
+        {
+            komutCevapAnahtariA.Connection = baglantiCevapAnahtariA;
+            komutCevapAnahtariA.CommandText = "DELETE FROM table_cevap_anahtariA";
+            komutCevapAnahtariA.ExecuteNonQuery();
+            komutCevapAnahtariA.Dispose();
+            baglantiCevapAnahtariA.Close();
         }
     }
 }

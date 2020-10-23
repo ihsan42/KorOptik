@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KorOptik_v1
@@ -18,26 +21,32 @@ namespace KorOptik_v1
             InitializeComponent();
         }
 
+        int izgaraBoşlukGenislik = 9;
+        int izgaraKareGenislik = 7;
         public List<OgrenciOkunan> okunanlar;
         List<Point> koseKareBaslangicNoktalari;
+        List<Point> kosekoordinatlari1 = new List<Point>();
+        List<Point> kosekoordinatlari2 = new List<Point>();
+        List<Point> kosekoordinatlari3 = new List<Point>();
         List<Point> baslangicnoktalari = new List<Point>();
         List<string> okunacakStandartAlanAdlari;
         List<string> okunacakDersAdlari;
         List<String> kayitliTumDersler;
-        List<string> paths = new List<string>();           
+        List<string> paths = new List<string>();
         List<int> soruSayilari;
         List<int> okunacakDersIndexleri;
         int eklenenDersSayisi;
-        public Boolean kalibrasyonYapildiMi=false;
-        public List<FormDegerleri> tumFormlarinDeğerleri=new List<FormDegerleri>();
+        public Boolean kalibrasyonYapildiMi = false;
+        public List<FormDegerleri> tumFormlarinDeğerleri = new List<FormDegerleri>();
 
         public String okulturu = "";
-        String formadi="";
+        String formadi = "";
         int grilikesigi;
         int parlaklikesigi;
         int sikokumahassasiyeti;
-        Point formebatlari;      
+        Point formebatlari;
         Bitmap resimm;
+        private bool buttonStopClicked = false;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -56,226 +65,262 @@ namespace KorOptik_v1
 
         private void buttonOku_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.AppStarting;
-            if (paths.Count == 0)
-            {
-                MessageBox.Show("Yüklenmiş form yok!");
+           // try
+           // {
+                if (paths.Count == 0)
+                {
+                    MessageBox.Show("Yüklenmiş form yok!");
 
-            }
-            else if (comboBoxFormTuru.SelectedIndex < 0)
-            {
-                MessageBox.Show("Lütfen form türünü seçiniz!");
-            }
-            else
-            {               
-                okunacakStandartAlanAdlari = new List<string>();
-                okunacakDersAdlari = new List<string>();
-                okunacakDersIndexleri = new List<int>();
-                kolonIsimleriniGoruntule(formadi, dataGridViewOkunanlar, okunacakStandartAlanAdlari, okunacakDersAdlari, okunacakDersIndexleri);
+                }
+                else if (comboBoxFormTuru.SelectedIndex < 0)
+                {
+                    MessageBox.Show("Lütfen form türünü seçiniz!");
+                }
+                else
+                {
+                    this.Cursor = Cursors.AppStarting;
 
-                okunacakStandartAlanAdlari = new List<string>();
-                okunacakDersAdlari = new List<string>();
-                formBilgileriGetir(comboBoxFormTuru.SelectedItem.ToString(), okunacakStandartAlanAdlari, okunacakDersAdlari);
+                    buttonStop.Visible = true;
 
-                List<String> okunamayanlar = new List<string>();
-                for (int m = 0; m < paths.Count; m++)
-                {                 
-                    Bitmap secilenForm = new Bitmap(paths[m]);
-                    Bitmap okunacakForm;
-                    Bitmap anaForm;
-                    if (kalibrasyonYapildiMi == true)
+                    okunacakStandartAlanAdlari = new List<string>();
+                    okunacakDersAdlari = new List<string>();
+                    okunacakDersIndexleri = new List<int>();
+                    kolonIsimleriniGoruntule(formadi, dataGridViewOkunanlar, okunacakStandartAlanAdlari, okunacakDersAdlari, okunacakDersIndexleri);
+
+                    okunacakStandartAlanAdlari = new List<string>();
+                    okunacakDersAdlari = new List<string>();
+                    formBilgileriGetir(comboBoxFormTuru.SelectedItem.ToString(), okunacakStandartAlanAdlari, okunacakDersAdlari);
+
+                    progressBar1.Maximum = paths.Count;
+                    progressBar1.Minimum = 0;
+                    progressBar1.Value = 0;
+                    progressBar1.Show();
+                    labelOkunanSayisi.Visible = true;
+                    labelOkunanSayisi.Text = "0/" + paths.Count.ToString();
+
+                    List<String> okunamayanlar = new List<string>();
+                    for (int m = 0; m < paths.Count; m++)
                     {
-                        okunacakForm = new Bitmap(secilenForm, tumFormlarinDeğerleri[m].getFormWidht(), tumFormlarinDeğerleri[m].getFormHeight());
-                        anaForm = new Bitmap(okunacakForm);
-                    }
-                    else
-                    {
-                        okunacakForm = new Bitmap(secilenForm, formebatlari.X, formebatlari.Y);
-                        anaForm = new Bitmap(okunacakForm);
-                    }
+                        if (buttonStopClicked == true)
+                        {
+                            buttonStopClicked = false;
+                            break;
 
-                    kenarBul(okunacakForm, m);
-                    egrilikGider(okunacakForm, anaForm, m);
+                        }
+                        progressBar1.Value += 1;
+                        labelOkunanSayisi.Text = (m + 1).ToString() + "/" + paths.Count.ToString();
 
-                    if (koseKareBaslangicNoktalari.Count == 6)
-                    {
-                        int basX = 0;
-                        int basY = 0;
-                        ///ADSOYAD OKUMA/////
+                        Bitmap secilenForm = new Bitmap(paths[m]);
+                        Bitmap okunacakForm;
+                        Bitmap anaForm;
                         if (kalibrasyonYapildiMi == true)
                         {
-                            basX = tumFormlarinDeğerleri[m].getAdSoyadBaslangic().X + koseKareBaslangicNoktalari[0].X;
-                            basY = tumFormlarinDeğerleri[m].getAdSoyadBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
+                            okunacakForm = new Bitmap(secilenForm, tumFormlarinDeğerleri[m].getFormWidht(), tumFormlarinDeğerleri[m].getFormHeight());
+                            anaForm = new Bitmap(okunacakForm);
+                            sikokumahassasiyeti = tumFormlarinDeğerleri[m].getSikOkumaHassasiyeti();
+                            grilikesigi = tumFormlarinDeğerleri[m].getGrilikEsigi();
+                            parlaklikesigi = tumFormlarinDeğerleri[m].getParlaklikEsigi();
                         }
                         else
                         {
-                            basX = baslangicnoktalari[0].X + koseKareBaslangicNoktalari[0].X;
-                            basY = baslangicnoktalari[0].Y + koseKareBaslangicNoktalari[0].Y;
-                        }
-                        binaryyap(okunacakForm, basX, basY + 27, 20 * 9, 29 * 9, m);
-                        String ogrAdi = adsoyadOku(okunacakForm, basX, basY);
-
-                        ////öĞRENCİ NO OKUMA/////
-                        if (kalibrasyonYapildiMi == true)
-                        {
-                            basX = tumFormlarinDeğerleri[m].getOgrenciNoBaslangic().X + koseKareBaslangicNoktalari[0].X;
-                            basY = tumFormlarinDeğerleri[m].getOgrenciNoBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
-                        }
-                        else
-                        {
-                            basX = baslangicnoktalari[1].X + koseKareBaslangicNoktalari[0].X;
-                            basY = baslangicnoktalari[1].Y + koseKareBaslangicNoktalari[0].Y;
-                        }
-                        binaryyap(okunacakForm, basX, basY + 18, 4 * 9, 10 * 9, m);
-                        string ogrNumarasi = ogrenciNoOku(okunacakForm, basX, basY);
-
-                        ////OKUL KODU OKUMA///////
-                        if (kalibrasyonYapildiMi == true)
-                        {
-                            basX = tumFormlarinDeğerleri[m].getOkulKoduBaslangic().X + koseKareBaslangicNoktalari[0].X;
-                            basY = tumFormlarinDeğerleri[m].getOkulKoduBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
-                        }
-                        else
-                        {
-                            basX = baslangicnoktalari[4].X + koseKareBaslangicNoktalari[0].X;
-                            basY = baslangicnoktalari[4].Y + koseKareBaslangicNoktalari[0].Y;
-                        }
-                        binaryyap(okunacakForm, basX, basY + 18, 6 * 9, 10 * 9, m);
-                        string okulkodu = okulKoduOku(okunacakForm, basX, basY);
-
-                        ///////KİTAPÇIK TÜRÜ OKUMA////////
-                        if (kalibrasyonYapildiMi == true)
-                        {
-                            basX = tumFormlarinDeğerleri[m].getKitapcikTuruBaslangic().X + koseKareBaslangicNoktalari[0].X;
-                            basY = tumFormlarinDeğerleri[m].getKitapcikTuruBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
-                        }
-                        else
-                        {
-                            basX = baslangicnoktalari[3].X + koseKareBaslangicNoktalari[0].X;
-                            basY = baslangicnoktalari[3].Y + koseKareBaslangicNoktalari[0].Y;
-                        }
-                        binaryyap(okunacakForm, basX + 18, basY + 63, 1 * 9, 4 * 9, m);
-                        string kitTuru = kitapcikTuruOku(okunacakForm, basX, basY);
-
-                        ///////SINIF-ŞUBE OKUMA//////////
-                        if (kalibrasyonYapildiMi == true)
-                        {
-                            basX = tumFormlarinDeğerleri[m].getSinifSubeBaslangic().X + koseKareBaslangicNoktalari[0].X;
-                            basY = tumFormlarinDeğerleri[m].getSinifSubeBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
-                        }
-                        else
-                        {
-                            basX = baslangicnoktalari[2].X + koseKareBaslangicNoktalari[0].X;
-                            basY = baslangicnoktalari[2].Y + koseKareBaslangicNoktalari[0].Y;
-                        }
-                        binaryyap(okunacakForm, basX, basY + 18, 1 * 9, 12 * 9, m);
-                        binaryyap(okunacakForm, basX + 9, basY + 18, 1 * 9, 29 * 9, m);
-                        string sinif = sinifOku(okunacakForm, basX, basY);
-                        string sube = subeOku(okunacakForm, basX, basY);
-
-                        //////////DERSLERİ OKUMA////////////
-                        int sikSayisi = 0;
-                        if (okulturu.Equals("İlkokul"))
-                        {
-                            sikSayisi = 3;
-                        }
-                        if (okulturu.Equals("Ortaokul"))
-                        {
-                            sikSayisi = 4;
-                        }
-                        if (okulturu.Equals("Lise"))
-                        {
-                            sikSayisi = 5;
+                            okunacakForm = new Bitmap(secilenForm, formebatlari.X, formebatlari.Y);
+                            anaForm = new Bitmap(okunacakForm);
                         }
 
-                        List<String> cevaplar = new List<string>();
-                        for (int i = 0; i < okunacakDersAdlari.Count; i++)
+                        kenarBul(okunacakForm, m);
+                        egrilikGider(okunacakForm, anaForm, m);
+
+                        if (koseKareBaslangicNoktalari.Count == 3)
                         {
-                            int sorusayisi = soruSayilari[i];
+                            int basX = 0;
+                            int basY = 0;
+                            ///ADSOYAD OKUMA/////
                             if (kalibrasyonYapildiMi == true)
                             {
-                                basX = tumFormlarinDeğerleri[m].getDersBaslangicNoktalari()[i].X + koseKareBaslangicNoktalari[0].X;
-                                basY = tumFormlarinDeğerleri[m].getDersBaslangicNoktalari()[i].Y + koseKareBaslangicNoktalari[0].Y;
+                                basX = tumFormlarinDeğerleri[m].getAdSoyadBaslangic().X + koseKareBaslangicNoktalari[0].X;
+                                basY = tumFormlarinDeğerleri[m].getAdSoyadBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
                             }
                             else
                             {
-                                basX = baslangicnoktalari[6 + i].X + koseKareBaslangicNoktalari[0].X;
-                                basY = baslangicnoktalari[6 + i].Y + koseKareBaslangicNoktalari[0].Y;
+                                basX = baslangicnoktalari[0].X + koseKareBaslangicNoktalari[0].X;
+                                basY = baslangicnoktalari[0].Y + koseKareBaslangicNoktalari[0].Y;
+                            }
+                            binaryyap(okunacakForm, basX - 3, basY + 1, 20 * izgaraBoşlukGenislik, 29 * izgaraBoşlukGenislik, m);
+                            String ogrAdi = adsoyadOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
+
+                            ////öĞRENCİ NO OKUMA/////
+                            if (kalibrasyonYapildiMi == true)
+                            {
+                                basX = tumFormlarinDeğerleri[m].getOgrenciNoBaslangic().X + koseKareBaslangicNoktalari[0].X;
+                                basY = tumFormlarinDeğerleri[m].getOgrenciNoBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
+                            }
+                            else
+                            {
+                                basX = baslangicnoktalari[1].X + koseKareBaslangicNoktalari[0].X;
+                                basY = baslangicnoktalari[1].Y + koseKareBaslangicNoktalari[0].Y;
+                            }
+                            binaryyap(okunacakForm, basX - 3, basY + 1, 4 * izgaraBoşlukGenislik, 10 * izgaraBoşlukGenislik, m);
+                            string ogrNumarasi = ogrenciNoOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
+
+                            ////OKUL KODU OKUMA///////
+                            if (kalibrasyonYapildiMi == true)
+                            {
+                                basX = tumFormlarinDeğerleri[m].getOkulKoduBaslangic().X + koseKareBaslangicNoktalari[0].X;
+                                basY = tumFormlarinDeğerleri[m].getOkulKoduBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
+                            }
+                            else
+                            {
+                                basX = baslangicnoktalari[4].X + koseKareBaslangicNoktalari[0].X;
+                                basY = baslangicnoktalari[4].Y + koseKareBaslangicNoktalari[0].Y;
+                            }
+                            binaryyap(okunacakForm, basX - 3, basY + 1, 6 * izgaraBoşlukGenislik, 10 * izgaraBoşlukGenislik, m);
+                            string okulkodu = okulKoduOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
+
+                            ///////KİTAPÇIK TÜRÜ OKUMA////////
+                            if (kalibrasyonYapildiMi == true)
+                            {
+                                basX = tumFormlarinDeğerleri[m].getKitapcikTuruBaslangic().X + koseKareBaslangicNoktalari[0].X;
+                                basY = tumFormlarinDeğerleri[m].getKitapcikTuruBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
+                            }
+                            else
+                            {
+                                basX = baslangicnoktalari[3].X + koseKareBaslangicNoktalari[0].X;
+                                basY = baslangicnoktalari[3].Y + koseKareBaslangicNoktalari[0].Y;
+                            }
+                            binaryyap(okunacakForm, basX - 3, basY + 1, 1 * izgaraBoşlukGenislik, 4 * izgaraBoşlukGenislik, m);
+                            string kitTuru = kitapcikTuruOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
+
+                            ///////SINIF-ŞUBE OKUMA//////////
+                            if (kalibrasyonYapildiMi == true)
+                            {
+                                basX = tumFormlarinDeğerleri[m].getSinifSubeBaslangic().X + koseKareBaslangicNoktalari[0].X;
+                                basY = tumFormlarinDeğerleri[m].getSinifSubeBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
+                            }
+                            else
+                            {
+                                basX = baslangicnoktalari[2].X + koseKareBaslangicNoktalari[0].X;
+                                basY = baslangicnoktalari[2].Y + koseKareBaslangicNoktalari[0].Y;
+                            }
+                            binaryyap(okunacakForm, basX - 3, basY + 1, 1 * izgaraBoşlukGenislik, 12 * izgaraBoşlukGenislik, m);
+                            binaryyap(okunacakForm, basX - 3 + izgaraBoşlukGenislik, basY + 1, 1 * izgaraBoşlukGenislik, 29 * izgaraBoşlukGenislik, m);
+                            string sinif = sinifOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
+                            string sube = subeOku(okunacakForm, basX - 3 + izgaraBoşlukGenislik, basY + 1, sikokumahassasiyeti);
+
+                            //////////DERSLERİ OKUMA////////////
+                            int sikSayisi = 0;
+                            if (okulturu.Equals("İlkokul"))
+                            {
+                                sikSayisi = 3;
+                            }
+                            if (okulturu.Equals("Ortaokul"))
+                            {
+                                sikSayisi = 4;
+                            }
+                            if (okulturu.Equals("Lise"))
+                            {
+                                sikSayisi = 5;
                             }
 
-                            binaryyap(okunacakForm, basX + 9, basY, sikSayisi * 9, sorusayisi * 9, m);
-                            string cevap = dersleriOku(okunacakForm, basX, basY, okulturu, sorusayisi, sikSayisi);
-                            cevaplar.Add(cevap);
-                        }
+                            List<String> cevaplar = new List<string>();
+                            for (int i = 0; i < okunacakDersAdlari.Count; i++)
+                            {
+                                int sorusayisi = soruSayilari[i];
+                                if (kalibrasyonYapildiMi == true)
+                                {
+                                    basX = tumFormlarinDeğerleri[m].getDersBaslangicNoktalari()[i].X + koseKareBaslangicNoktalari[0].X;
+                                    basY = tumFormlarinDeğerleri[m].getDersBaslangicNoktalari()[i].Y + koseKareBaslangicNoktalari[0].Y;
+                                }
+                                else
+                                {
+                                    basX = baslangicnoktalari[6 + i].X + koseKareBaslangicNoktalari[0].X;
+                                    basY = baslangicnoktalari[6 + i].Y + koseKareBaslangicNoktalari[0].Y;
+                                }
 
-                        /////OKUNANLARI YAZDIRMA//////////////
-                        dataGridViewOkunanlar.Rows.Add();
-                        for (int j = 0; j < dataGridViewOkunanlar.Rows[m].Cells.Count; j++)
+                                binaryyap(okunacakForm, basX + 6, basY, sikSayisi * izgaraBoşlukGenislik, sorusayisi * izgaraBoşlukGenislik, m);
+                                string cevap = dersleriOku(okunacakForm, basX + 6, basY, okulturu, sorusayisi, sikSayisi, sikokumahassasiyeti);
+                                cevaplar.Add(cevap);
+                            }
+
+                            /////OKUNANLARI YAZDIRMA//////////////
+                            dataGridViewOkunanlar.Rows.Add();
+                            for (int j = 0; j < dataGridViewOkunanlar.Rows[m].Cells.Count; j++)
+                            {
+                                if (dataGridViewOkunanlar.Columns[j].HeaderText.Equals("Ad-Soyad"))
+                                {
+                                    dataGridViewOkunanlar.Rows[m].Cells[j].Value = ogrAdi;
+                                }
+                                if (dataGridViewOkunanlar.Columns[j].HeaderText.Equals("Öğrenci No"))
+                                {
+                                    dataGridViewOkunanlar.Rows[m].Cells[j].Value = ogrNumarasi;
+                                }
+                                if (dataGridViewOkunanlar.Columns[j].HeaderText.Equals("Sınıf-Şube"))
+                                {
+                                    dataGridViewOkunanlar.Rows[m].Cells[j].Value = sinif + sube;
+                                }
+                                if (dataGridViewOkunanlar.Columns[j].HeaderText.Equals("Kitapçık Türü"))
+                                {
+                                    dataGridViewOkunanlar.Rows[m].Cells[j].Value = kitTuru;
+                                }
+                                if (dataGridViewOkunanlar.Columns[j].HeaderText.Equals("Okul Kodu"))
+                                {
+                                    dataGridViewOkunanlar.Rows[m].Cells[j].Value = okulkodu;
+                                }
+                            }
+                            for (int i = 0; i < cevaplar.Count; i++)
+                            {
+                                dataGridViewOkunanlar.Rows[m].Cells[dataGridViewOkunanlar.Rows[m].Cells.Count + i - cevaplar.Count].Value = cevaplar[i];
+                            }
+
+
+                            secilenForm.Dispose();
+                            okunacakForm.Dispose();
+                            anaForm.Dispose();
+                            koseKareBaslangicNoktalari.Clear();
+                            Application.DoEvents();
+                        }
+                        else
                         {
-                            if (dataGridViewOkunanlar.Columns[j].HeaderText.Equals("Ad-Soyad"))
-                            {
-                                dataGridViewOkunanlar.Rows[m].Cells[j].Value = ogrAdi;
-                            }
-                            if (dataGridViewOkunanlar.Columns[j].HeaderText.Equals("Öğrenci No"))
-                            {
-                                dataGridViewOkunanlar.Rows[m].Cells[j].Value = ogrNumarasi;
-                            }
-                            if (dataGridViewOkunanlar.Columns[j].HeaderText.Equals("Sınıf-Şube"))
-                            {
-                                dataGridViewOkunanlar.Rows[m].Cells[j].Value = sinif + sube;
-                            }
-                            if (dataGridViewOkunanlar.Columns[j].HeaderText.Equals("Kitapçık Türü"))
-                            {
-                                dataGridViewOkunanlar.Rows[m].Cells[j].Value = kitTuru;
-                            }
-                            if (dataGridViewOkunanlar.Columns[j].HeaderText.Equals("Okul Kodu"))
-                            {
-                                dataGridViewOkunanlar.Rows[m].Cells[j].Value = okulkodu;
-                            }
+                            dataGridViewOkunanlar.Rows.Add();
+                            okunamayanlar.Add((m + 1).ToString() + ". sıra " + paths[m]);
                         }
-                        for (int i = 0; i < cevaplar.Count; i++)
+                    }
+                    String sonuc = "Okuma Tamamlandı.";
+                    if (okunamayanlar.Count > 0)
+                    {
+                        sonuc = "Okuma Tamamlandı. Okunamayan optikler var! Lütfen kalibrasyon yapın.\n\n Okunamayanlar\n";
+                        int sira = 0;
+                        foreach (String s in okunamayanlar)
                         {
-                            dataGridViewOkunanlar.Rows[m].Cells[dataGridViewOkunanlar.Rows[m].Cells.Count + i - cevaplar.Count].Value = cevaplar[i];
+                            sira += 1;
+                            sonuc += sira + ") " + s + "\n";
                         }
-
-
-                        secilenForm.Dispose();
-                        okunacakForm.Dispose();
-                        anaForm.Dispose();
-                        koseKareBaslangicNoktalari.Clear();
-                        Application.DoEvents();
                     }
-                    else
-                    {
-                        dataGridViewOkunanlar.Rows.Add();
-                        okunamayanlar.Add((m + 1).ToString() + ". sıra " + paths[m]);
-                    }
+
+                    MessageBox.Show(sonuc);
+                    buttonStop.Visible = false;
                 }
-                String sonuc = "Okuma Tamamlandı.";
-                if (okunamayanlar.Count > 0)
-                {
-                    sonuc = "Okuma Tamamlandı. Okunamayan optikler var! Lütfen kalibrasyon yapın.\n\n Okunamayanlar\n";
-                    int sira = 0;
-                    foreach (String s in okunamayanlar)
-                    {
-                        sira += 1;
-                        sonuc += sira + ") " + s + "\n";
-                    }
-                }
-
-                MessageBox.Show(sonuc);
-
-            }
-            this.Cursor = Cursors.Default;
+                this.Cursor = Cursors.Default;
+                progressBar1.Hide();
+                labelOkunanSayisi.Visible = false;
+           //}
+            //catch (Exception h)
+           // {
+              //  this.Cursor = Cursors.Default;
+              //  MessageBox.Show(h.Message);
+               
+           // }
         }
+
+        ///okuma bitiş
 
         private void değerlendirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dataGridViewOkunanlar.RowCount == 0) {
+            if (dataGridViewOkunanlar.RowCount == 0)
+            {
                 MessageBox.Show("Okunmuş form yok!");
             }
             else
-            {              
+            {
                 okunanlar = new List<OgrenciOkunan>();
 
                 for (int i = 0; i < dataGridViewOkunanlar.RowCount - 1; i++)
@@ -327,7 +372,7 @@ namespace KorOptik_v1
                     degerlendir.okunacakStandartAlanlar.Add(s);
                 }
                 degerlendir.Show();
-            }                             
+            }
         }
 
         private void formTasarlaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -375,12 +420,12 @@ namespace KorOptik_v1
             {
                 Kalibrasyon kalibrasyon = new Kalibrasyon();
                 if (comboBoxFormTuru.SelectedIndex > -1)
-                {                    
+                {
                     kalibrasyon.formadiKalibre = formadi;
                     foreach (String path in paths)
                     {
                         kalibrasyon.pathsSecilen.Add(path);
-                    }                   
+                    }
                     kalibrasyon.Show();
                 }
                 else
@@ -395,30 +440,30 @@ namespace KorOptik_v1
         }
 
         private void comboBoxFormTuru_SelectedIndexChanged(object sender, EventArgs e)
-        {          
-                formadi = comboBoxFormTuru.SelectedItem.ToString();
-                okunacakStandartAlanAdlari = new List<string>();
-                okunacakDersAdlari = new List<string>();
-                formBilgileriGetir(formadi, okunacakStandartAlanAdlari, okunacakDersAdlari);
-                eklenenDersSayisi = okunacakDersAdlari.Count;                      
-        }     
+        {
+            formadi = comboBoxFormTuru.SelectedItem.ToString();
+            okunacakStandartAlanAdlari = new List<string>();
+            okunacakDersAdlari = new List<string>();
+            formBilgileriGetir(formadi, okunacakStandartAlanAdlari, okunacakDersAdlari);
+            eklenenDersSayisi = okunacakDersAdlari.Count;
+        }
 
-        public String adsoyadOku(Bitmap b,int basX, int basY)
+        public String adsoyadOku(Bitmap b, int basX, int basY, int sikOkumaHassasligi)
         {
             int x1 = basX;
-            int x2 = basX + 20 * 9;
-            int y1 = basY + 27;
-            int y2 = basY + 27 + 29 * 9;
+            int x2 = basX + 20 * izgaraBoşlukGenislik;
+            int y1 = basY;
+            int y2 = basY + 29 * izgaraBoşlukGenislik;
 
             List<int> sutunlardakiSiyahPikselSayilari = new List<int>();
-            for (int i = x1; i < x2; i += 9)
+            for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
             {
-                for (int j = y1; j < y2; j += 9)
+                for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                 {
                     List<int> siyahpikseller = new List<int>();
-                    for (int m = i; m < i + 9; m++)
+                    for (int m = i; m < i + izgaraKareGenislik; m++)
                     {
-                        for (int n = j; n < j + 9; n++)
+                        for (int n = j; n < j + izgaraKareGenislik; n++)
                         {
                             Color renk = b.GetPixel(m, n);
                             if (renk.R == 0 && renk.G == 0 && renk.B == 0)
@@ -433,19 +478,19 @@ namespace KorOptik_v1
             }
 
             List<String> adsoyad = new List<string>();
-            for(int i = 0; i < sutunlardakiSiyahPikselSayilari.Count; i += 29)
+            for (int i = 0; i < sutunlardakiSiyahPikselSayilari.Count; i += 29)
             {
                 int j = -1;
                 List<int> isatetlenenler = new List<int>();
                 for (int k = i; k < i + 29; k++)
-                {                    
-                    if (sutunlardakiSiyahPikselSayilari[k] > sikokumahassasiyeti)
+                {
+                    if (sutunlardakiSiyahPikselSayilari[k] > sikOkumaHassasligi)
                     {
                         isatetlenenler.Add(sutunlardakiSiyahPikselSayilari[k]);
                         j = k;
-                    }                   
+                    }
                 }
-                
+
                 if (isatetlenenler.Count > 1)
                 {
                     adsoyad.Add("?");
@@ -582,27 +627,27 @@ namespace KorOptik_v1
                 isim += s;
             }
             adsoyad.Clear();
-            sutunlardakiSiyahPikselSayilari.Clear();   
-            
+            sutunlardakiSiyahPikselSayilari.Clear();
+
             return isim;
         }
 
-        public String ogrenciNoOku(Bitmap b, int basX, int basY)
+        public String ogrenciNoOku(Bitmap b, int basX, int basY, int sikOkumaHassasligi)
         {
             int x1 = basX;
-            int x2 = basX + 4 * 9;
-            int y1 = basY + 18;
-            int y2 = basY + 18 + 10 * 9;
+            int x2 = basX + 4 * izgaraBoşlukGenislik;
+            int y1 = basY;
+            int y2 = basY + 10 * izgaraBoşlukGenislik;
 
             List<int> sutunlardakiSiyahPikselSayilari = new List<int>();
-            for (int i = x1; i < x2; i += 9)
+            for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
             {
-                for (int j = y1; j < y2; j += 9)
+                for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                 {
                     List<int> siyahpikseller = new List<int>();
-                    for (int m = i; m < i + 9; m++)
+                    for (int m = i; m < i + izgaraKareGenislik; m++)
                     {
-                        for (int n = j; n < j + 9; n++)
+                        for (int n = j; n < j + izgaraKareGenislik; n++)
                         {
                             Color renk = b.GetPixel(m, n);
                             if (renk.R == 0 && renk.G == 0 && renk.B == 0)
@@ -623,7 +668,7 @@ namespace KorOptik_v1
                 List<int> isatetlenenler = new List<int>();
                 for (int k = i; k < i + 10; k++)
                 {
-                    if (sutunlardakiSiyahPikselSayilari[k] > sikokumahassasiyeti)
+                    if (sutunlardakiSiyahPikselSayilari[k] > sikOkumaHassasligi)
                     {
                         isatetlenenler.Add(sutunlardakiSiyahPikselSayilari[k]);
                         j = k;
@@ -679,7 +724,7 @@ namespace KorOptik_v1
                     if (j == i + 9)
                     {
                         ogrenciNo.Add("9");
-                    }                  
+                    }
                 }
                 isatetlenenler.Clear();
             }
@@ -695,22 +740,22 @@ namespace KorOptik_v1
             return ogrNo;
         }
 
-        public String sinifOku(Bitmap b, int basX, int basY)
+        public String sinifOku(Bitmap b, int basX, int basY, int sikOkumaHassasligi)
         {
-            int x1 = basX ;
-            int x2 = basX + 1 * 9;
-            int y1 = basY + 18;
-            int y2 = basY + 18 + 12 * 9;
+            int x1 = basX;
+            int x2 = basX + 1 * izgaraBoşlukGenislik;
+            int y1 = basY;
+            int y2 = basY + 12 * izgaraBoşlukGenislik;
 
             List<int> sutunlardakiSiyahPikselSayilari = new List<int>();
-            for (int i = x1; i < x2; i += 9)
+            for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
             {
-                for (int j = y1; j < y2; j += 9)
+                for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                 {
                     List<int> siyahpikseller = new List<int>();
-                    for (int m = i; m < i + 9; m++)
+                    for (int m = i; m < i + izgaraKareGenislik; m++)
                     {
-                        for (int n = j; n < j + 9; n++)
+                        for (int n = j; n < j + izgaraKareGenislik; n++)
                         {
                             Color renk = b.GetPixel(m, n);
                             if (renk.R == 0 && renk.G == 0 && renk.B == 0)
@@ -731,7 +776,7 @@ namespace KorOptik_v1
                 List<int> isatetlenenler = new List<int>();
                 for (int k = i; k < i + 12; k++)
                 {
-                    if (sutunlardakiSiyahPikselSayilari[k] > sikokumahassasiyeti)
+                    if (sutunlardakiSiyahPikselSayilari[k] > sikOkumaHassasligi)
                     {
                         isatetlenenler.Add(sutunlardakiSiyahPikselSayilari[k]);
                         j = k;
@@ -795,7 +840,7 @@ namespace KorOptik_v1
                     if (j == i + 11)
                     {
                         adsoyad.Add("12");
-                    }                    
+                    }
                 }
                 isatetlenenler.Clear();
             }
@@ -811,22 +856,22 @@ namespace KorOptik_v1
             return sube;
         }
 
-        public String subeOku(Bitmap b, int basX, int basY)
+        public String subeOku(Bitmap b, int basX, int basY, int sikOkumaHassasligi)
         {
-            int x1 = basX+9;
-            int x2 = basX+9 + 1 * 9;
-            int y1 = basY + 18;
-            int y2 = basY + 18 + 29 * 9;
+            int x1 = basX;
+            int x2 = basX + izgaraBoşlukGenislik;
+            int y1 = basY;
+            int y2 = basY + 29 * izgaraBoşlukGenislik;
 
             List<int> sutunlardakiSiyahPikselSayilari = new List<int>();
-            for (int i = x1; i < x2; i += 9)
+            for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
             {
-                for (int j = y1; j < y2; j += 9)
+                for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                 {
                     List<int> siyahpikseller = new List<int>();
-                    for (int m = i; m < i + 9; m++)
+                    for (int m = i; m < i + izgaraKareGenislik; m++)
                     {
-                        for (int n = j; n < j + 9; n++)
+                        for (int n = j; n < j + izgaraKareGenislik; n++)
                         {
                             Color renk = b.GetPixel(m, n);
                             if (renk.R == 0 && renk.G == 0 && renk.B == 0)
@@ -847,7 +892,7 @@ namespace KorOptik_v1
                 List<int> isatetlenenler = new List<int>();
                 for (int k = i; k < i + 29; k++)
                 {
-                    if (sutunlardakiSiyahPikselSayilari[k] > sikokumahassasiyeti)
+                    if (sutunlardakiSiyahPikselSayilari[k] > sikOkumaHassasligi)
                     {
                         isatetlenenler.Add(sutunlardakiSiyahPikselSayilari[k]);
                         j = k;
@@ -995,22 +1040,22 @@ namespace KorOptik_v1
             return sube;
         }
 
-        public String kitapcikTuruOku(Bitmap b, int basX, int basY)
+        public String kitapcikTuruOku(Bitmap b, int basX, int basY, int sikOkumaHassasligi)
         {
-            int x1 = basX+18;
-            int x2 = basX +18+ 1 * 9;
-            int y1 = basY + 63;
-            int y2 = basY + 63 + 4 * 9;
+            int x1 = basX;
+            int x2 = basX + izgaraBoşlukGenislik;
+            int y1 = basY;
+            int y2 = basY + 4 * izgaraBoşlukGenislik;
 
             List<int> sutunlardakiSiyahPikselSayilari = new List<int>();
-            for (int i = x1; i < x2; i += 9)
+            for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
             {
-                for (int j = y1; j < y2; j += 9)
+                for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                 {
                     List<int> siyahpikseller = new List<int>();
-                    for (int m = i; m < i + 9; m++)
+                    for (int m = i; m < i + izgaraKareGenislik; m++)
                     {
-                        for (int n = j; n < j + 9; n++)
+                        for (int n = j; n < j + izgaraKareGenislik; n++)
                         {
                             Color renk = b.GetPixel(m, n);
                             if (renk.R == 0 && renk.G == 0 && renk.B == 0)
@@ -1031,7 +1076,7 @@ namespace KorOptik_v1
                 List<int> isatetlenenler = new List<int>();
                 for (int k = i; k < i + 4; k++)
                 {
-                    if (sutunlardakiSiyahPikselSayilari[k] > sikokumahassasiyeti)
+                    if (sutunlardakiSiyahPikselSayilari[k] > sikOkumaHassasligi)
                     {
                         isatetlenenler.Add(sutunlardakiSiyahPikselSayilari[k]);
                         j = k;
@@ -1063,7 +1108,7 @@ namespace KorOptik_v1
                     if (j == i + 3)
                     {
                         ogrenciNo.Add("D");
-                    }                   
+                    }
                 }
                 isatetlenenler.Clear();
             }
@@ -1079,22 +1124,22 @@ namespace KorOptik_v1
             return ogrNo;
         }
 
-        public String okulKoduOku(Bitmap b, int basX, int basY)
+        public String okulKoduOku(Bitmap b, int basX, int basY, int sikOkumaHassasligi)
         {
             int x1 = basX;
-            int x2 = basX + 6 * 9;
-            int y1 = basY + 18;
-            int y2 = basY + 18 + 10 * 9;
+            int x2 = basX + 6 * izgaraBoşlukGenislik;
+            int y1 = basY;
+            int y2 = basY + 10 * izgaraBoşlukGenislik;
 
             List<int> sutunlardakiSiyahPikselSayilari = new List<int>();
-            for (int i = x1; i < x2; i += 9)
+            for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
             {
-                for (int j = y1; j < y2; j += 9)
+                for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                 {
                     List<int> siyahpikseller = new List<int>();
-                    for (int m = i; m < i + 9; m++)
+                    for (int m = i; m < i + izgaraKareGenislik; m++)
                     {
-                        for (int n = j; n < j + 9; n++)
+                        for (int n = j; n < j + izgaraKareGenislik; n++)
                         {
                             Color renk = b.GetPixel(m, n);
                             if (renk.R == 0 && renk.G == 0 && renk.B == 0)
@@ -1115,7 +1160,7 @@ namespace KorOptik_v1
                 List<int> isatetlenenler = new List<int>();
                 for (int k = i; k < i + 10; k++)
                 {
-                    if (sutunlardakiSiyahPikselSayilari[k] > sikokumahassasiyeti)
+                    if (sutunlardakiSiyahPikselSayilari[k] > sikOkumaHassasligi)
                     {
                         isatetlenenler.Add(sutunlardakiSiyahPikselSayilari[k]);
                         j = k;
@@ -1187,22 +1232,22 @@ namespace KorOptik_v1
             return ogrNo;
         }
 
-        public String dersleriOku(Bitmap b, int basX, int basY,String okulTuru,int soruSayisi,int sikSayisi)
+        public String dersleriOku(Bitmap b, int basX, int basY, String okulTuru, int soruSayisi, int sikSayisi, int sikOkumaHassasligi)
         {
-            int x1 = basX +9;
-            int x2 = basX+9+sikSayisi*9;                     
-            int y1 = basY ;
-            int y2 = basY+ soruSayisi*9;
+            int x1 = basX;
+            int x2 = basX + sikSayisi * izgaraBoşlukGenislik;
+            int y1 = basY;
+            int y2 = basY + soruSayisi * izgaraBoşlukGenislik;
 
             List<int> sutunlardakiSiyahPikselSayilari = new List<int>();
-            for (int i = y1; i < y2; i += 9)
+            for (int i = y1; i < y2; i += izgaraBoşlukGenislik)
             {
-                for (int j = x1; j < x2; j += 9)
+                for (int j = x1; j < x2; j += izgaraBoşlukGenislik)
                 {
                     List<int> siyahpikseller = new List<int>();
-                    for (int m = i; m < i + 9; m++)
+                    for (int m = i; m < i + izgaraKareGenislik; m++)
                     {
-                        for (int n = j; n < j + 9; n++)
+                        for (int n = j; n < j + izgaraKareGenislik; n++)
                         {
                             Color renk = b.GetPixel(n, m);
                             if (renk.R == 0 && renk.G == 0 && renk.B == 0)
@@ -1223,7 +1268,7 @@ namespace KorOptik_v1
                 List<int> isatetlenenler = new List<int>();
                 for (int k = i; k < i + sikSayisi; k++)
                 {
-                    if (sutunlardakiSiyahPikselSayilari[k] > sikokumahassasiyeti)
+                    if (sutunlardakiSiyahPikselSayilari[k] > sikOkumaHassasligi)
                     {
                         isatetlenenler.Add(sutunlardakiSiyahPikselSayilari[k]);
                         j = k;
@@ -1273,17 +1318,17 @@ namespace KorOptik_v1
             sutunlardakiSiyahPikselSayilari.Clear();
 
             return ogrNo;
-        }              
+        }
 
-        public void kolonIsimleriniGoruntule(String formadi,DataGridView dataGridView,List<string> okunacakStdAlanlar,List<String> okunacakDersler,List<int> okunacakDersIndexs)
+        public void kolonIsimleriniGoruntule(String formadi, DataGridView dataGridView, List<string> okunacakStdAlanlar, List<String> okunacakDersler, List<int> okunacakDersIndexs)
         {
             okunacakDersler = new List<string>();
             okunacakStdAlanlar = new List<string>();
             okunacakDersIndexs = new List<int>();
-            dataGridViewOkunanlar.Columns.Clear();
+            dataGridView.Columns.Clear();
             List<String> dersNames = new List<string>();
             List<int> standartAlanlarIndexler = new List<int>();
-            List<Point> baslangicPoints= new List<Point>();
+            List<Point> baslangicPoints = new List<Point>();
 
             Veritabani vt = new Veritabani();
             vt.baglan();
@@ -1297,7 +1342,7 @@ namespace KorOptik_v1
                     standartAlanlarIndexler.Add(i);
                 }
             }
-           
+
             foreach (int i in standartAlanlarIndexler)
             {
                 if (i == 0)
@@ -1343,7 +1388,7 @@ namespace KorOptik_v1
             dersNames.Clear();
             standartAlanlarIndexler.Clear();
         }
-       
+
         private void formBilgileriGetir(String formadi, List<string> okunacakStdAlanlar, List<String> okunacakDersler)
         {
             okunacakDersler = new List<string>();
@@ -1434,16 +1479,17 @@ namespace KorOptik_v1
 
                     int nOffset = stride - genislik * 3;
 
+                    if (kalibrasyonYapildiMi == true)
+                    {
+                        grilikesigi = tumFormlarinDeğerleri[formSirasi].getGrilikEsigi();
+                    }
+
                     for (int y = 0; y < yukseklik; ++y)
                     {
                         for (int x = 0; x < genislik; ++x)
                         {
-                            GriResim[x, y] = (double)(.299 * p[0] + .587 * p[1] + .114 * p[2]);
-
-                            if (kalibrasyonYapildiMi == true) {
-                                grilikesigi = tumFormlarinDeğerleri[formSirasi].getGrilikEsigi();
-                            }
-
+                            // GriResim[x, y] = (double)(.299 * p[0] + .587 * p[1] + .114 * p[2]);
+                            GriResim[x, y] = (double)((p[0] + p[1] + p[2]) / 3);
                             if (GriResim[x, y] < grilikesigi)
                             {
                                 GriResim[x, y] = (double)(0);
@@ -1469,120 +1515,215 @@ namespace KorOptik_v1
             catch { }
         }
 
-        private void kenarBul(Bitmap kalibreEdilecekForm,int formSirasi)
+        private static List<Point> sobelOperator(Bitmap sourceImage, Point startPoint, int width, int height, double factor = 1, int bias = 0, bool grayscale = false)
         {
+            double[,] xkernel = new double[,]{
+                    { -1, 0, 1 },
+                    { -2, 0, 2 },
+                    { -1, 0, 1 }
+            };
+
+            double[,] ykernel = new double[,]{
+                    {  1,  2,  1 },
+                    {  0,  0,  0 },
+                    { -1, -2, -1 }
+            };
+
+            //Lock source image bits into system memory
+            BitmapData srcData = sourceImage.LockBits(new Rectangle(startPoint.X, startPoint.Y, width, height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+
+            //Get the total number of bytes in your image - 32 bytes per pixel x image width x image height -> for 32bpp images
+            int bytes = srcData.Stride * srcData.Height;
+
+            //Create byte arrays to hold pixel information of your image
+            byte[] pixelBuffer = new byte[bytes];
+            byte[] resultBuffer = new byte[bytes];
+
+            //Get the address of the first pixel data
+            IntPtr srcScan0 = srcData.Scan0;
+
+            //Copy image data to one of the byte arrays
+            Marshal.Copy(srcScan0, pixelBuffer, 0, bytes);
+
+            //Unlock bits from system memory -> we have all our needed info in the array
+            sourceImage.UnlockBits(srcData);
+
+            //Create variable for pixel data for each kernel
+            double xr = 0.0;
+            double xg = 0.0;
+            double xb = 0.0;
+            double yr = 0.0;
+            double yg = 0.0;
+            double yb = 0.0;
+            double rt = 0.0;
+            double gt = 0.0;
+            double bt = 0.0;
+
+            //This is how much your center pixel is offset from the border of your kernel
+            //Sobel is 3x3, so center is 1 pixel from the kernel border
+            int filterOffset = 1;
+            int calcOffset = 0;
+            int byteOffset = 0;
+
+            //Start with the pixel that is offset 1 from top and 1 from the left side
+            //this is so entire kernel is on your image
+            List<Point> sınırKoordinatları = new List<Point>();
+
+            for (int OffsetY = filterOffset; OffsetY < height - filterOffset; OffsetY++)
+            {
+                for (int OffsetX = filterOffset; OffsetX < width - filterOffset; OffsetX++)
+                {
+                    //reset rgb values to 0
+                    xr = xg = xb = yr = yg = yb = 0;
+                    rt = gt = bt = 0.0;
+
+                    //position of the kernel center pixel
+                    byteOffset = OffsetY * srcData.Stride + OffsetX * 4;
+
+                    //kernel calculations
+                    for (int filterY = -filterOffset; filterY <= filterOffset; filterY++)
+                    {
+                        for (int filterX = -filterOffset; filterX <= filterOffset; filterX++)
+                        {
+                            calcOffset = byteOffset + filterX * 4 + filterY * srcData.Stride;
+                            xb += (double)(pixelBuffer[calcOffset]) * xkernel[filterY + filterOffset, filterX + filterOffset];
+                            xg += (double)(pixelBuffer[calcOffset + 1]) * xkernel[filterY + filterOffset, filterX + filterOffset];
+                            xr += (double)(pixelBuffer[calcOffset + 2]) * xkernel[filterY + filterOffset, filterX + filterOffset];
+                            yb += (double)(pixelBuffer[calcOffset]) * ykernel[filterY + filterOffset, filterX + filterOffset];
+                            yg += (double)(pixelBuffer[calcOffset + 1]) * ykernel[filterY + filterOffset, filterX + filterOffset];
+                            yr += (double)(pixelBuffer[calcOffset + 2]) * ykernel[filterY + filterOffset, filterX + filterOffset];
+                        }
+                    }
+
+                    //total rgb values for this pixel
+                    bt = Math.Sqrt((xb * xb) + (yb * yb));
+                    gt = Math.Sqrt((xg * xg) + (yg * yg));
+                    rt = Math.Sqrt((xr * xr) + (yr * yr));
+
+                    //set limits, bytes can hold values from 0 up to 255;
+                    if (bt > 255) bt = 255;
+                    else if (bt < 0) bt = 0;
+                    if (gt > 255) gt = 255;
+                    else if (gt < 0) gt = 0;
+                    if (rt > 255) rt = 255;
+                    else if (rt < 0) rt = 0;
+
+                    if (bt == 255 && gt == 255 && rt == 255)
+                    {
+                        sınırKoordinatları.Add(new Point(OffsetX + startPoint.X, OffsetY + startPoint.Y));
+                    }
+                }
+            }
+            return sınırKoordinatları;
+        }
+        private void kenarBul(Bitmap kalibreEdilecekForm, int formSirasi)
+        {
+
+            if (kalibrasyonYapildiMi == true)
+            {
+                parlaklikesigi = tumFormlarinDeğerleri[formSirasi].getParlaklikEsigi();
+            }
+
+            bool solUstVarMı = true;
+            bool sagUstVarMı = true;
+            bool solAltVarMı = true;
+            int width = 90;
+            int height = 90;
+
             koseKareBaslangicNoktalari = new List<Point>();
+
+            ///////////sağ alt////////////////////////
+            Point startPoint4 = new Point(kalibreEdilecekForm.Width - 100, kalibreEdilecekForm.Height - 100);
+            List<Point> kosekoordinatlari4 = sobelOperator(kalibreEdilecekForm, startPoint4, width, height, 1.0, 0, true);
+            if (kosekoordinatlari4.Count > parlaklikesigi)
+            {
+                kalibreEdilecekForm.RotateFlip(RotateFlipType.Rotate180FlipNone);
+            }
+
             ///////////Sol Üst////////////////////////
-            List<Point> kosekoordinatlari1 = new List<Point>();
-            for (int i = 1; i < 70; i++)
+            string s = "";
+            Point startPoint1 = new Point(10, 10);
+            kosekoordinatlari1 = sobelOperator(kalibreEdilecekForm, startPoint1, width, height, 1.0, 0, true);
+
+            if (kosekoordinatlari1.Count() > parlaklikesigi)
             {
-                for (int j = 1; j < 70; j++)
+                double ortTopX = 0;
+                double ortTopY = 0;
+
+                for (int i = 0; i < kosekoordinatlari1.Count(); i++)
                 {
-                    Color renk = kalibreEdilecekForm.GetPixel(i, j);
-                    Color cr = kalibreEdilecekForm.GetPixel(i + 1, j);
-                    Color cl = kalibreEdilecekForm.GetPixel(i - 1, j);
-                    Color cu = kalibreEdilecekForm.GetPixel(i, j - 1);
-                    Color cd = kalibreEdilecekForm.GetPixel(i, j + 1);
-                    int dx = cr.R - cl.R;
-                    int dy = cd.R - cu.R;
-                    double power = Math.Sqrt((dx * dx / 4) + (dy * dy / 4));
-
-                    if (kalibrasyonYapildiMi == true) {
-                        parlaklikesigi = tumFormlarinDeğerleri[formSirasi].getParlaklikEsigi();
-                    }
-
-                    if (power > parlaklikesigi)
-                    {
-                        kosekoordinatlari1.Add(new Point(i, j));
-                    }
+                    ortTopX += (double)(kosekoordinatlari1[kosekoordinatlari1.Count() - 1 - i].X + kosekoordinatlari1[i].X) / 2;
+                    ortTopY += (double)(kosekoordinatlari1[kosekoordinatlari1.Count() - 1 - i].Y + kosekoordinatlari1[i].Y) / 2;
                 }
+
+                int ortX = (int)Math.Round(ortTopX / kosekoordinatlari1.Count());
+                int ortY = (int)Math.Round(ortTopY / kosekoordinatlari1.Count());
+
+                koseKareBaslangicNoktalari.Add(new Point(ortX, ortY));
+            }
+            else
+            {
+                solUstVarMı = false;
             }
 
-            if (kosekoordinatlari1.Count > 0)
-            {
-                koseKareBaslangicNoktalari.Add(kosekoordinatlari1[0]);
-                koseKareBaslangicNoktalari.Add(kosekoordinatlari1[kosekoordinatlari1.Count - 1]);
-                kosekoordinatlari1.Clear();
-            }
 
-            //////////Sağ Üst////////////////////////////
-            List<Point> kosekoordinatlari2 = new List<Point>();
-
-            for (int i = kalibreEdilecekForm.Width - 70; i < kalibreEdilecekForm.Width - 1; i++)
+            ///////////sağ Üst////////////////////////
+            Point startPoint2 = new Point(kalibreEdilecekForm.Width - 100, 10);
+            kosekoordinatlari2 = sobelOperator(kalibreEdilecekForm, startPoint2, width, height, 1.0, 0, true);
+            if (kosekoordinatlari2.Count() > parlaklikesigi)
             {
-                for (int j = 1; j < 70; j++)
+                double ortTopX = 0;
+                double ortTopY = 0;
+
+                for (int i = 0; i < kosekoordinatlari2.Count(); i++)
                 {
-                    Color renk = kalibreEdilecekForm.GetPixel(i, j);
-                    Color cr = kalibreEdilecekForm.GetPixel(i + 1, j);
-                    Color cl = kalibreEdilecekForm.GetPixel(i - 1, j);
-                    Color cu = kalibreEdilecekForm.GetPixel(i, j - 1);
-                    Color cd = kalibreEdilecekForm.GetPixel(i, j + 1);
-                    int dx = cr.R - cl.R;
-                    int dy = cd.R - cu.R;
-                    double power = Math.Sqrt((dx * dx / 4) + (dy * dy / 4));
-
-                    if (kalibrasyonYapildiMi == true)
-                    {
-                        parlaklikesigi = tumFormlarinDeğerleri[formSirasi].getParlaklikEsigi();
-                    }
-
-                    if (power > parlaklikesigi)
-                    {
-                        kosekoordinatlari2.Add(new Point(i, j));
-                    }
+                    ortTopX += (double)(kosekoordinatlari2[kosekoordinatlari2.Count() - 1 - i].X + kosekoordinatlari2[i].X) / 2;
+                    ortTopY += (double)(kosekoordinatlari2[kosekoordinatlari2.Count() - 1 - i].Y + kosekoordinatlari2[i].Y) / 2;
                 }
+
+                int ortX = (int)Math.Round(ortTopX / kosekoordinatlari2.Count());
+                int ortY = (int)Math.Round(ortTopY / kosekoordinatlari2.Count());
+
+                koseKareBaslangicNoktalari.Add(new Point(ortX, ortY));
+            }
+            else
+            {
+                sagUstVarMı = false;
             }
 
-            if (kosekoordinatlari2.Count > 0)
+            ///////////Sol alt////////////////////////
+            Point startPoint3 = new Point(10, kalibreEdilecekForm.Height - 100);
+            kosekoordinatlari3 = sobelOperator(kalibreEdilecekForm, startPoint3, width, height, 1.0, 0, true);
+            if (kosekoordinatlari3.Count() > parlaklikesigi)
             {
-                koseKareBaslangicNoktalari.Add(kosekoordinatlari2[0]);
-                koseKareBaslangicNoktalari.Add(kosekoordinatlari2[kosekoordinatlari2.Count - 1]);
-                kosekoordinatlari2.Clear();
-            }
+                double ortTopX = 0;
+                double ortTopY = 0;
 
-            ////////////Sol Alt/////////////
-            List<Point> kosekoordinatlari3 = new List<Point>();
-            for (int i = 1; i < 70; i++)
-            {
-                for (int j = kalibreEdilecekForm.Height - 70; j < kalibreEdilecekForm.Height - 1; j++)
+                for (int i = 0; i < kosekoordinatlari3.Count(); i++)
                 {
-                    Color renk = kalibreEdilecekForm.GetPixel(i, j);
-                    Color cr = kalibreEdilecekForm.GetPixel(i + 1, j);
-                    Color cl = kalibreEdilecekForm.GetPixel(i - 1, j);
-                    Color cu = kalibreEdilecekForm.GetPixel(i, j - 1);
-                    Color cd = kalibreEdilecekForm.GetPixel(i, j + 1);
-                    int dx = cr.R - cl.R;
-                    int dy = cd.R - cu.R;
-                    double power = Math.Sqrt((dx * dx / 4) + (dy * dy / 4));
-
-                    if (kalibrasyonYapildiMi == true)
-                    {
-                        parlaklikesigi = tumFormlarinDeğerleri[formSirasi].getParlaklikEsigi();
-                    }
-
-                    if (power > parlaklikesigi)
-                    {
-                        kosekoordinatlari3.Add(new Point(i, j));
-                    }
+                    ortTopX += (double)(kosekoordinatlari3[kosekoordinatlari3.Count() - 1 - i].X + kosekoordinatlari3[i].X) / 2;
+                    ortTopY += (double)(kosekoordinatlari3[kosekoordinatlari3.Count() - 1 - i].Y + kosekoordinatlari3[i].Y) / 2;
                 }
-            }
 
-            if (kosekoordinatlari3.Count > 0)
+                int ortX = (int)Math.Round(ortTopX / kosekoordinatlari3.Count());
+                int ortY = (int)Math.Round(ortTopY / kosekoordinatlari3.Count());
+
+                koseKareBaslangicNoktalari.Add(new Point(ortX, ortY));
+            }
+            else
             {
-                koseKareBaslangicNoktalari.Add(kosekoordinatlari3[0]);
-                koseKareBaslangicNoktalari.Add(kosekoordinatlari3[kosekoordinatlari3.Count - 1]);
-                kosekoordinatlari3.Clear();
+                solAltVarMı = false;
             }
         }
 
-        private void egrilikGider(Bitmap kalibreEdilecekForm,Bitmap anaForm,int formSirasi)
+        private void egrilikGider(Bitmap kalibreEdilecekForm, Bitmap anaForm, int formSirasi)
         {
-            if (koseKareBaslangicNoktalari.Count == 6)
+            if (koseKareBaslangicNoktalari.Count == 3)
             {
                 int solUstX = koseKareBaslangicNoktalari[0].X;
-                int solAltX = koseKareBaslangicNoktalari[4].X;
+                int solAltX = koseKareBaslangicNoktalari[2].X;
                 int solUstY = koseKareBaslangicNoktalari[0].Y;
-                int sagUstY = koseKareBaslangicNoktalari[2].Y;
+                int sagUstY = koseKareBaslangicNoktalari[1].Y;
 
                 int gen = 0;
                 int yuk = 0;
@@ -1603,10 +1744,10 @@ namespace KorOptik_v1
 
                     kenarBul(kalibreEdilecekForm, formSirasi);
 
-                    if (koseKareBaslangicNoktalari.Count > 4)
+                    if (koseKareBaslangicNoktalari.Count > 2)
                     {
                         solUstX = koseKareBaslangicNoktalari[0].X;
-                        solAltX = koseKareBaslangicNoktalari[4].X;
+                        solAltX = koseKareBaslangicNoktalari[2].X;
                     }
                     else { break; }
 
@@ -1627,10 +1768,10 @@ namespace KorOptik_v1
                     g.Dispose();
 
                     kenarBul(kalibreEdilecekForm, formSirasi);
-                    if (koseKareBaslangicNoktalari.Count > 4)
+                    if (koseKareBaslangicNoktalari.Count > 2)
                     {
                         solUstX = koseKareBaslangicNoktalari[0].X;
-                        solAltX = koseKareBaslangicNoktalari[4].X;
+                        solAltX = koseKareBaslangicNoktalari[2].X;
                     }
                     else { break; }
 
@@ -1651,10 +1792,10 @@ namespace KorOptik_v1
                     g.Dispose();
 
                     kenarBul(kalibreEdilecekForm, formSirasi);
-                    if (koseKareBaslangicNoktalari.Count > 2)
+                    if (koseKareBaslangicNoktalari.Count > 1)
                     {
                         solUstY = koseKareBaslangicNoktalari[0].Y;
-                        sagUstY = koseKareBaslangicNoktalari[2].Y;
+                        sagUstY = koseKareBaslangicNoktalari[1].Y;
                     }
                     else { break; }
 
@@ -1675,10 +1816,10 @@ namespace KorOptik_v1
                     g.Dispose();
 
                     kenarBul(kalibreEdilecekForm, formSirasi);
-                    if (koseKareBaslangicNoktalari.Count > 2)
+                    if (koseKareBaslangicNoktalari.Count > 1)
                     {
                         solUstY = koseKareBaslangicNoktalari[0].Y;
-                        sagUstY = koseKareBaslangicNoktalari[2].Y;
+                        sagUstY = koseKareBaslangicNoktalari[1].Y;
                     }
                     else { break; }
                 }
@@ -1695,6 +1836,54 @@ namespace KorOptik_v1
         {
             OturumBirlestir oturumBirlestir = new OturumBirlestir();
             oturumBirlestir.Show();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            if (comboBoxFormTuru.SelectedIndex < 0)
+            {
+                MessageBox.Show("Seçilmiş form yok!");
+            }
+            else
+            {
+                DialogResult soru = MessageBox.Show(comboBoxFormTuru.SelectedItem.ToString() + " formunu silmek istediğinizden emin misiniz ?", "Uyarı",
+                 MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+                if (soru == DialogResult.Yes)
+                {
+
+                    Veritabani vt = new Veritabani();
+                    vt.baglan();
+                    vt.formuSil(comboBoxFormTuru.SelectedItem.ToString());
+                    if (System.IO.File.Exists(@"KaydedilenFormlar/" + comboBoxFormTuru.SelectedItem.ToString() + ".jpg"))
+                    {
+                        System.IO.File.Delete(@"KaydedilenFormlar/" + comboBoxFormTuru.SelectedItem.ToString() + ".jpg");
+                    }
+
+                    MessageBox.Show(comboBoxFormTuru.SelectedItem.ToString() + " silindi.");
+
+                    vt.baglan();
+                    List<String> kayitliFormAdlari = new List<string>();
+                    kayitliFormAdlari = vt.kayitliFormlarınIsimleriniGetir();
+
+                    comboBoxFormTuru.Items.Clear();
+
+                    if (kayitliFormAdlari.Count != 0)
+                    {
+                        for (int i = 0; i < kayitliFormAdlari.Count; i++)
+                        {
+                            comboBoxFormTuru.Items.Add(kayitliFormAdlari[i]);
+                        }
+                    }
+
+                }
+            }
+        }
+
+        private void ButtonStop_Click(object sender, EventArgs e)
+        {
+            buttonStopClicked = true;
+
         }
     }
 }

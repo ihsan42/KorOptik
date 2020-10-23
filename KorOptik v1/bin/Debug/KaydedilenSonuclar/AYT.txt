@@ -1,2 +1,0 @@
-﻿Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|AYT-T.D.E| | |AYT-Tarih-1| | |AYT-Coğrafya-1| | |AYT-Tarih-2| | |AYT-Coğrafya-2| | |AYT-Felsefe| | |AYT-Din Kültürü| | |AYT-Matematik| | |AYT-Fizik| | |AYT-Kimya| | |AYT-Biyoloji| | |TOPLAM| | |
-1|????????????????????|0000| A| |000000| |5|0|5|0|0|0|0|0|0|5|0|5|0|0|0|0|0|0|0|0|0|5|0|5|0|0|0|0|0|0|0|0|0|15|0|15|

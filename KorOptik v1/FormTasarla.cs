@@ -17,26 +17,27 @@ namespace KorOptik_v1
             InitializeComponent();
         }
 
+        Color colorGray = Color.FromArgb(255, 190, 190, 190);
         Graphics g;
         Bitmap bosForm;
-       // Bitmap temizForm;
+        // Bitmap temizForm;
         int dersSayisi;
         List<Point> dersBaslangicNoktalari;
-        //int genislik = 2480;
-        //int yukseklik = 3508;
+        int genislik = 2480;
+        int yukseklik = 3508;
         int cevapSikkiEbat = 36;
         int cevapSikkiBosluk = 7;
-        Point dersAlaniBaslangic = new Point(150, 1712);
-        Point adSoyadBaslangic = new Point(150, 250);
-        Point ogrenciNoBaslangic = new Point(1053, 250);
-        Point sinifBaslangic = new Point(1569, 250);
-        Point subeBaslangic = new Point(412, 250);
-        Point okulKoduBaslangic = new Point(1268, 250);
-        Point kitapcıkTurBaslangic = new Point(1698, 250);
-        Point baslikBaslangic = new Point(1000, 150);
+        Point dersAlaniBaslangic = new Point(450, 2012);
+        Point adSoyadBaslangic = new Point(450, 700);
+        Point ogrenciNoBaslangic = new Point(1360, 700);
+        Point sinifBaslangic = new Point(1869, 700);
+        Point subeBaslangic = new Point(1912, 700);
+        Point okulKoduBaslangic = new Point(1568, 700);
+        Point kitapcıkTurBaslangic = new Point(1550, 1650);
+        Point baslikBaslangic = new Point(850, 220);
 
         int cemberKalinligi = 3;
-        //float fontSizeBaslik = 50f;
+        float fontSizeBaslik = 24f;
         float fontSizeSik = 20f;
         float fontSizeSiraNo = 24f;
         float fontSizeDersadi = 24f;
@@ -51,15 +52,19 @@ namespace KorOptik_v1
             {
                 MessageBox.Show("Soru sayısı boş bıralılamaz!");
             }
+            else if (Convert.ToInt32(textBoxSoruSayisi.Text) > 70)
+            {
+                MessageBox.Show("Soru sayısı en fazla 70 olabilir!\nLütfen soru sayısını 71'den küçük bir değer giriniz!");
+            }
             else
             {
-                String dersadi= textBoxDersAdi.Text;
+                String dersadi = textBoxDersAdi.Text;
                 ListViewItem item = new ListViewItem();
                 item.Text = dersadi;
                 item.SubItems.Add(textBoxSoruSayisi.Text);
 
                 Boolean durumm = false;
-                for(int i = 0; i < listViewEklenenAlanlar.Items.Count; i++)
+                for (int i = 0; i < listViewEklenenAlanlar.Items.Count; i++)
                 {
                     if (dersadi.Equals(listViewEklenenAlanlar.Items[i].SubItems[0].Text))
                     {
@@ -82,8 +87,8 @@ namespace KorOptik_v1
                 }
                 else
                 {
-                    MessageBox.Show(dersadi+" zaten eklenmiş!");
-                }                            
+                    MessageBox.Show(dersadi + " zaten eklenmiş!");
+                }
             }
         }
 
@@ -103,21 +108,6 @@ namespace KorOptik_v1
         private void buttonFormugoruntule_Click(object sender, EventArgs e)
         {
             formuGoruntule();
-
-           /* int x1 = dersAlaniBaslangic.X;
-            int x2 = dersAlaniBaslangic.X + 4 * 43;
-            int y1 = dersAlaniBaslangic.Y;
-            int y2 = dersAlaniBaslangic.Y + 1 * 43;
-           
-            for (int i = y1; i < y2; i += 43)
-            {
-                for (int j = x1; j < x2; j += 43)
-                {
-                    Graphics g = Graphics.FromImage(bosForm);
-                    g.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(j, i, 36, 36));
-                    List<int> siyahpikseller = new List<int>();                    
-                }
-            }*/
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -144,7 +134,7 @@ namespace KorOptik_v1
             {
                 if (dersSayisi > 0)
                 {
-                    if (comboBoxOkulTuru.SelectedIndex== 0)
+                    if (comboBoxOkulTuru.SelectedIndex == 0)
                     {
                         for (int a = 0; a < dersSayisi; a++)
                         {
@@ -164,20 +154,14 @@ namespace KorOptik_v1
                         {
                             dersBaslangicNoktalari.Add(new Point(dersAlaniBaslangic.X + a * 7 * (cevapSikkiEbat + cevapSikkiBosluk), dersAlaniBaslangic.Y));
                         }
-                    }                   
+                    }
 
                     this.Cursor = Cursors.AppStarting;
                     bosForm = new Bitmap("FormTasarlamaBileşenleri/bosFormKareli.jpg");
-                    /* bosForm = new Bitmap(genislik, yukseklik);
-                     for (int i = 0; i < genislik; i++)
-                     {
-                         for (int j = 0; j < yukseklik; j++)
-                         {
-                             bosForm.SetPixel(i, j, Color.White);
-                         }
-                     }*/
-                    //temizForm = new Bitmap("FormTasarlamaBileşenleri/bosFormKareli.jpg");
-                    baslik_Goruntule(); adsoyad_Goruntule(); ogrNo_Goruntule(); sinifSube_Goruntule(); okulKodu_Goruntule(); kitTuru_Goruntule(); eklenenAlanlar_Goruntule();
+
+                    baslik_Goruntule();
+                    adsoyad_Goruntule();
+                    ogrNo_Goruntule(); sinifSube_Goruntule(); okulKodu_Goruntule(); kitTuru_Goruntule(); eklenenAlanlar_Goruntule();
                     Bitmap form = new Bitmap(bosForm, 827, 1169);
                     pictureBox1.Image = bosForm;
 
@@ -196,7 +180,7 @@ namespace KorOptik_v1
         }
 
         private void eklenenAlanlar_Goruntule()
-        {          
+        {
             for (int a = 0; a < dersSayisi; a++)
             {
                 int sorusayisi = Convert.ToInt32(listViewEklenenAlanlar.Items[a].SubItems[1].Text);
@@ -215,7 +199,7 @@ namespace KorOptik_v1
                             }
                         }
 
-                        SolidBrush brushSiklar = new SolidBrush(Color.Gray);
+                        SolidBrush brushSiklar = new SolidBrush(colorGray);
                         g = Graphics.FromImage(ilkokulSiklar);
                         g.DrawEllipse(new Pen(brushSiklar, cemberKalinligi), new Rectangle(cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk, 0, cevapSikkiEbat, cevapSikkiEbat));
                         g.DrawEllipse(new Pen(brushSiklar, cemberKalinligi), new Rectangle(cemberKalinligi + 2 * cevapSikkiEbat + 2 * cevapSikkiBosluk, 0, cevapSikkiEbat, cevapSikkiEbat));
@@ -252,7 +236,7 @@ namespace KorOptik_v1
                             }
                         }
 
-                        SolidBrush brushSiklar = new SolidBrush(Color.Gray);
+                        SolidBrush brushSiklar = new SolidBrush(colorGray);
                         g = Graphics.FromImage(ortaokulSiklar);
                         g.DrawEllipse(new Pen(brushSiklar, cemberKalinligi), new Rectangle(cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk, 0, cevapSikkiEbat, cevapSikkiEbat));
                         g.DrawEllipse(new Pen(brushSiklar, cemberKalinligi), new Rectangle(cemberKalinligi + 2 * cevapSikkiEbat + 2 * cevapSikkiBosluk, 0, cevapSikkiEbat, cevapSikkiEbat));
@@ -291,7 +275,7 @@ namespace KorOptik_v1
                             }
                         }
 
-                        SolidBrush brushSiklar = new SolidBrush(Color.Gray);
+                        SolidBrush brushSiklar = new SolidBrush(colorGray);
                         g = Graphics.FromImage(liseSiklar);
                         g.DrawEllipse(new Pen(brushSiklar, cemberKalinligi), new Rectangle(cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk, 0, cevapSikkiEbat, cevapSikkiEbat));
                         g.DrawEllipse(new Pen(brushSiklar, cemberKalinligi), new Rectangle(cemberKalinligi + 2 * cevapSikkiEbat + 2 * cevapSikkiBosluk, 0, cevapSikkiEbat, cevapSikkiEbat));
@@ -325,7 +309,7 @@ namespace KorOptik_v1
                 g = Graphics.FromImage(bosForm);
                 string dersadi = listViewEklenenAlanlar.Items[a].SubItems[0].Text;
                 Font fontDersadi = new Font("Cambria", fontSizeDersadi, FontStyle.Bold);
-                SolidBrush brushDersadi = new SolidBrush(Color.Gray);
+                SolidBrush brushDersadi = new SolidBrush(colorGray);
                 if (comboBoxOkulTuru.SelectedIndex == 0)
                 {
                     g.DrawRectangle(new Pen(Color.Gray, 2), new Rectangle(dersBaslangicNoktalari[a].X - 2, dersBaslangicNoktalari[a].Y - 4 - cemberKalinligi - (cevapSikkiEbat + cevapSikkiBosluk), 4 * (cevapSikkiBosluk + cevapSikkiEbat), (cevapSikkiEbat + cevapSikkiBosluk)));
@@ -334,13 +318,13 @@ namespace KorOptik_v1
                 }
                 else if (comboBoxOkulTuru.SelectedIndex == 1)
                 {
-                    g.DrawRectangle(new Pen(Color.Gray, 2), new Rectangle(dersBaslangicNoktalari[a].X - 2, dersBaslangicNoktalari[a].Y - 4 - cemberKalinligi - (cevapSikkiEbat + cevapSikkiBosluk), 5 * (cevapSikkiBosluk + cevapSikkiEbat), (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawRectangle(new Pen(colorGray, 2), new Rectangle(dersBaslangicNoktalari[a].X - 2, dersBaslangicNoktalari[a].Y - 4 - cemberKalinligi - (cevapSikkiEbat + cevapSikkiBosluk), 5 * (cevapSikkiBosluk + cevapSikkiEbat), (cevapSikkiEbat + cevapSikkiBosluk)));
                     g.DrawString(dersadi, fontDersadi, brushDersadi, new Point(dersBaslangicNoktalari[a].X, dersBaslangicNoktalari[a].Y - (cevapSikkiEbat + cemberKalinligi) - 4));
                     g.Dispose();
                 }
                 else if (comboBoxOkulTuru.SelectedIndex == 2)
                 {
-                    g.DrawRectangle(new Pen(Color.Gray, 2), new Rectangle(dersBaslangicNoktalari[a].X - 2, dersBaslangicNoktalari[a].Y - 4 - cemberKalinligi - (cevapSikkiEbat + cevapSikkiBosluk), 6 * (cevapSikkiBosluk + cevapSikkiEbat), (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawRectangle(new Pen(colorGray, 2), new Rectangle(dersBaslangicNoktalari[a].X - 2, dersBaslangicNoktalari[a].Y - 4 - cemberKalinligi - (cevapSikkiEbat + cevapSikkiBosluk), 6 * (cevapSikkiBosluk + cevapSikkiEbat), (cevapSikkiEbat + cevapSikkiBosluk)));
                     g.DrawString(dersadi, fontDersadi, brushDersadi, new Point(dersBaslangicNoktalari[a].X, dersBaslangicNoktalari[a].Y - (cevapSikkiEbat + cemberKalinligi) - 4));
                     g.Dispose();
                 }
@@ -352,11 +336,11 @@ namespace KorOptik_v1
             if (checkBoxKitTuru.Checked)
             {
                 g = Graphics.FromImage(bosForm);
-                Bitmap kitTur = new Bitmap("FormTasarlamaBileşenleri/kitapcikTuru.jpg");
-                g.DrawImage(kitTur, kitapcıkTurBaslangic);
-                /*Font fontSik = new Font("Cambria", fontSizeSik, FontStyle.Bold);
-                SolidBrush brushSik = new SolidBrush(Color.Gray);
-                g.DrawRectangle(new Pen(Color.Gray, 2), new Rectangle(kitapcıkTurBaslangic.X - 2 * (cemberKalinligi + cevapSikkiEbat), kitapcıkTurBaslangic.Y - cemberKalinligi - 7 * (cevapSikkiEbat + cevapSikkiBosluk), 5 * (cevapSikkiBosluk + cevapSikkiEbat), 12 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                /*Bitmap kitTur = new Bitmap("FormTasarlamaBileşenleri/kitapcikTuru.jpg");
+                g.DrawImage(kitTur, kitapcıkTurBaslangic);*/
+                Font fontSik = new Font("Cambria", fontSizeSik, FontStyle.Bold);
+                SolidBrush brushSik = new SolidBrush(colorGray);
+                g.DrawRectangle(new Pen(colorGray, 2), new Rectangle(kitapcıkTurBaslangic.X - 2 * (cemberKalinligi + cevapSikkiEbat), kitapcıkTurBaslangic.Y - cemberKalinligi - 7 * (cevapSikkiEbat + cevapSikkiBosluk), 5 * (cevapSikkiBosluk + cevapSikkiEbat), 12 * (cevapSikkiEbat + cevapSikkiBosluk)));
                 g.DrawString("\n      Kitapçık\n          Türü\n\n       DİKKAT!\n       Bu alanı\n  işaretlemeyi\n  unutmayınız!", fontSik, brushSik, new Point(kitapcıkTurBaslangic.X - 2 * (cemberKalinligi + cevapSikkiEbat), kitapcıkTurBaslangic.Y - cemberKalinligi - 7 * (cevapSikkiEbat + cevapSikkiBosluk)));
 
                 for (int j = 0; j < 1; j++)
@@ -370,7 +354,7 @@ namespace KorOptik_v1
                     g.DrawString("B", fontSik, brushSik, new Point(kitapcıkTurBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), kitapcıkTurBaslangic.Y + 1 * (cevapSikkiEbat + cevapSikkiBosluk)));
                     g.DrawString("C", fontSik, brushSik, new Point(kitapcıkTurBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), kitapcıkTurBaslangic.Y + 2 * (cevapSikkiEbat + cevapSikkiBosluk)));
                     g.DrawString("D", fontSik, brushSik, new Point(kitapcıkTurBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), kitapcıkTurBaslangic.Y + 3 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                }*/
+                }
                 g.Dispose();
             }
         }
@@ -380,11 +364,11 @@ namespace KorOptik_v1
             if (checkBoxOkulKodu.Checked)
             {
                 g = Graphics.FromImage(bosForm);
-                Bitmap okulKodu = new Bitmap("FormTasarlamaBileşenleri/okulKodu.jpg");
-                g.DrawImage(okulKodu, okulKoduBaslangic);
-                /*Font fontSik = new Font("Cambria", fontSizeSik, FontStyle.Bold);
-                SolidBrush brushSik = new SolidBrush(Color.Gray);
-                g.DrawRectangle(new Pen(Color.Gray, 2), new Rectangle(okulKoduBaslangic.X - 2, okulKoduBaslangic.Y - cemberKalinligi - 2 * (cevapSikkiEbat + cevapSikkiBosluk), 6 * (cevapSikkiBosluk + cevapSikkiEbat), (cevapSikkiEbat + cevapSikkiBosluk)));
+                //Bitmap okulKodu = new Bitmap("FormTasarlamaBileşenleri/okulKodu.jpg");
+                //g.DrawImage(okulKodu, okulKoduBaslangic);
+                Font fontSik = new Font("Cambria", fontSizeSik, FontStyle.Bold);
+                SolidBrush brushSik = new SolidBrush(colorGray);
+                g.DrawRectangle(new Pen(colorGray, 2), new Rectangle(okulKoduBaslangic.X - 2, okulKoduBaslangic.Y - cemberKalinligi - 2 * (cevapSikkiEbat + cevapSikkiBosluk), 6 * (cevapSikkiBosluk + cevapSikkiEbat), (cevapSikkiEbat + cevapSikkiBosluk)));
                 g.DrawString("      Okul Kodu", fontSik, brushSik, new Point(okulKoduBaslangic.X, okulKoduBaslangic.Y - cemberKalinligi - 2 * (cevapSikkiEbat + cevapSikkiBosluk)));
 
                 for (int j = 0; j < 6; j++)
@@ -393,7 +377,7 @@ namespace KorOptik_v1
                     {
                         g.DrawEllipse(new Pen(brushSik, cemberKalinligi), new Rectangle(okulKoduBaslangic.X + j * (cevapSikkiEbat + cevapSikkiBosluk), okulKoduBaslangic.Y + i * (cevapSikkiEbat + cevapSikkiBosluk), cevapSikkiEbat, cevapSikkiEbat));
                     }
-                    g.DrawRectangle(new Pen(Color.Gray, 2), new Rectangle(okulKoduBaslangic.X - 2 + j * (cevapSikkiEbat + cevapSikkiBosluk), okulKoduBaslangic.Y - cemberKalinligi - (cevapSikkiEbat + cevapSikkiBosluk), (cevapSikkiBosluk + cevapSikkiEbat), cevapSikkiEbat + cevapSikkiBosluk));
+                    g.DrawRectangle(new Pen(colorGray, 2), new Rectangle(okulKoduBaslangic.X - 2 + j * (cevapSikkiEbat + cevapSikkiBosluk), okulKoduBaslangic.Y - cemberKalinligi - (cevapSikkiEbat + cevapSikkiBosluk), (cevapSikkiBosluk + cevapSikkiEbat), cevapSikkiEbat + cevapSikkiBosluk));
 
                     g.DrawString("0", fontSik, brushSik, new Point(okulKoduBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), okulKoduBaslangic.Y));
                     g.DrawString("1", fontSik, brushSik, new Point(okulKoduBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), okulKoduBaslangic.Y + 1 * (cevapSikkiEbat + cevapSikkiBosluk)));
@@ -405,7 +389,7 @@ namespace KorOptik_v1
                     g.DrawString("7", fontSik, brushSik, new Point(okulKoduBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), okulKoduBaslangic.Y + 7 * (cevapSikkiEbat + cevapSikkiBosluk)));
                     g.DrawString("8", fontSik, brushSik, new Point(okulKoduBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), okulKoduBaslangic.Y + 8 * (cevapSikkiEbat + cevapSikkiBosluk)));
                     g.DrawString("9", fontSik, brushSik, new Point(okulKoduBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), okulKoduBaslangic.Y + 9 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                }*/
+                }
                 g.Dispose();
             }
         }
@@ -415,11 +399,11 @@ namespace KorOptik_v1
             if (checkBoxSinif.Checked)
             {
                 g = Graphics.FromImage(bosForm);
-                Bitmap sinifSube = new Bitmap("FormTasarlamaBileşenleri/sinifSube.jpg");
-                g.DrawImage(sinifSube, sinifBaslangic);
-                /*Font fontSik = new Font("Cambria", fontSizeSik, FontStyle.Bold);
-                SolidBrush brushSik = new SolidBrush(Color.Gray);
-                g.DrawRectangle(new Pen(Color.Gray, 2), new Rectangle(sinifBaslangic.X - 2, sinifBaslangic.Y - cemberKalinligi - 2 * (cevapSikkiEbat + cevapSikkiBosluk), 2 * (cevapSikkiBosluk + cevapSikkiEbat), 2 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                // Bitmap sinifSube = new Bitmap("FormTasarlamaBileşenleri/sinifSube.jpg");
+                // g.DrawImage(sinifSube, sinifBaslangic);
+                Font fontSik = new Font("Cambria", fontSizeSik, FontStyle.Bold);
+                SolidBrush brushSik = new SolidBrush(colorGray);
+                g.DrawRectangle(new Pen(colorGray, 2), new Rectangle(sinifBaslangic.X - 2, sinifBaslangic.Y - cemberKalinligi - 2 * (cevapSikkiEbat + cevapSikkiBosluk), 2 * (cevapSikkiBosluk + cevapSikkiEbat), 2 * (cevapSikkiEbat + cevapSikkiBosluk)));
                 g.DrawString("Sınıf\nŞube", fontSik, brushSik, new Point(sinifBaslangic.X, sinifBaslangic.Y - cemberKalinligi - 2 * (cevapSikkiEbat + cevapSikkiBosluk)));
 
                 for (int j = 0; j < 1; j++)
@@ -447,7 +431,7 @@ namespace KorOptik_v1
 
                 g = Graphics.FromImage(bosForm);
                 fontSik = new Font("Cambria", fontSizeSik, FontStyle.Bold);
-                brushSik = new SolidBrush(Color.Gray);
+                brushSik = new SolidBrush(colorGray);
 
                 for (int j = 0; j < 1; j++)
                 {
@@ -487,7 +471,7 @@ namespace KorOptik_v1
                     g.DrawString("Y", fontSik, brushSik, new Point(subeBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), subeBaslangic.Y + 27 * (cevapSikkiEbat + cevapSikkiBosluk)));
                     g.DrawString("Z", fontSik, brushSik, new Point(subeBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), subeBaslangic.Y + 28 * (cevapSikkiEbat + cevapSikkiBosluk)));
 
-                }*/
+                }
                 g.Dispose();
             }
         }
@@ -497,12 +481,12 @@ namespace KorOptik_v1
             if (checkBoxOgrNo.Checked)
             {
                 g = Graphics.FromImage(bosForm);
-                Bitmap ogrNo = new Bitmap("FormTasarlamaBileşenleri/ogrenciNo.jpg");
-                g.DrawImage(ogrNo, ogrenciNoBaslangic);
+                //Bitmap ogrNo = new Bitmap("FormTasarlamaBileşenleri/ogrenciNo.jpg");
+                //g.DrawImage(ogrNo, ogrenciNoBaslangic);
 
-                /*Font fontSik = new Font("Cambria", fontSizeSik, FontStyle.Bold);
-                SolidBrush brushSik = new SolidBrush(Color.Gray);
-                g.DrawRectangle(new Pen(Color.Gray, 2), new Rectangle(ogrenciNoBaslangic.X - 2, ogrenciNoBaslangic.Y - cemberKalinligi - 2 * (cevapSikkiEbat + cevapSikkiBosluk), 4 * (cevapSikkiBosluk + cevapSikkiEbat), (cevapSikkiEbat + cevapSikkiBosluk)));
+                Font fontSik = new Font("Cambria", fontSizeSik, FontStyle.Bold);
+                SolidBrush brushSik = new SolidBrush(colorGray);
+                g.DrawRectangle(new Pen(colorGray, 2), new Rectangle(ogrenciNoBaslangic.X - 2, ogrenciNoBaslangic.Y - cemberKalinligi - 2 * (cevapSikkiEbat + cevapSikkiBosluk), 4 * (cevapSikkiBosluk + cevapSikkiEbat), (cevapSikkiEbat + cevapSikkiBosluk)));
                 g.DrawString("Öğrenci No", fontSik, brushSik, new Point(ogrenciNoBaslangic.X, ogrenciNoBaslangic.Y - cemberKalinligi - 2 * (cevapSikkiEbat + cevapSikkiBosluk)));
 
                 for (int j = 0; j < 4; j++)
@@ -511,7 +495,7 @@ namespace KorOptik_v1
                     {
                         g.DrawEllipse(new Pen(brushSik, cemberKalinligi), new Rectangle(ogrenciNoBaslangic.X + j * (cevapSikkiEbat + cevapSikkiBosluk), ogrenciNoBaslangic.Y + i * (cevapSikkiEbat + cevapSikkiBosluk), cevapSikkiEbat, cevapSikkiEbat));
                     }
-                    g.DrawRectangle(new Pen(Color.Gray, 2), new Rectangle(ogrenciNoBaslangic.X - 2 + j * (cevapSikkiEbat + cevapSikkiBosluk), ogrenciNoBaslangic.Y - cemberKalinligi - (cevapSikkiEbat + cevapSikkiBosluk), (cevapSikkiBosluk + cevapSikkiEbat), cevapSikkiEbat + cevapSikkiBosluk));
+                    g.DrawRectangle(new Pen(colorGray, 2), new Rectangle(ogrenciNoBaslangic.X - 2 + j * (cevapSikkiEbat + cevapSikkiBosluk), ogrenciNoBaslangic.Y - cemberKalinligi - (cevapSikkiEbat + cevapSikkiBosluk), (cevapSikkiBosluk + cevapSikkiEbat), cevapSikkiEbat + cevapSikkiBosluk));
 
                     g.DrawString("0", fontSik, brushSik, new Point(ogrenciNoBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), ogrenciNoBaslangic.Y));
                     g.DrawString("1", fontSik, brushSik, new Point(ogrenciNoBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), ogrenciNoBaslangic.Y + 1 * (cevapSikkiEbat + cevapSikkiBosluk)));
@@ -523,7 +507,7 @@ namespace KorOptik_v1
                     g.DrawString("7", fontSik, brushSik, new Point(ogrenciNoBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), ogrenciNoBaslangic.Y + 7 * (cevapSikkiEbat + cevapSikkiBosluk)));
                     g.DrawString("8", fontSik, brushSik, new Point(ogrenciNoBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), ogrenciNoBaslangic.Y + 8 * (cevapSikkiEbat + cevapSikkiBosluk)));
                     g.DrawString("9", fontSik, brushSik, new Point(ogrenciNoBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), ogrenciNoBaslangic.Y + 9 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                }*/
+                }
                 g.Dispose();
             }
         }
@@ -533,51 +517,51 @@ namespace KorOptik_v1
             if (checkBoxAdSoyad.Checked)
             {
                 g = Graphics.FromImage(bosForm);
-                Bitmap adsoyad = new Bitmap("FormTasarlamaBileşenleri/adsoyad.jpg");
-                g.DrawImage(adsoyad, adSoyadBaslangic);
-                /* Font fontSik = new Font("Cambria", fontSizeSik, FontStyle.Bold);
-                 SolidBrush brushSik = new SolidBrush(Color.Gray);
-                 g.DrawRectangle(new Pen(Color.Gray, 2), new Rectangle(adSoyadBaslangic.X - 2, adSoyadBaslangic.Y - cemberKalinligi - 3 * (cevapSikkiEbat + cevapSikkiBosluk), 20 * (cevapSikkiBosluk + cevapSikkiEbat), 2 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                 g.DrawString("                                                             AD-SOYAD \n      (Adınız ile soyadınız arasına bir kare boşluk bırakınız!)", fontSik, brushSik, new Point(adSoyadBaslangic.X, adSoyadBaslangic.Y - cemberKalinligi - 3 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                //Bitmap adsoyad = new Bitmap("FormTasarlamaBileşenleri/adsoyad.jpg");
+                //g.DrawImage(adsoyad, adSoyadBaslangic);
+                Font fontSik = new Font("Cambria", fontSizeSik, FontStyle.Bold);
+                SolidBrush brushSik = new SolidBrush(colorGray);
+                g.DrawRectangle(new Pen(colorGray), new Rectangle(adSoyadBaslangic.X - 2, adSoyadBaslangic.Y - cemberKalinligi - 3 * (cevapSikkiEbat + cevapSikkiBosluk), 20 * (cevapSikkiBosluk + cevapSikkiEbat), 2 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                g.DrawString("                                                             AD-SOYAD \n      (Adınız ile soyadınız arasına bir kare boşluk bırakınız!)", fontSik, brushSik, new Point(adSoyadBaslangic.X, adSoyadBaslangic.Y - cemberKalinligi - 3 * (cevapSikkiEbat + cevapSikkiBosluk)));
 
-                 for (int j = 0; j < 20; j++)
-                 {
-                     for (int i = 0; i < 29; i++)
-                     {
-                         g.DrawEllipse(new Pen(brushSik, cemberKalinligi), new Rectangle(adSoyadBaslangic.X + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + i * (cevapSikkiEbat + cevapSikkiBosluk), cevapSikkiEbat, cevapSikkiEbat));
-                     }
-                     g.DrawRectangle(new Pen(Color.Gray, 2), new Rectangle(adSoyadBaslangic.X - 2 + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y - cemberKalinligi - (cevapSikkiEbat + cevapSikkiBosluk), (cevapSikkiBosluk + cevapSikkiEbat), cevapSikkiEbat + cevapSikkiBosluk));
+                for (int j = 0; j < 20; j++)
+                {
+                    for (int i = 0; i < 29; i++)
+                    {
+                        g.DrawEllipse(new Pen(brushSik, cemberKalinligi), new Rectangle(adSoyadBaslangic.X + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + i * (cevapSikkiEbat + cevapSikkiBosluk), cevapSikkiEbat, cevapSikkiEbat));
+                    }
+                    g.DrawRectangle(new Pen(colorGray, 2), new Rectangle(adSoyadBaslangic.X - 2 + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y - cemberKalinligi - (cevapSikkiEbat + cevapSikkiBosluk), (cevapSikkiBosluk + cevapSikkiEbat), cevapSikkiEbat + cevapSikkiBosluk));
 
-                     g.DrawString("A", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y));
-                     g.DrawString("B", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 1 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("C", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 2 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("Ç", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 3 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("D", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 4 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("E", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 5 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("F", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 6 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("G", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 7 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("Ğ", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 3 + 8 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("H", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 9 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("I", fontSik, brushSik, new Point(adSoyadBaslangic.X + 3 * cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 10 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("İ", fontSik, brushSik, new Point(adSoyadBaslangic.X + 3 * cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 3 + 11 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("J", fontSik, brushSik, new Point(adSoyadBaslangic.X + 3 * cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y - 3 + 12 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("K", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 13 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("L", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 14 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("M", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 15 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("N", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 16 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("O", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 17 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("Ö", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 18 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("P", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 19 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("R", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 20 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("S", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 21 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("Ş", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 22 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("T", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 23 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("U", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 24 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("Ü", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 25 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("V", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 26 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("Y", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 27 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                     g.DrawString("Z", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 28 * (cevapSikkiEbat + cevapSikkiBosluk)));
-                 }*/
+                    g.DrawString("A", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y));
+                    g.DrawString("B", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 1 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("C", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 2 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("Ç", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 3 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("D", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 4 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("E", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 5 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("F", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 6 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("G", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 7 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("Ğ", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 3 + 8 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("H", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 9 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("I", fontSik, brushSik, new Point(adSoyadBaslangic.X + 3 * cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 10 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("İ", fontSik, brushSik, new Point(adSoyadBaslangic.X + 3 * cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 3 + 11 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("J", fontSik, brushSik, new Point(adSoyadBaslangic.X + 3 * cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y - 3 + 12 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("K", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 13 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("L", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 14 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("M", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 15 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("N", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 16 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("O", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 17 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("Ö", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 18 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("P", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 19 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("R", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 20 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("S", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 21 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("Ş", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 22 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("T", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 23 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("U", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 24 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("Ü", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 25 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("V", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 26 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("Y", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 27 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                    g.DrawString("Z", fontSik, brushSik, new Point(adSoyadBaslangic.X + cemberKalinligi + j * (cevapSikkiEbat + cevapSikkiBosluk), adSoyadBaslangic.Y + 28 * (cevapSikkiEbat + cevapSikkiBosluk)));
+                }
                 g.Dispose();
             }
         }
@@ -587,15 +571,22 @@ namespace KorOptik_v1
             if (checkBoxBaslik.Checked)
             {
                 g = Graphics.FromImage(bosForm);
-                Bitmap baslik = new Bitmap("FormTasarlamaBileşenleri/baslikCevapKagidi.jpg");
-                g.DrawImage(baslik, baslikBaslangic);
-                /*  Font font = new Font("Cambria", fontSizeBaslik, FontStyle.Bold);
-                  SolidBrush brush = new SolidBrush(Color.Black);
-                  g.DrawString("CEVAP KAĞIDI", font, brush, 1000, 100);
-                g.DrawRectangle(new Pen(Color.Black, 22), new Rectangle(150, 150, 22, 22));
-                g.DrawRectangle(new Pen(Color.Black, 22), new Rectangle(genislik - 150, 150, 22, 22));
-                g.DrawRectangle(new Pen(Color.Black, 22), new Rectangle(150, yukseklik - 150, 22, 22));
-                g.DrawRectangle(new Pen(Color.Black, 22), new Rectangle(genislik - 150, yukseklik - 150, 22, 22));*/
+                // Bitmap baslik = new Bitmap("FormTasarlamaBileşenleri/baslikCevapKagidi.jpg");
+                // g.DrawImage(baslik, baslikBaslangic);
+                Font font = new Font("Cambria", fontSizeBaslik, FontStyle.Bold);
+                SolidBrush brush = new SolidBrush(colorGray);
+                g.DrawString("Ad-Soyad:", font, brush, baslikBaslangic.X, baslikBaslangic.Y);
+                g.DrawString("Öğrenci No:", font, brush, baslikBaslangic.X, baslikBaslangic.Y + 70);
+                g.DrawString("Sınıf:", font, brush, baslikBaslangic.X, baslikBaslangic.Y + 140);
+                g.DrawString("İmza:", font, brush, baslikBaslangic.X, baslikBaslangic.Y + 210);
+                g.DrawRectangle(new Pen(colorGray, 2), new Rectangle(baslikBaslangic.X - 30, baslikBaslangic.Y - 50, 800, 340));
+
+
+
+                // g.DrawRectangle(new Pen(Color.Black, 30), new Rectangle(300, 300, 30, 30));
+                // g.DrawRectangle(new Pen(Color.Black, 30), new Rectangle(genislik - 350, 300, 30, 30));
+                //  g.DrawRectangle(new Pen(Color.Black, 30), new Rectangle(300, yukseklik - 300, 30, 30));
+                // g.DrawRectangle(new Pen(Color.Black, 30), new Rectangle(genislik - 350, yukseklik - 300, 30, 30));
                 g.Dispose();
             }
         }
@@ -1115,6 +1106,38 @@ namespace KorOptik_v1
 
         private void buttonKaydet_Click(object sender, EventArgs e)
         {
+
+            List<int> soruSayıları = new List<int>();
+            dersSayisi = listViewEklenenAlanlar.Items.Count;
+            for (int a = 0; a < dersSayisi; a++)
+            {
+                int sorusayisi = Convert.ToInt32(listViewEklenenAlanlar.Items[a].SubItems[1].Text);
+                soruSayıları.Add(sorusayisi);
+            }
+
+            /*bool durumHata = false;
+            for (int a = 0; a < dersSayisi; a++)
+            {
+                if (dersBaslangicNoktalari[a].X<0||dersBaslangicNoktalari[a].Y<0||
+                    dersBaslangicNoktalari[a].X + (soruSayıları[a]-2) * (cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk) > genislik||
+                    dersBaslangicNoktalari[a].Y + (soruSayıları[a]-2) * (cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk) > yukseklik) {
+
+                    MessageBox.Show("Hata!\nFormun dışına taşan alan(lar) var!\nLütfen ilgili alanlar formun dışına taşmasın!");
+                    durumHata = true;
+                    break;
+                }
+            }
+            if (durumHata == true) { }
+            else if (adSoyadBaslangic.X < 0 || adSoyadBaslangic.Y < 0 || ogrenciNoBaslangic.X < 0 || ogrenciNoBaslangic.Y < 0 || subeBaslangic.X < 0 || subeBaslangic.Y < 0 || okulKoduBaslangic.X < 0 || okulKoduBaslangic.Y < 0 || kitapcıkTurBaslangic.X < 0 || kitapcıkTurBaslangic.Y < 0 ||
+            adSoyadBaslangic.X + 20 * (cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk) > genislik || adSoyadBaslangic.Y + 30 * (cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk) > yukseklik ||
+            ogrenciNoBaslangic.X + 4 * (cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk) > genislik || ogrenciNoBaslangic.Y + 11 * (cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk) > yukseklik ||
+            subeBaslangic.X + 1 * (cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk) > genislik || subeBaslangic.Y + 30 * (cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk) > yukseklik ||
+            okulKoduBaslangic.X + 6 * (cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk) > genislik || okulKoduBaslangic.Y + 11 * (cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk) > yukseklik ||
+            kitapcıkTurBaslangic.X + 1 * (cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk) > genislik || kitapcıkTurBaslangic.Y + 4 * (cemberKalinligi + cevapSikkiEbat + cevapSikkiBosluk) > yukseklik) {
+
+                MessageBox.Show("Hata!\nFormun dışına taşan alan(lar) var!\nLütfen ilgili alanlar formun dışına taşmasın!");
+            }
+            else*/
             if (pictureBox1.Image != null)
             {
                 if (textBoxFormAdi.Text != "")
@@ -1124,21 +1147,21 @@ namespace KorOptik_v1
                     vt.baglan();
                     List<string> kayitliFormAdlari = new List<string>();
                     kayitliFormAdlari = vt.kayitliFormlarınIsimleriniGetir();
-                    Boolean durum = false;                   
-                        if (kayitliFormAdlari.Contains(formadi))
-                        {
-                            durum = true;
-                        }                    
+                    Boolean durum = false;
+                    if (kayitliFormAdlari.Contains(formadi))
+                    {
+                        durum = true;
+                    }
                     if (durum == false)
-                    {                      
+                    {
                         String okulturu = comboBoxOkulTuru.SelectedItem.ToString();
                         List<Point> standartAlanlarBaslangicNoktalari = new List<Point>();
-                        standartAlanlarBaslangicNoktalari.Add(new Point(adSoyadBaslangic.X/5,adSoyadBaslangic.Y/5));
-                        standartAlanlarBaslangicNoktalari.Add(new Point(ogrenciNoBaslangic.X / 5, ogrenciNoBaslangic.Y / 5));
-                        standartAlanlarBaslangicNoktalari.Add(new Point(sinifBaslangic.X / 5, sinifBaslangic.Y / 5));
-                        standartAlanlarBaslangicNoktalari.Add(new Point(kitapcıkTurBaslangic.X / 5, kitapcıkTurBaslangic.Y / 5));
-                        standartAlanlarBaslangicNoktalari.Add(new Point(okulKoduBaslangic.X / 5, okulKoduBaslangic.Y / 5));
-                        standartAlanlarBaslangicNoktalari.Add(new Point(baslikBaslangic.X / 5, baslikBaslangic.Y / 5));
+                        standartAlanlarBaslangicNoktalari.Add(new Point((int)(adSoyadBaslangic.X / 4.7969) - 28, (int)(adSoyadBaslangic.Y / 4.7989) - 29));
+                        standartAlanlarBaslangicNoktalari.Add(new Point((int)(ogrenciNoBaslangic.X / 4.7969) - 28, (int)(ogrenciNoBaslangic.Y / 4.7989) - 29));
+                        standartAlanlarBaslangicNoktalari.Add(new Point((int)(sinifBaslangic.X / 4.7969) - 28, (int)(sinifBaslangic.Y / 4.7989) - 29));
+                        standartAlanlarBaslangicNoktalari.Add(new Point((int)(kitapcıkTurBaslangic.X / 4.7969) - 28, (int)(kitapcıkTurBaslangic.Y / 4.7989) - 29));
+                        standartAlanlarBaslangicNoktalari.Add(new Point((int)(okulKoduBaslangic.X / 4.7969) - 28, (int)(okulKoduBaslangic.Y / 4.7989) - 29));
+                        standartAlanlarBaslangicNoktalari.Add(new Point((int)(baslikBaslangic.X / 4.7969) - 28, (int)(baslikBaslangic.Y / 4.7989) - 29));
                         List<int> sorusayilari = new List<int>();
                         for (int i = 0; i < listViewEklenenAlanlar.Items.Count; i++)
                         {
@@ -1165,9 +1188,9 @@ namespace KorOptik_v1
                                 dersAdlari.Add("");
                             }
                         }
-                        for(int i = 0; i < dersBaslangicNoktalari.Count; i++)
+                        for (int i = 0; i < dersBaslangicNoktalari.Count; i++)
                         {
-                            dersBaslangicNoktalari[i] = new Point(dersBaslangicNoktalari[i].X / 5, dersBaslangicNoktalari[i].Y / 5);
+                            dersBaslangicNoktalari[i] = new Point((int)(dersBaslangicNoktalari[i].X / 4.7969) - 28, (int)(dersBaslangicNoktalari[i].Y / 4.7989) - 29);
                         }
                         if (dersBaslangicNoktalari.Count < 10)
                         {
@@ -1203,7 +1226,7 @@ namespace KorOptik_v1
                     else
                     {
                         MessageBox.Show("Bu form adıyla kayıtlı form zaten mevcut! Lütfen başka bir form ismi yazın.");
-                    }                   
+                    }
                 }
                 else
                 {
@@ -1220,6 +1243,31 @@ namespace KorOptik_v1
         private void textBoxSoruSayisi_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void PictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(0, 0, 150, 150));
+            e.Graphics.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(671 - 150, 0, 150, 150));
+            e.Graphics.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(0, 949 - 150, 150, 150));
+            e.Graphics.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(671 - 150, 949 - 150, 150, 150));
+        }
+
+        private void FormTasarla_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Form1 form1 = (Form1)Application.OpenForms["Form1"];
+            form1.comboBoxFormTuru.Items.Clear();
+            Veritabani vt = new Veritabani();
+            vt.baglan();
+            List<String> kayitliFormAdlari = new List<string>();
+            kayitliFormAdlari = vt.kayitliFormlarınIsimleriniGetir();
+            if (kayitliFormAdlari.Count != 0)
+            {
+                for (int i = 0; i < kayitliFormAdlari.Count; i++)
+                {
+                    form1.comboBoxFormTuru.Items.Add(kayitliFormAdlari[i]);
+                }
+            }
         }
     }
 }

@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonUpFastly = new System.Windows.Forms.Button();
             this.buttonDownFastly = new System.Windows.Forms.Button();
@@ -71,16 +73,20 @@
             this.textBoxPageCount = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBoxPageNumber = new System.Windows.Forms.TextBox();
+            this.dataGridViewOkunanlar = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOkunanlar)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(-32, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 69);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(496, 702);
+            this.pictureBox1.Size = new System.Drawing.Size(517, 1007);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -88,9 +94,8 @@
             // 
             // buttonUpFastly
             // 
-            this.buttonUpFastly.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonUpFastly.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonUpFastly.Location = new System.Drawing.Point(598, 296);
+            this.buttonUpFastly.Location = new System.Drawing.Point(628, 377);
             this.buttonUpFastly.Name = "buttonUpFastly";
             this.buttonUpFastly.Size = new System.Drawing.Size(39, 39);
             this.buttonUpFastly.TabIndex = 42;
@@ -99,8 +104,7 @@
             // 
             // buttonDownFastly
             // 
-            this.buttonDownFastly.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonDownFastly.Location = new System.Drawing.Point(598, 462);
+            this.buttonDownFastly.Location = new System.Drawing.Point(628, 543);
             this.buttonDownFastly.Name = "buttonDownFastly";
             this.buttonDownFastly.Size = new System.Drawing.Size(39, 39);
             this.buttonDownFastly.TabIndex = 41;
@@ -109,8 +113,7 @@
             // 
             // buttonRightFastly
             // 
-            this.buttonRightFastly.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonRightFastly.Location = new System.Drawing.Point(688, 378);
+            this.buttonRightFastly.Location = new System.Drawing.Point(718, 459);
             this.buttonRightFastly.Name = "buttonRightFastly";
             this.buttonRightFastly.Size = new System.Drawing.Size(39, 39);
             this.buttonRightFastly.TabIndex = 40;
@@ -119,8 +122,7 @@
             // 
             // buttonLeftFastly
             // 
-            this.buttonLeftFastly.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonLeftFastly.Location = new System.Drawing.Point(508, 379);
+            this.buttonLeftFastly.Location = new System.Drawing.Point(538, 460);
             this.buttonLeftFastly.Name = "buttonLeftFastly";
             this.buttonLeftFastly.Size = new System.Drawing.Size(39, 39);
             this.buttonLeftFastly.TabIndex = 39;
@@ -129,8 +131,7 @@
             // 
             // buttonUp
             // 
-            this.buttonUp.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonUp.Location = new System.Drawing.Point(598, 341);
+            this.buttonUp.Location = new System.Drawing.Point(628, 422);
             this.buttonUp.Name = "buttonUp";
             this.buttonUp.Size = new System.Drawing.Size(39, 39);
             this.buttonUp.TabIndex = 38;
@@ -140,8 +141,7 @@
             // 
             // buttonDown
             // 
-            this.buttonDown.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonDown.Location = new System.Drawing.Point(598, 417);
+            this.buttonDown.Location = new System.Drawing.Point(628, 498);
             this.buttonDown.Name = "buttonDown";
             this.buttonDown.Size = new System.Drawing.Size(39, 39);
             this.buttonDown.TabIndex = 37;
@@ -151,8 +151,7 @@
             // 
             // buttonRight
             // 
-            this.buttonRight.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonRight.Location = new System.Drawing.Point(643, 379);
+            this.buttonRight.Location = new System.Drawing.Point(673, 460);
             this.buttonRight.Name = "buttonRight";
             this.buttonRight.Size = new System.Drawing.Size(39, 39);
             this.buttonRight.TabIndex = 36;
@@ -162,8 +161,7 @@
             // 
             // buttonLeft
             // 
-            this.buttonLeft.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonLeft.Location = new System.Drawing.Point(553, 378);
+            this.buttonLeft.Location = new System.Drawing.Point(583, 459);
             this.buttonLeft.Name = "buttonLeft";
             this.buttonLeft.Size = new System.Drawing.Size(39, 39);
             this.buttonLeft.TabIndex = 35;
@@ -173,9 +171,8 @@
             // 
             // buttonIzgaraUpFastly
             // 
-            this.buttonIzgaraUpFastly.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonIzgaraUpFastly.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonIzgaraUpFastly.Location = new System.Drawing.Point(865, 297);
+            this.buttonIzgaraUpFastly.Location = new System.Drawing.Point(895, 406);
             this.buttonIzgaraUpFastly.Name = "buttonIzgaraUpFastly";
             this.buttonIzgaraUpFastly.Size = new System.Drawing.Size(39, 39);
             this.buttonIzgaraUpFastly.TabIndex = 51;
@@ -184,8 +181,7 @@
             // 
             // buttonIzgaraDownFastly
             // 
-            this.buttonIzgaraDownFastly.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonIzgaraDownFastly.Location = new System.Drawing.Point(865, 463);
+            this.buttonIzgaraDownFastly.Location = new System.Drawing.Point(895, 572);
             this.buttonIzgaraDownFastly.Name = "buttonIzgaraDownFastly";
             this.buttonIzgaraDownFastly.Size = new System.Drawing.Size(39, 39);
             this.buttonIzgaraDownFastly.TabIndex = 50;
@@ -194,8 +190,7 @@
             // 
             // buttonIzgaraRightFastly
             // 
-            this.buttonIzgaraRightFastly.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonIzgaraRightFastly.Location = new System.Drawing.Point(955, 379);
+            this.buttonIzgaraRightFastly.Location = new System.Drawing.Point(985, 488);
             this.buttonIzgaraRightFastly.Name = "buttonIzgaraRightFastly";
             this.buttonIzgaraRightFastly.Size = new System.Drawing.Size(39, 39);
             this.buttonIzgaraRightFastly.TabIndex = 49;
@@ -204,8 +199,7 @@
             // 
             // buttonIzgaraLeftFastly
             // 
-            this.buttonIzgaraLeftFastly.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonIzgaraLeftFastly.Location = new System.Drawing.Point(775, 380);
+            this.buttonIzgaraLeftFastly.Location = new System.Drawing.Point(805, 489);
             this.buttonIzgaraLeftFastly.Name = "buttonIzgaraLeftFastly";
             this.buttonIzgaraLeftFastly.Size = new System.Drawing.Size(39, 39);
             this.buttonIzgaraLeftFastly.TabIndex = 48;
@@ -214,8 +208,7 @@
             // 
             // buttonIzgaraUp
             // 
-            this.buttonIzgaraUp.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonIzgaraUp.Location = new System.Drawing.Point(865, 342);
+            this.buttonIzgaraUp.Location = new System.Drawing.Point(895, 451);
             this.buttonIzgaraUp.Name = "buttonIzgaraUp";
             this.buttonIzgaraUp.Size = new System.Drawing.Size(39, 39);
             this.buttonIzgaraUp.TabIndex = 47;
@@ -225,8 +218,7 @@
             // 
             // buttonIzgaraDown
             // 
-            this.buttonIzgaraDown.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonIzgaraDown.Location = new System.Drawing.Point(866, 418);
+            this.buttonIzgaraDown.Location = new System.Drawing.Point(896, 527);
             this.buttonIzgaraDown.Name = "buttonIzgaraDown";
             this.buttonIzgaraDown.Size = new System.Drawing.Size(39, 39);
             this.buttonIzgaraDown.TabIndex = 46;
@@ -236,8 +228,7 @@
             // 
             // buttonIzgaraRight
             // 
-            this.buttonIzgaraRight.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonIzgaraRight.Location = new System.Drawing.Point(910, 380);
+            this.buttonIzgaraRight.Location = new System.Drawing.Point(940, 489);
             this.buttonIzgaraRight.Name = "buttonIzgaraRight";
             this.buttonIzgaraRight.Size = new System.Drawing.Size(39, 39);
             this.buttonIzgaraRight.TabIndex = 45;
@@ -247,8 +238,7 @@
             // 
             // buttonIzgaraLeft
             // 
-            this.buttonIzgaraLeft.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonIzgaraLeft.Location = new System.Drawing.Point(820, 379);
+            this.buttonIzgaraLeft.Location = new System.Drawing.Point(850, 488);
             this.buttonIzgaraLeft.Name = "buttonIzgaraLeft";
             this.buttonIzgaraLeft.Size = new System.Drawing.Size(39, 39);
             this.buttonIzgaraLeft.TabIndex = 44;
@@ -258,12 +248,11 @@
             // 
             // comboBoxAlanlar
             // 
-            this.comboBoxAlanlar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.comboBoxAlanlar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.comboBoxAlanlar.FormattingEnabled = true;
             this.comboBoxAlanlar.Items.AddRange(new object[] {
             "Tüm Alanlar"});
-            this.comboBoxAlanlar.Location = new System.Drawing.Point(775, 261);
+            this.comboBoxAlanlar.Location = new System.Drawing.Point(805, 370);
             this.comboBoxAlanlar.Name = "comboBoxAlanlar";
             this.comboBoxAlanlar.Size = new System.Drawing.Size(219, 24);
             this.comboBoxAlanlar.TabIndex = 52;
@@ -272,9 +261,9 @@
             // 
             this.buttonKaydet.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonKaydet.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonKaydet.Location = new System.Drawing.Point(643, 542);
+            this.buttonKaydet.Location = new System.Drawing.Point(543, 599);
             this.buttonKaydet.Name = "buttonKaydet";
-            this.buttonKaydet.Size = new System.Drawing.Size(220, 44);
+            this.buttonKaydet.Size = new System.Drawing.Size(186, 44);
             this.buttonKaydet.TabIndex = 53;
             this.buttonKaydet.Text = "Kalibrasyonu Kaydet";
             this.buttonKaydet.UseVisualStyleBackColor = true;
@@ -282,8 +271,7 @@
             // 
             // buttonParlaklikEşigiAzalt
             // 
-            this.buttonParlaklikEşigiAzalt.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonParlaklikEşigiAzalt.Location = new System.Drawing.Point(527, 159);
+            this.buttonParlaklikEşigiAzalt.Location = new System.Drawing.Point(557, 268);
             this.buttonParlaklikEşigiAzalt.Name = "buttonParlaklikEşigiAzalt";
             this.buttonParlaklikEşigiAzalt.Size = new System.Drawing.Size(75, 23);
             this.buttonParlaklikEşigiAzalt.TabIndex = 1;
@@ -293,8 +281,7 @@
             // 
             // buttonParlaklikEşigiArttir
             // 
-            this.buttonParlaklikEşigiArttir.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonParlaklikEşigiArttir.Location = new System.Drawing.Point(608, 159);
+            this.buttonParlaklikEşigiArttir.Location = new System.Drawing.Point(638, 268);
             this.buttonParlaklikEşigiArttir.Name = "buttonParlaklikEşigiArttir";
             this.buttonParlaklikEşigiArttir.Size = new System.Drawing.Size(75, 23);
             this.buttonParlaklikEşigiArttir.TabIndex = 2;
@@ -304,9 +291,8 @@
             // 
             // labelParlaklikEsigi
             // 
-            this.labelParlaklikEsigi.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelParlaklikEsigi.AutoSize = true;
-            this.labelParlaklikEsigi.Location = new System.Drawing.Point(592, 131);
+            this.labelParlaklikEsigi.Location = new System.Drawing.Point(622, 240);
             this.labelParlaklikEsigi.Name = "labelParlaklikEsigi";
             this.labelParlaklikEsigi.Size = new System.Drawing.Size(13, 13);
             this.labelParlaklikEsigi.TabIndex = 3;
@@ -314,9 +300,8 @@
             // 
             // labelEsikDegeri
             // 
-            this.labelEsikDegeri.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelEsikDegeri.AutoSize = true;
-            this.labelEsikDegeri.Location = new System.Drawing.Point(786, 131);
+            this.labelEsikDegeri.Location = new System.Drawing.Point(816, 240);
             this.labelEsikDegeri.Name = "labelEsikDegeri";
             this.labelEsikDegeri.Size = new System.Drawing.Size(13, 13);
             this.labelEsikDegeri.TabIndex = 56;
@@ -324,8 +309,7 @@
             // 
             // buttonGrilikEsigiArttir
             // 
-            this.buttonGrilikEsigiArttir.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonGrilikEsigiArttir.Location = new System.Drawing.Point(802, 159);
+            this.buttonGrilikEsigiArttir.Location = new System.Drawing.Point(832, 268);
             this.buttonGrilikEsigiArttir.Name = "buttonGrilikEsigiArttir";
             this.buttonGrilikEsigiArttir.Size = new System.Drawing.Size(75, 23);
             this.buttonGrilikEsigiArttir.TabIndex = 55;
@@ -335,8 +319,7 @@
             // 
             // buttonGrilikEsigiAzalt
             // 
-            this.buttonGrilikEsigiAzalt.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonGrilikEsigiAzalt.Location = new System.Drawing.Point(721, 159);
+            this.buttonGrilikEsigiAzalt.Location = new System.Drawing.Point(751, 268);
             this.buttonGrilikEsigiAzalt.Name = "buttonGrilikEsigiAzalt";
             this.buttonGrilikEsigiAzalt.Size = new System.Drawing.Size(75, 23);
             this.buttonGrilikEsigiAzalt.TabIndex = 54;
@@ -346,9 +329,8 @@
             // 
             // labelSikOkumaHassasiyeti
             // 
-            this.labelSikOkumaHassasiyeti.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelSikOkumaHassasiyeti.AutoSize = true;
-            this.labelSikOkumaHassasiyeti.Location = new System.Drawing.Point(991, 131);
+            this.labelSikOkumaHassasiyeti.Location = new System.Drawing.Point(1021, 240);
             this.labelSikOkumaHassasiyeti.Name = "labelSikOkumaHassasiyeti";
             this.labelSikOkumaHassasiyeti.Size = new System.Drawing.Size(13, 13);
             this.labelSikOkumaHassasiyeti.TabIndex = 59;
@@ -356,8 +338,7 @@
             // 
             // buttonSikOkumaHassasiyetiArttir
             // 
-            this.buttonSikOkumaHassasiyetiArttir.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonSikOkumaHassasiyetiArttir.Location = new System.Drawing.Point(1007, 159);
+            this.buttonSikOkumaHassasiyetiArttir.Location = new System.Drawing.Point(1037, 268);
             this.buttonSikOkumaHassasiyetiArttir.Name = "buttonSikOkumaHassasiyetiArttir";
             this.buttonSikOkumaHassasiyetiArttir.Size = new System.Drawing.Size(75, 23);
             this.buttonSikOkumaHassasiyetiArttir.TabIndex = 58;
@@ -367,8 +348,7 @@
             // 
             // buttonSikOkumaHassasiyetiAzalt
             // 
-            this.buttonSikOkumaHassasiyetiAzalt.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonSikOkumaHassasiyetiAzalt.Location = new System.Drawing.Point(926, 159);
+            this.buttonSikOkumaHassasiyetiAzalt.Location = new System.Drawing.Point(956, 268);
             this.buttonSikOkumaHassasiyetiAzalt.Name = "buttonSikOkumaHassasiyetiAzalt";
             this.buttonSikOkumaHassasiyetiAzalt.Size = new System.Drawing.Size(75, 23);
             this.buttonSikOkumaHassasiyetiAzalt.TabIndex = 57;
@@ -378,13 +358,12 @@
             // 
             // buttonPictureNext
             // 
-            this.buttonPictureNext.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonPictureNext.BackColor = System.Drawing.Color.Transparent;
             this.buttonPictureNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.buttonPictureNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPictureNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.buttonPictureNext.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.buttonPictureNext.Location = new System.Drawing.Point(830, 5);
+            this.buttonPictureNext.Location = new System.Drawing.Point(860, 114);
             this.buttonPictureNext.Name = "buttonPictureNext";
             this.buttonPictureNext.Size = new System.Drawing.Size(58, 27);
             this.buttonPictureNext.TabIndex = 60;
@@ -394,13 +373,12 @@
             // 
             // buttonPictureBack
             // 
-            this.buttonPictureBack.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonPictureBack.BackColor = System.Drawing.Color.Transparent;
             this.buttonPictureBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.buttonPictureBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPictureBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.buttonPictureBack.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.buttonPictureBack.Location = new System.Drawing.Point(606, 4);
+            this.buttonPictureBack.Location = new System.Drawing.Point(636, 113);
             this.buttonPictureBack.Name = "buttonPictureBack";
             this.buttonPictureBack.Size = new System.Drawing.Size(65, 27);
             this.buttonPictureBack.TabIndex = 61;
@@ -410,11 +388,10 @@
             // 
             // radioButtonTüm
             // 
-            this.radioButtonTüm.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.radioButtonTüm.AutoSize = true;
             this.radioButtonTüm.Checked = true;
             this.radioButtonTüm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.radioButtonTüm.Location = new System.Drawing.Point(598, 34);
+            this.radioButtonTüm.Location = new System.Drawing.Point(628, 143);
             this.radioButtonTüm.Name = "radioButtonTüm";
             this.radioButtonTüm.Size = new System.Drawing.Size(290, 24);
             this.radioButtonTüm.TabIndex = 63;
@@ -425,10 +402,9 @@
             // 
             // radioButtonGosterilen
             // 
-            this.radioButtonGosterilen.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.radioButtonGosterilen.AutoSize = true;
             this.radioButtonGosterilen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.radioButtonGosterilen.Location = new System.Drawing.Point(598, 63);
+            this.radioButtonGosterilen.Location = new System.Drawing.Point(628, 172);
             this.radioButtonGosterilen.Name = "radioButtonGosterilen";
             this.radioButtonGosterilen.Size = new System.Drawing.Size(323, 24);
             this.radioButtonGosterilen.TabIndex = 64;
@@ -438,8 +414,7 @@
             // 
             // buttonParlaklikUygula
             // 
-            this.buttonParlaklikUygula.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonParlaklikUygula.Location = new System.Drawing.Point(563, 188);
+            this.buttonParlaklikUygula.Location = new System.Drawing.Point(593, 297);
             this.buttonParlaklikUygula.Name = "buttonParlaklikUygula";
             this.buttonParlaklikUygula.Size = new System.Drawing.Size(75, 23);
             this.buttonParlaklikUygula.TabIndex = 65;
@@ -449,8 +424,7 @@
             // 
             // buttonGrilikUygula
             // 
-            this.buttonGrilikUygula.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonGrilikUygula.Location = new System.Drawing.Point(754, 188);
+            this.buttonGrilikUygula.Location = new System.Drawing.Point(784, 297);
             this.buttonGrilikUygula.Name = "buttonGrilikUygula";
             this.buttonGrilikUygula.Size = new System.Drawing.Size(75, 23);
             this.buttonGrilikUygula.TabIndex = 66;
@@ -460,10 +434,9 @@
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(508, 104);
+            this.label1.Location = new System.Drawing.Point(538, 213);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(191, 23);
             this.label1.TabIndex = 68;
@@ -472,10 +445,9 @@
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(719, 104);
+            this.label2.Location = new System.Drawing.Point(749, 213);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(158, 23);
             this.label2.TabIndex = 69;
@@ -484,10 +456,9 @@
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(888, 104);
+            this.label3.Location = new System.Drawing.Point(918, 213);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(204, 23);
             this.label3.TabIndex = 70;
@@ -496,10 +467,9 @@
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(508, 262);
+            this.label4.Location = new System.Drawing.Point(538, 343);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(219, 23);
             this.label4.TabIndex = 71;
@@ -508,10 +478,9 @@
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label5.Location = new System.Drawing.Point(775, 235);
+            this.label5.Location = new System.Drawing.Point(805, 344);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(219, 23);
             this.label5.TabIndex = 72;
@@ -520,8 +489,7 @@
             // 
             // buttonSikHasUygula
             // 
-            this.buttonSikHasUygula.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonSikHasUygula.Location = new System.Drawing.Point(967, 188);
+            this.buttonSikHasUygula.Location = new System.Drawing.Point(997, 297);
             this.buttonSikHasUygula.Name = "buttonSikHasUygula";
             this.buttonSikHasUygula.Size = new System.Drawing.Size(75, 23);
             this.buttonSikHasUygula.TabIndex = 73;
@@ -531,11 +499,10 @@
             // 
             // textBoxPageCount
             // 
-            this.textBoxPageCount.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxPageCount.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.textBoxPageCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxPageCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.textBoxPageCount.Location = new System.Drawing.Point(764, 4);
+            this.textBoxPageCount.Location = new System.Drawing.Point(794, 113);
             this.textBoxPageCount.Name = "textBoxPageCount";
             this.textBoxPageCount.ReadOnly = true;
             this.textBoxPageCount.Size = new System.Drawing.Size(60, 31);
@@ -544,10 +511,9 @@
             // 
             // textBox1
             // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBox1.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.textBox1.Location = new System.Drawing.Point(749, 4);
+            this.textBox1.Location = new System.Drawing.Point(779, 113);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(14, 31);
@@ -557,11 +523,10 @@
             // 
             // textBoxPageNumber
             // 
-            this.textBoxPageNumber.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxPageNumber.BackColor = System.Drawing.SystemColors.Info;
             this.textBoxPageNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxPageNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.textBoxPageNumber.Location = new System.Drawing.Point(688, 5);
+            this.textBoxPageNumber.Location = new System.Drawing.Point(718, 114);
             this.textBoxPageNumber.Name = "textBoxPageNumber";
             this.textBoxPageNumber.Size = new System.Drawing.Size(60, 31);
             this.textBoxPageNumber.TabIndex = 74;
@@ -569,12 +534,53 @@
             this.textBoxPageNumber.Click += new System.EventHandler(this.textBoxPageNumber_Click);
             this.textBoxPageNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPageNumber_KeyPress);
             // 
+            // dataGridViewOkunanlar
+            // 
+            this.dataGridViewOkunanlar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewOkunanlar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewOkunanlar.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewOkunanlar.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewOkunanlar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewOkunanlar.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewOkunanlar.Location = new System.Drawing.Point(1, 1);
+            this.dataGridViewOkunanlar.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.dataGridViewOkunanlar.Name = "dataGridViewOkunanlar";
+            this.dataGridViewOkunanlar.Size = new System.Drawing.Size(1168, 63);
+            this.dataGridViewOkunanlar.TabIndex = 78;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(711, 69);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(133, 34);
+            this.button1.TabIndex = 79;
+            this.button1.Text = "Kontrol Et";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Kalibrasyon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1119, 500);
+            this.ClientSize = new System.Drawing.Size(1169, 646);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.dataGridViewOkunanlar);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.textBoxPageCount);
             this.Controls.Add(this.textBoxPageNumber);
@@ -623,6 +629,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Kalibrasyon_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOkunanlar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -673,5 +680,7 @@
         private System.Windows.Forms.TextBox textBoxPageCount;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBoxPageNumber;
+        private System.Windows.Forms.DataGridView dataGridViewOkunanlar;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -67,26 +67,28 @@
             this.checkBoxBaslik = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.buttonKaydet = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             this.contextMenuStrip_EklenenAlanlar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBoxOkulTuru
             // 
+            this.comboBoxOkulTuru.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.comboBoxOkulTuru.FormattingEnabled = true;
             this.comboBoxOkulTuru.Items.AddRange(new object[] {
             "İlkokul",
             "Ortaokul",
             "Lise"});
-            this.comboBoxOkulTuru.Location = new System.Drawing.Point(12, 71);
+            this.comboBoxOkulTuru.Location = new System.Drawing.Point(746, 75);
             this.comboBoxOkulTuru.Name = "comboBoxOkulTuru";
-            this.comboBoxOkulTuru.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxOkulTuru.Size = new System.Drawing.Size(121, 28);
             this.comboBoxOkulTuru.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 55);
+            this.label1.Location = new System.Drawing.Point(746, 59);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(54, 13);
             this.label1.TabIndex = 1;
@@ -94,7 +96,7 @@
             // 
             // textBoxFormAdi
             // 
-            this.textBoxFormAdi.Location = new System.Drawing.Point(12, 32);
+            this.textBoxFormAdi.Location = new System.Drawing.Point(746, 36);
             this.textBoxFormAdi.Name = "textBoxFormAdi";
             this.textBoxFormAdi.Size = new System.Drawing.Size(121, 20);
             this.textBoxFormAdi.TabIndex = 2;
@@ -102,7 +104,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 13);
+            this.label2.Location = new System.Drawing.Point(746, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 13);
             this.label2.TabIndex = 3;
@@ -113,7 +115,7 @@
             this.checkBoxAdSoyad.AutoSize = true;
             this.checkBoxAdSoyad.Checked = true;
             this.checkBoxAdSoyad.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxAdSoyad.Location = new System.Drawing.Point(215, 35);
+            this.checkBoxAdSoyad.Location = new System.Drawing.Point(949, 39);
             this.checkBoxAdSoyad.Name = "checkBoxAdSoyad";
             this.checkBoxAdSoyad.Size = new System.Drawing.Size(72, 17);
             this.checkBoxAdSoyad.TabIndex = 4;
@@ -125,7 +127,7 @@
             this.checkBoxOgrNo.AutoSize = true;
             this.checkBoxOgrNo.Checked = true;
             this.checkBoxOgrNo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxOgrNo.Location = new System.Drawing.Point(215, 58);
+            this.checkBoxOgrNo.Location = new System.Drawing.Point(949, 62);
             this.checkBoxOgrNo.Name = "checkBoxOgrNo";
             this.checkBoxOgrNo.Size = new System.Drawing.Size(80, 17);
             this.checkBoxOgrNo.TabIndex = 5;
@@ -137,7 +139,7 @@
             this.checkBoxSinif.AutoSize = true;
             this.checkBoxSinif.Checked = true;
             this.checkBoxSinif.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSinif.Location = new System.Drawing.Point(215, 81);
+            this.checkBoxSinif.Location = new System.Drawing.Point(949, 85);
             this.checkBoxSinif.Name = "checkBoxSinif";
             this.checkBoxSinif.Size = new System.Drawing.Size(74, 17);
             this.checkBoxSinif.TabIndex = 6;
@@ -149,7 +151,7 @@
             this.checkBoxKitTuru.AutoSize = true;
             this.checkBoxKitTuru.Checked = true;
             this.checkBoxKitTuru.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxKitTuru.Location = new System.Drawing.Point(301, 35);
+            this.checkBoxKitTuru.Location = new System.Drawing.Point(1035, 39);
             this.checkBoxKitTuru.Name = "checkBoxKitTuru";
             this.checkBoxKitTuru.Size = new System.Drawing.Size(89, 17);
             this.checkBoxKitTuru.TabIndex = 8;
@@ -161,7 +163,7 @@
             this.checkBoxOkulKodu.AutoSize = true;
             this.checkBoxOkulKodu.Checked = true;
             this.checkBoxOkulKodu.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxOkulKodu.Location = new System.Drawing.Point(301, 58);
+            this.checkBoxOkulKodu.Location = new System.Drawing.Point(1035, 62);
             this.checkBoxOkulKodu.Name = "checkBoxOkulKodu";
             this.checkBoxOkulKodu.Size = new System.Drawing.Size(76, 17);
             this.checkBoxOkulKodu.TabIndex = 9;
@@ -172,7 +174,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(229, 5);
+            this.label3.Location = new System.Drawing.Point(963, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(140, 20);
             this.label3.TabIndex = 12;
@@ -180,7 +182,7 @@
             // 
             // textBoxDersAdi
             // 
-            this.textBoxDersAdi.Location = new System.Drawing.Point(537, 48);
+            this.textBoxDersAdi.Location = new System.Drawing.Point(749, 172);
             this.textBoxDersAdi.Name = "textBoxDersAdi";
             this.textBoxDersAdi.Size = new System.Drawing.Size(100, 20);
             this.textBoxDersAdi.TabIndex = 14;
@@ -188,7 +190,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(534, 29);
+            this.label4.Location = new System.Drawing.Point(746, 153);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 15;
@@ -198,7 +200,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label5.Location = new System.Drawing.Point(533, 5);
+            this.label5.Location = new System.Drawing.Point(745, 129);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(168, 20);
             this.label5.TabIndex = 16;
@@ -207,7 +209,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(652, 29);
+            this.label6.Location = new System.Drawing.Point(864, 153);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 13);
             this.label6.TabIndex = 18;
@@ -215,7 +217,7 @@
             // 
             // textBoxSoruSayisi
             // 
-            this.textBoxSoruSayisi.Location = new System.Drawing.Point(655, 48);
+            this.textBoxSoruSayisi.Location = new System.Drawing.Point(867, 172);
             this.textBoxSoruSayisi.Name = "textBoxSoruSayisi";
             this.textBoxSoruSayisi.Size = new System.Drawing.Size(100, 20);
             this.textBoxSoruSayisi.TabIndex = 17;
@@ -223,7 +225,7 @@
             // 
             // buttonEkle
             // 
-            this.buttonEkle.Location = new System.Drawing.Point(608, 77);
+            this.buttonEkle.Location = new System.Drawing.Point(820, 201);
             this.buttonEkle.Name = "buttonEkle";
             this.buttonEkle.Size = new System.Drawing.Size(75, 23);
             this.buttonEkle.TabIndex = 19;
@@ -237,7 +239,8 @@
             this.columnHeader1,
             this.columnHeader2});
             this.listViewEklenenAlanlar.ContextMenuStrip = this.contextMenuStrip_EklenenAlanlar;
-            this.listViewEklenenAlanlar.Location = new System.Drawing.Point(845, 28);
+            this.listViewEklenenAlanlar.HideSelection = false;
+            this.listViewEklenenAlanlar.Location = new System.Drawing.Point(1003, 153);
             this.listViewEklenenAlanlar.Name = "listViewEklenenAlanlar";
             this.listViewEklenenAlanlar.Size = new System.Drawing.Size(217, 97);
             this.listViewEklenenAlanlar.TabIndex = 21;
@@ -272,7 +275,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label7.Location = new System.Drawing.Point(854, 5);
+            this.label7.Location = new System.Drawing.Point(1012, 130);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(194, 20);
             this.label7.TabIndex = 22;
@@ -281,16 +284,17 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 104);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(671, 949);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox1_Paint);
             // 
             // buttonFormuGoruntule
             // 
-            this.buttonFormuGoruntule.Location = new System.Drawing.Point(845, 131);
+            this.buttonFormuGoruntule.Location = new System.Drawing.Point(1003, 256);
             this.buttonFormuGoruntule.Name = "buttonFormuGoruntule";
             this.buttonFormuGoruntule.Size = new System.Drawing.Size(217, 23);
             this.buttonFormuGoruntule.TabIndex = 24;
@@ -300,7 +304,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(845, 189);
+            this.button2.Location = new System.Drawing.Point(1003, 314);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(217, 23);
             this.button2.TabIndex = 25;
@@ -314,6 +318,7 @@
             // 
             // comboBox_TasınacakAlanlar
             // 
+            this.comboBox_TasınacakAlanlar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.comboBox_TasınacakAlanlar.FormattingEnabled = true;
             this.comboBox_TasınacakAlanlar.Items.AddRange(new object[] {
             "Ad-Soyad",
@@ -321,10 +326,10 @@
             "Sınıf-Şube",
             "Okul Kodu",
             "Kitapçık Türü",
-            "Başlık"});
+            "Öğrenci Bilgileri Kutusu"});
             this.comboBox_TasınacakAlanlar.Location = new System.Drawing.Point(710, 334);
             this.comboBox_TasınacakAlanlar.Name = "comboBox_TasınacakAlanlar";
-            this.comboBox_TasınacakAlanlar.Size = new System.Drawing.Size(240, 21);
+            this.comboBox_TasınacakAlanlar.Size = new System.Drawing.Size(240, 28);
             this.comboBox_TasınacakAlanlar.TabIndex = 26;
             // 
             // buttonLeft
@@ -413,11 +418,11 @@
             this.checkBoxBaslik.AutoSize = true;
             this.checkBoxBaslik.Checked = true;
             this.checkBoxBaslik.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxBaslik.Location = new System.Drawing.Point(301, 81);
+            this.checkBoxBaslik.Location = new System.Drawing.Point(1035, 85);
             this.checkBoxBaslik.Name = "checkBoxBaslik";
-            this.checkBoxBaslik.Size = new System.Drawing.Size(54, 17);
+            this.checkBoxBaslik.Size = new System.Drawing.Size(134, 17);
             this.checkBoxBaslik.TabIndex = 35;
-            this.checkBoxBaslik.Text = "Başlık";
+            this.checkBoxBaslik.Text = "Öğrenci Bilgileri Kutusu";
             this.checkBoxBaslik.UseVisualStyleBackColor = true;
             // 
             // label8
@@ -432,7 +437,7 @@
             // 
             // buttonKaydet
             // 
-            this.buttonKaydet.Location = new System.Drawing.Point(845, 160);
+            this.buttonKaydet.Location = new System.Drawing.Point(1003, 285);
             this.buttonKaydet.Name = "buttonKaydet";
             this.buttonKaydet.Size = new System.Drawing.Size(217, 23);
             this.buttonKaydet.TabIndex = 37;
@@ -440,12 +445,24 @@
             this.buttonKaydet.UseVisualStyleBackColor = true;
             this.buttonKaydet.Click += new System.EventHandler(this.buttonKaydet_Click);
             // 
+            // label9
+            // 
+            this.label9.BackColor = System.Drawing.Color.White;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(706, 256);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(261, 47);
+            this.label9.TabIndex = 38;
+            this.label9.Text = "DİKKAT! Kırmızı karelerin içine herhangi bir alan taşımayınız!";
+            // 
             // FormTasarla
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1100, 595);
+            this.ClientSize = new System.Drawing.Size(1249, 502);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.buttonKaydet);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.checkBoxBaslik);
@@ -481,6 +498,8 @@
             this.Controls.Add(this.comboBoxOkulTuru);
             this.Name = "FormTasarla";
             this.Text = "FormTasarla";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormTasarla_FormClosed);
             this.contextMenuStrip_EklenenAlanlar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -528,5 +547,6 @@
         private System.Windows.Forms.CheckBox checkBoxBaslik;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button buttonKaydet;
+        private System.Windows.Forms.Label label9;
     }
 }

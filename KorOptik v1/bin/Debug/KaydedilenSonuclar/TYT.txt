@@ -1,2 +1,0 @@
-﻿Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|TYT-Türkçe| | |TYT-Tarih| | |TYT-Coğrafya| | |TYT-Felsefe| | |TYT-Din Kültürü| | |TYT-Matematik| | |TYT-Fizik| | |TYT-Kimya| | |TYT-Biyoloji| | |TOPLAM| | |
-1|????????????????????|0000|  | |000000| |5|0|5|5|0|5|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|10|0|10|

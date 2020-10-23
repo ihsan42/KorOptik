@@ -19,10 +19,10 @@ namespace KorOptik_v1
 
         FileStream fs;
         public String formadi;
-        public List<string> okunacakStandartAlanlar=new List<string>();
-        public List<string> okunacakDersler=new List<string>();
+        public List<string> okunacakStandartAlanlar = new List<string>();
+        public List<string> okunacakDersler = new List<string>();
         public List<OgrenciOkunan> okunanlarTekOturum;
-        List<int> soruSayilari;     
+        List<int> soruSayilari;
 
         private void Degerlendir_Load(object sender, EventArgs e)
         {
@@ -49,9 +49,9 @@ namespace KorOptik_v1
             }
 
             soruSayilari = new List<int>();
-
-            List<int> soruSay = new List<int>();
             Veritabani vt = new Veritabani();
+            List<int> soruSay = new List<int>();
+            vt = new Veritabani();
             vt.baglan();
             soruSay = vt.soruSayılariniGetir(formadi);
             foreach (int say in soruSay)
@@ -67,6 +67,24 @@ namespace KorOptik_v1
             cevapAnahtariDersleriniGoruntule(dataGridViewCevapAnahtariC, okunacakDersler, soruSayilari);
             cevapAnahtariDersleriniGoruntule(dataGridViewCevapAnahtariD, okunacakDersler, soruSayilari);
 
+
+            List<String> cevaplar = new List<string>();
+            vt.baglan();
+            cevaplar = vt.getirCevapAnahtariA();
+            int derssayisi = cevaplar.Count;
+
+            for (int i = 0; i < okunacakDersler.Count; i++)
+            {
+                if (i + 1 <= derssayisi) {
+                    for (int j = 1; j < soruSayilari[i] + 1; j++)
+                    {
+                        if (j<=cevaplar[i].Length)
+                        {
+                            dataGridViewCevapAnahtariA.Rows[i].Cells[j].Value = cevaplar[i][j-1];
+                        }                    
+                    }                                 
+                }          
+            }
 
         }
 
@@ -105,7 +123,7 @@ namespace KorOptik_v1
 
             for (int i = 0; i < oturumDerslerHepsi.Count; i++)
             {
-                for (int j = 1; j < soruSayilari[i]+1; j++)
+                for (int j = 1; j < soruSayilari[i] + 1; j++)
                 {
                     dataGridView.Rows[i].Cells[j].Style.BackColor = Color.LightGray;
                     dataGridView.Columns[j].Width = 40;
@@ -120,7 +138,7 @@ namespace KorOptik_v1
                     {
                         dataGridView.Rows[i].Cells[j].ReadOnly = true;
                     }
-                    
+
                 }
             }
         }
@@ -133,7 +151,7 @@ namespace KorOptik_v1
             foreach (String s in okunacakStdalanlar)
             {
                 sira += 1;
-                listView.Columns.Add("column" + sira.ToString(), s);               
+                listView.Columns.Add("column" + sira.ToString(), s);
             }
 
             listView.Columns.Add("&&&");
@@ -145,7 +163,7 @@ namespace KorOptik_v1
                 listView.Columns.Add("column" + sira.ToString(), "TYT-Türkçe");
                 listView.Columns.Add("column" + sira.ToString(), " ");
                 listView.Columns.Add("column" + sira.ToString(), " ");
-              
+
                 listView.Columns.Add("column" + sira.ToString(), "TYT-Tarih");
                 listView.Columns.Add("column" + sira.ToString(), " ");
                 listView.Columns.Add("column" + sira.ToString(), " ");
@@ -236,13 +254,13 @@ namespace KorOptik_v1
                     listView.Columns.Add("column" + sira.ToString(), " ");
                 }
             }
-            
+
             listView.Columns.Add("TOPLAM");
             listView.Columns.Add(" ");
-            listView.Columns.Add(" ");                              
+            listView.Columns.Add(" ");
 
             listView.Items.Add("");
-            for (int i=0;i<okunacakStdalanlar.Count+1;i++)
+            for (int i = 0; i < okunacakStdalanlar.Count + 1; i++)
             {
                 listView.Items[0].SubItems.Add(" ");
             }
@@ -274,16 +292,25 @@ namespace KorOptik_v1
                     listView.Items[0].SubItems.Add("N");
                 }
             }
-            
+
             listView.Items[0].SubItems.Add("Doğru");
             listView.Items[0].SubItems.Add("Yanlış");
-            listView.Items[0].SubItems.Add("Net");            
+            listView.Items[0].SubItems.Add("Net");
         }
 
         private void buttonDegerlendir_Click(object sender, EventArgs e)
         {
             Form1 form1 = (Form1)Application.OpenForms["Form1"];
             sonucListesiniHazirla(formadi, listViewSonuclar, okunacakStandartAlanlar, okunacakDersler);
+
+            /* List<string> cevapAnahtariA = new List<string>();
+             for(int i = 1; i < dataGridViewCevapAnahtariA.Rows.Count; i++)
+             {
+                 for (int j = 1; j < dataGridViewCevapAnahtariA.Rows[i].Cells.Count; j++)
+                 {
+                     cevapAnahtariA.Add(dataGridViewCevapAnahtariA.Rows[i].Cells[j].Value.ToString());
+                 }
+             }*/
 
             int siraNo = 0;
             for (int m = 0; m < okunanlarTekOturum.Count; m++)
@@ -1255,7 +1282,7 @@ namespace KorOptik_v1
                     listViewSonuclar.Items[m + 1].SubItems[listViewDersColumnsStart + ogrenci.getOkunanCevaplar().Count * 3].Text = toplamDogru.ToString();
                     listViewSonuclar.Items[m + 1].SubItems[listViewDersColumnsStart + ogrenci.getOkunanCevaplar().Count * 3 + 1].Text = toplamYanlis.ToString();
                     listViewSonuclar.Items[m + 1].SubItems[listViewDersColumnsStart + ogrenci.getOkunanCevaplar().Count * 3 + 2].Text = toplamNet.ToString();
-                }                             
+                }
             }
 
         }
@@ -1332,7 +1359,7 @@ namespace KorOptik_v1
         {
             buttonSonucKaydetSon.Visible = true;
             labelKayitIsmi.Visible = true;
-            textBoxKayitIsmi.Visible = true;               
+            textBoxKayitIsmi.Visible = true;
         }
 
         private void buttonSonucKaydetSon_Click(object sender, EventArgs e)
@@ -1350,34 +1377,35 @@ namespace KorOptik_v1
             {
                 Boolean durum1 = false;
                 Boolean durum2 = false;
-                String yol = "KaydedilenSonuclar/"+kayitAdi + ".txt";
+                String yol = "KaydedilenSonuclar/" + kayitAdi + ".txt";
                 String dosyaIsmi = kayitAdi + ".txt";
 
                 DirectoryInfo di = new DirectoryInfo("KaydedilenSonuclar");
                 FileInfo[] files = di.GetFiles("*.txt", SearchOption.AllDirectories);
 
                 Boolean varMi = false;
-                foreach(FileInfo fi in files)
+                foreach (FileInfo fi in files)
                 {
-                    if (fi.Name.Equals(dosyaIsmi)) {
+                    if (fi.Name.Equals(dosyaIsmi))
+                    {
                         varMi = true;
                     }
                 }
-                if (varMi==true)
+                if (varMi == true)
                 {
                     DialogResult onay = new DialogResult();
                     onay = MessageBox.Show("Bu kayıt ismiyle daha önceden kaydedilmiş sonuçlar var.Üzerine yazılsın mı?", "Dikkat!", MessageBoxButtons.YesNo);
                     if (onay == DialogResult.Yes)
-                    {                        
+                    {
                         durum1 = true;
                         if (System.IO.File.Exists(yol))
                         {
                             System.IO.File.Delete(yol);
-                        }                    
-                    }                   
+                        }
+                    }
                 }
                 else
-                {                   
+                {
                     durum2 = true;
                 }
 
@@ -1390,14 +1418,14 @@ namespace KorOptik_v1
                     {
                         //if (!listViewSonuclar.Columns[i].Text.ToString().Equals(""))
                         //{
-                            sw.Write(listViewSonuclar.Columns[i].Text.ToString() + "|");
+                        sw.Write(listViewSonuclar.Columns[i].Text.ToString() + "|");
                         //}                                          
                     }
 
                     sw.WriteLine();
 
                     for (int i = 1; i < listViewSonuclar.Items.Count; i++)
-                    {                      
+                    {
                         for (int j = 0; j < listViewSonuclar.Items[i].SubItems.Count; j++)
                         {
                             sw.Write(listViewSonuclar.Items[i].SubItems[j].Text.ToString() + "|");
@@ -1417,6 +1445,57 @@ namespace KorOptik_v1
         {
             Raporlar raporlar = new Raporlar();
             raporlar.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataGridView dataGridView = null;
+            dataGridView = dataGridViewCevapAnahtariA;
+
+            for (int i = 0; i < dataGridView.RowCount - 1; i++)
+            {
+                for (int j = 1; j < dataGridView.ColumnCount; j++)
+                {
+                    dataGridView.Rows[i].Cells[j].Value = DBNull.Value;
+                }
+            }
+        }
+
+
+        private void Degerlendir_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DataGridView dataGridView = null;
+            dataGridView = dataGridViewCevapAnahtariA;
+
+            List<String> cevapAnahtariA = new List<string>();
+            for (int i = 0; i < dataGridView.RowCount - 1; i++)
+            {
+                String s = "";
+                for (int j = 1; j < dataGridView.ColumnCount; j++)
+                {
+                    if (dataGridView.Rows[i].Cells[j].Value == null || dataGridView.Rows[i].Cells[j].Value == DBNull.Value || String.IsNullOrEmpty(dataGridView.Rows[i].Cells[j].Value.ToString()))
+                    {
+                        s += " ";
+                    }
+                    else
+                    {
+                        s += dataGridView.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+                cevapAnahtariA.Add(s);
+            }
+
+            Veritabani vt = new Veritabani();
+            vt.baglan();
+            vt.silCevapAnahtariA();
+           
+            foreach (String s in cevapAnahtariA)
+            {
+                vt = new Veritabani();
+                vt.baglan();
+                vt.kaydetCevapAnahtariA(s);
+            }
+          
         }
     }
 }
