@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|MEDİNE KÖKÜNÜZ      |0397|8A|A|753938| |9|5|7,33|7|3|6|7|3|6|4|6|2|4|8|1,33|8|10|4,67|39|35|27,33|

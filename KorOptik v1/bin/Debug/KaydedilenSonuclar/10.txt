@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|NURSİMA KAVAK|580 | 8B| |753938| |11|8|8,33|3|5|1,33|5|5|3,33|1|4|-0,33|3|14|-1,67|3|10|-0,33|26|46|10,66|

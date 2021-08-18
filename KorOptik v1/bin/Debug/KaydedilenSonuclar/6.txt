@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|SUDE NAZ ONAY|0611|8B|A|753938| |7|11|3,33|1|8|-1,67|8|2|7,33|3|5|1,33|1|10|-2,33|4|14|-0,67|24|50|7,32|

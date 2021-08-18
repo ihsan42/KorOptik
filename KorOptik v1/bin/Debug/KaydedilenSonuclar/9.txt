@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|ŞENAY NURHAK|0657|8B| |753938| |6|14|1,33|2|8|-0,67|0|10|-3,33|1|9|-2|4|16|-1,33|4|16|-1,33|17|73|-7,33|

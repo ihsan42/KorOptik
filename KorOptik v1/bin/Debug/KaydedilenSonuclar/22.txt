@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|MEDİNE ÇAMLI |0414|8A|A|753938| |9|10|5,67|6|4|4,67|5|4|3,67|1|1|0,67|2|15|-3|2|12|-2|25|46|9,68|

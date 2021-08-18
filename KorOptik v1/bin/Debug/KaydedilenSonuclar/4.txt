@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|AHMET KÖKENÖZ|0008|8B| |753938| |15|5|13,33|5|4|3,67|6|4|4,67|1|1|0,67|0|0|0|0|1|-0,33|27|15|22,01|

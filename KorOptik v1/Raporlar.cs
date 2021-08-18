@@ -379,6 +379,10 @@ namespace KorOptik_v1
                             }
                             else if (ogrBilgileri[j].Equals("Okul Kodu"))
                             {
+                                if (yazdırılacaklar[j].Equals("      "))
+                                {
+                                    yazdırılacaklar[j] = "0";
+                                }
                                 gruplanacakOgrenci.setOkulKodu(yazdırılacaklar[j]);
                             }                                                  
                         }

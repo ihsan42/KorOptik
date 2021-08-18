@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|ÖMER ASAF GÖKBURUN|0607|8A|A|753938| |6|14|1,33|1|9|-2|2|8|-0,67|0|0|0|2|14|-2,67|5|14|0,33|16|59|-3,68|

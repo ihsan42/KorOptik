@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|PINAR ÇAKIL|529 |8B| |753938| |10|10|6,67|4|5|2,33|4|6|2|2|6|0|6|9|3|5|13|0,67|31|49|14,67|

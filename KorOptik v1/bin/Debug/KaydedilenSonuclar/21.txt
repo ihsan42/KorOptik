@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|İSMAİL CİNKARA      |0697|8A|A|      | |8|8|5,33|0|9|-3|2|6|0|0|0|0|2|15|-3|8|11|4,33|20|49|3,66|

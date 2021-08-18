@@ -44,3 +44,31 @@ C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v
 C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.exe.manifest
 C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.application
 C:\Users\ihsan KORKMAZ\source\repos\KorOptik v1\KorOptik v1\bin\Debug\KorOptik v1.exe.config
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\bin\Debug\KorOptik v1.exe.config
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\bin\Debug\KorOptik v1.exe.manifest
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\bin\Debug\KorOptik v1.application
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\bin\Debug\KorOptik v1.exe
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\bin\Debug\KorOptik v1.pdb
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\bin\Debug\System.Data.SQLite.dll
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\bin\Debug\System.Data.SQLite.xml
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.csprojAssemblyReference.cache
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.csproj.ResolveComReference.cache
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik_v1.Degerlendir.resources
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik_v1.Form1.resources
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik_v1.FormTanit.resources
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik_v1.FormTasarla.resources
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik_v1.FormYazdir.resources
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik_v1.Kalibrasyon.resources
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik_v1.OturumBirlestir.resources
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik_v1.Properties.Resources.resources
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik_v1.Raporlar.resources
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik_v1.SinifSeviyeleri.resources
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.csproj.GenerateResource.cache
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.csproj.CoreCompileInputs.cache
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.TrustInfo.xml
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.exe.manifest
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.application
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.csproj.CopyComplete
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.exe
+C:\Users\ihsanPC\Desktop\KorOptik v1\KorOptik v1\obj\Debug\KorOptik v1.pdb

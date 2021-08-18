@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|HATİCE BİLEN        |0509|8A|A|753938| |7|11|3,33|5|5|3,33|3|6|1|2|7|-0,33|5|12|1|8|12|4|30|53|12,33|

@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|SILA GÜZEL|0654|8A| |753938| |6|14|1,33|4|6|2|4|6|2|3|7|0,67|2|18|-4|5|15|0|24|66|2|

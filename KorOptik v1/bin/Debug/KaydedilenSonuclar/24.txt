@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|NURBANU BİLEN|9999|8A|A|753938| |5|15|0|1|9|-2|1|9|-2|1|9|-2|4|9|1|5|10|1,67|17|61|-3,33|

@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|AHMETÇAMLI|0001|8A|A|753938| |8|12|4|6|4|4,67|7|3|6|1|9|-2|5|15|0|3|17|-2,67|30|60|10|

@@ -266,7 +266,16 @@ namespace KorOptik_v1
                             for (int j = 1; j < toplamOgrSayisal; j++)
                             {
                                 string[] ogrenciBilSayisal = ogrencilerSayisal[j].Split('|');
-
+                                if (ogrenciBilSozel[5].Equals("      "))
+                                {
+                                    ogrenciBilSozel[5] = "0";
+                                }
+                                   
+                                if (ogrenciBilSayisal[5].Equals("      "))
+                                {
+                                    ogrenciBilSayisal[5] = "0";
+                                }
+                                                       
                                 if (Convert.ToInt32(ogrenciBilSozel[5]) == Convert.ToInt32(ogrenciBilSayisal[5]) && Convert.ToInt32(ogrenciBilSozel[2]) == Convert.ToInt32(ogrenciBilSayisal[2]))
                                 {                                    
                                     for (int k=7;k<ogrenciBilSayisal.Length-4;k++)

@@ -145,8 +145,8 @@ namespace KorOptik_v1
                                 basX = baslangicnoktalari[0].X + koseKareBaslangicNoktalari[0].X;
                                 basY = baslangicnoktalari[0].Y + koseKareBaslangicNoktalari[0].Y;
                             }
-                            binaryyap(okunacakForm, basX - 3, basY + 1, 20 * izgaraBoşlukGenislik, 29 * izgaraBoşlukGenislik, m);
-                            String ogrAdi = adsoyadOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
+                            binaryyap(okunacakForm, basX, basY, 20 * izgaraBoşlukGenislik, 29 * izgaraBoşlukGenislik, m);
+                            String ogrAdi = adsoyadOku(okunacakForm, basX, basY, sikokumahassasiyeti);
 
                             ////öĞRENCİ NO OKUMA/////
                             if (kalibrasyonYapildiMi == true)
@@ -159,8 +159,8 @@ namespace KorOptik_v1
                                 basX = baslangicnoktalari[1].X + koseKareBaslangicNoktalari[0].X;
                                 basY = baslangicnoktalari[1].Y + koseKareBaslangicNoktalari[0].Y;
                             }
-                            binaryyap(okunacakForm, basX - 3, basY + 1, 4 * izgaraBoşlukGenislik, 10 * izgaraBoşlukGenislik, m);
-                            string ogrNumarasi = ogrenciNoOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
+                            binaryyap(okunacakForm, basX, basY, 4 * izgaraBoşlukGenislik, 10 * izgaraBoşlukGenislik, m);
+                            string ogrNumarasi = ogrenciNoOku(okunacakForm, basX, basY, sikokumahassasiyeti);
 
                             ////OKUL KODU OKUMA///////
                             if (kalibrasyonYapildiMi == true)
@@ -173,8 +173,8 @@ namespace KorOptik_v1
                                 basX = baslangicnoktalari[4].X + koseKareBaslangicNoktalari[0].X;
                                 basY = baslangicnoktalari[4].Y + koseKareBaslangicNoktalari[0].Y;
                             }
-                            binaryyap(okunacakForm, basX - 3, basY + 1, 6 * izgaraBoşlukGenislik, 10 * izgaraBoşlukGenislik, m);
-                            string okulkodu = okulKoduOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
+                            binaryyap(okunacakForm, basX, basY, 6 * izgaraBoşlukGenislik, 10 * izgaraBoşlukGenislik, m);
+                            string okulkodu = okulKoduOku(okunacakForm, basX, basY, sikokumahassasiyeti);
 
                             ///////KİTAPÇIK TÜRÜ OKUMA////////
                             if (kalibrasyonYapildiMi == true)
@@ -187,8 +187,8 @@ namespace KorOptik_v1
                                 basX = baslangicnoktalari[3].X + koseKareBaslangicNoktalari[0].X;
                                 basY = baslangicnoktalari[3].Y + koseKareBaslangicNoktalari[0].Y;
                             }
-                            binaryyap(okunacakForm, basX - 3, basY + 1, 1 * izgaraBoşlukGenislik, 4 * izgaraBoşlukGenislik, m);
-                            string kitTuru = kitapcikTuruOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
+                            binaryyap(okunacakForm, basX, basY, 1 * izgaraBoşlukGenislik, 4 * izgaraBoşlukGenislik, m);
+                            string kitTuru = kitapcikTuruOku(okunacakForm, basX, basY, sikokumahassasiyeti);
 
                             ///////SINIF-ŞUBE OKUMA//////////
                             if (kalibrasyonYapildiMi == true)
@@ -201,10 +201,10 @@ namespace KorOptik_v1
                                 basX = baslangicnoktalari[2].X + koseKareBaslangicNoktalari[0].X;
                                 basY = baslangicnoktalari[2].Y + koseKareBaslangicNoktalari[0].Y;
                             }
-                            binaryyap(okunacakForm, basX - 3, basY + 1, 1 * izgaraBoşlukGenislik, 12 * izgaraBoşlukGenislik, m);
-                            binaryyap(okunacakForm, basX - 3 + izgaraBoşlukGenislik, basY + 1, 1 * izgaraBoşlukGenislik, 29 * izgaraBoşlukGenislik, m);
-                            string sinif = sinifOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
-                            string sube = subeOku(okunacakForm, basX - 3 + izgaraBoşlukGenislik, basY + 1, sikokumahassasiyeti);
+                            binaryyap(okunacakForm, basX, basY, 1 * izgaraBoşlukGenislik, 12 * izgaraBoşlukGenislik, m);
+                            binaryyap(okunacakForm, basX+ izgaraBoşlukGenislik, basY, 1 * izgaraBoşlukGenislik, 29 * izgaraBoşlukGenislik, m);
+                            string sinif = sinifOku(okunacakForm, basX, basY, sikokumahassasiyeti);
+                            string sube = subeOku(okunacakForm, basX + izgaraBoşlukGenislik, basY, sikokumahassasiyeti);
 
                             //////////DERSLERİ OKUMA////////////
                             int sikSayisi = 0;
@@ -236,8 +236,8 @@ namespace KorOptik_v1
                                     basY = baslangicnoktalari[6 + i].Y + koseKareBaslangicNoktalari[0].Y;
                                 }
 
-                                binaryyap(okunacakForm, basX + 6, basY, sikSayisi * izgaraBoşlukGenislik, sorusayisi * izgaraBoşlukGenislik, m);
-                                string cevap = dersleriOku(okunacakForm, basX + 6, basY, okulturu, sorusayisi, sikSayisi, sikokumahassasiyeti);
+                                binaryyap(okunacakForm, basX+izgaraBoşlukGenislik, basY, sikSayisi * izgaraBoşlukGenislik, sorusayisi * izgaraBoşlukGenislik, m);
+                                string cevap = dersleriOku(okunacakForm, basX+izgaraBoşlukGenislik, basY, okulturu, sorusayisi, sikSayisi, sikokumahassasiyeti);
                                 cevaplar.Add(cevap);
                             }
 

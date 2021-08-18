@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|SERDAR US           |671 |8B| |753938| |4|16|-1,33|2|8|-0,67|2|8|-0,67|1|4|-0,33|8|12|4|6|14|1,33|23|62|2,33|

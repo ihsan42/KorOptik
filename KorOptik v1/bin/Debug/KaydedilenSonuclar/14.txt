@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|MEFE KABAARDIÇ      |0452|8A|A| 53938| |16|4|14,67|10|0|10|7|3|6|7|3|6|11|9|8|9|11|5,33|60|30|50|

@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|AYŞEGÜL AKYOL|0100|8A|A|753938| |12|7|9,67|7|3|6|7|3|6|1|4|-0,33|1|15|-4|7|8|4,33|35|40|21,67|

@@ -291,7 +291,6 @@ namespace KorOptik_v1
 
         private void kenarBul()
         {
-            parlaklikesigi = tumFormlarinDeğerleriKalibre[gosterilenFormSirasi].getParlaklikEsigi();
             bool solUstVarMı = true;
             bool sagUstVarMı = true;
             bool solAltVarMı = true;
@@ -306,7 +305,6 @@ namespace KorOptik_v1
             if (kosekoordinatlari4.Count > parlaklikesigi)
             {
                 kalibreEdilecekForm.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                pictureBox1.Image = kalibreEdilecekForm;
             }
 
             ///////////Sol Üst////////////////////////
@@ -543,12 +541,12 @@ namespace KorOptik_v1
                 y1 = p.Y + koseKareBaslangicNoktalari[0].Y;
                 y2 = p.Y + koseKareBaslangicNoktalari[0].Y + izgaraBoşlukGenislik * 29;
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 4, y1 + 1 - 3 * izgaraBoşlukGenislik, 20 * izgaraBoşlukGenislik, 32 * izgaraBoşlukGenislik);
+               // g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 4, y1 + 1 - 3 * izgaraBoşlukGenislik, 20 * izgaraBoşlukGenislik, 32 * izgaraBoşlukGenislik);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i - 3, j + 1, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i, j , izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
             }
@@ -569,12 +567,12 @@ namespace KorOptik_v1
                 y1 = p.Y + koseKareBaslangicNoktalari[0].Y;
                 y2 = p.Y + koseKareBaslangicNoktalari[0].Y + 10 * izgaraBoşlukGenislik;
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 4, y1 + 1 - 2 * izgaraBoşlukGenislik, 4 * izgaraBoşlukGenislik, 12 * izgaraBoşlukGenislik);
+               // g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 4, y1 + 1 - 2 * izgaraBoşlukGenislik, 4 * izgaraBoşlukGenislik, 12 * izgaraBoşlukGenislik);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i - 3, j + 1, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i , j, izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
             }
@@ -595,12 +593,12 @@ namespace KorOptik_v1
                 y1 = p.Y + koseKareBaslangicNoktalari[0].Y;
                 y2 = p.Y + koseKareBaslangicNoktalari[0].Y + 29 * izgaraBoşlukGenislik;
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 4, y1 + 1 - 2 * izgaraBoşlukGenislik, 2 * izgaraBoşlukGenislik, 31 * izgaraBoşlukGenislik);
+                //g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 4, y1 + 1 - 2 * izgaraBoşlukGenislik, 2 * izgaraBoşlukGenislik, 31 * izgaraBoşlukGenislik);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i - 3, j + 1, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i , j , izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
             }
@@ -621,12 +619,12 @@ namespace KorOptik_v1
                 y1 = p.Y + koseKareBaslangicNoktalari[0].Y;
                 y2 = p.Y + koseKareBaslangicNoktalari[0].Y + 4 * izgaraBoşlukGenislik;
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 1 - 2 * izgaraBoşlukGenislik, y1 + 1 - 7 * izgaraBoşlukGenislik, 44, 108);
+               // g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 1 - 2 * izgaraBoşlukGenislik, y1 + 1 - 7 * izgaraBoşlukGenislik, 44, 108);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i - 3, j + 1, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i, j, izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
             }
@@ -647,12 +645,12 @@ namespace KorOptik_v1
                 y1 = p.Y + koseKareBaslangicNoktalari[0].Y;
                 y2 = p.Y + koseKareBaslangicNoktalari[0].Y + 10 * izgaraBoşlukGenislik;
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 4, y1 + 1 - 2 * izgaraBoşlukGenislik, 6 * izgaraBoşlukGenislik, 12 * izgaraBoşlukGenislik);
+               // g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 4, y1 + 1 - 2 * izgaraBoşlukGenislik, 6 * izgaraBoşlukGenislik, 12 * izgaraBoşlukGenislik);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i - 3, j + 1, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i , j, izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
             }
@@ -690,12 +688,12 @@ namespace KorOptik_v1
                 y1 = dersbaslNok[0].Y + koseKareBaslangicNoktalari[0].Y;
                 y2 = dersbaslNok[0].Y + koseKareBaslangicNoktalari[0].Y + yukseklik;
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
+                //g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + 6, j, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i+izgaraBoşlukGenislik, j, izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
 
@@ -734,12 +732,12 @@ namespace KorOptik_v1
                 y1 = dersbaslNok[1].Y + koseKareBaslangicNoktalari[0].Y;
                 y2 = dersbaslNok[1].Y + koseKareBaslangicNoktalari[0].Y + yukseklik;
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
+                //g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + 6, j, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i+izgaraBoşlukGenislik, j, izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
             }
@@ -777,12 +775,12 @@ namespace KorOptik_v1
                 y1 = dersbaslNok[2].Y + koseKareBaslangicNoktalari[0].Y;
                 y2 = dersbaslNok[2].Y + koseKareBaslangicNoktalari[0].Y + yukseklik;
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
+                //g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + 6, j, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + izgaraBoşlukGenislik, j, izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
             }
@@ -820,12 +818,12 @@ namespace KorOptik_v1
                 y1 = dersbaslNok[3].Y + koseKareBaslangicNoktalari[0].Y;
                 y2 = dersbaslNok[3].Y + koseKareBaslangicNoktalari[0].Y + yukseklik;
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
+               // g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + 6, j, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + izgaraBoşlukGenislik, j, izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
             }
@@ -863,12 +861,12 @@ namespace KorOptik_v1
                 y1 = dersbaslNok[4].Y + koseKareBaslangicNoktalari[0].Y;
                 y2 = dersbaslNok[4].Y + koseKareBaslangicNoktalari[0].Y + yukseklik;
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
+                //g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + 6, j, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + izgaraBoşlukGenislik, j, izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
             }
@@ -906,12 +904,12 @@ namespace KorOptik_v1
                 y1 = dersbaslNok[5].Y + koseKareBaslangicNoktalari[0].Y;
                 y2 = dersbaslNok[5].Y + koseKareBaslangicNoktalari[0].Y + yukseklik;
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
+                //g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + 6, j, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i +izgaraBoşlukGenislik, j, izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
             }
@@ -950,12 +948,12 @@ namespace KorOptik_v1
                 y2 = dersbaslNok[6].Y + koseKareBaslangicNoktalari[0].Y + yukseklik;
 
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
+                //g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + 6, j, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i +izgaraBoşlukGenislik, j, izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
             }
@@ -993,12 +991,12 @@ namespace KorOptik_v1
                 y1 = dersbaslNok[7].Y + koseKareBaslangicNoktalari[0].Y;
                 y2 = dersbaslNok[7].Y + koseKareBaslangicNoktalari[0].Y + yukseklik;
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
+                //g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + 6, j, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i +izgaraBoşlukGenislik, j, izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
             }
@@ -1036,12 +1034,12 @@ namespace KorOptik_v1
                 y1 = dersbaslNok[8].Y + koseKareBaslangicNoktalari[0].Y;
                 y2 = dersbaslNok[8].Y + koseKareBaslangicNoktalari[0].Y + yukseklik;
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
+                //g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + 6, j, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + izgaraBoşlukGenislik, j, izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
             }
@@ -1079,12 +1077,12 @@ namespace KorOptik_v1
                 y1 = dersbaslNok[9].Y + koseKareBaslangicNoktalari[0].Y;
                 y2 = dersbaslNok[9].Y + koseKareBaslangicNoktalari[0].Y + yukseklik;
 
-                g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
+               // g.Graphics.DrawRectangle(new Pen(Color.Blue, 1), x1 - 3, y1 - izgaraBoşlukGenislik, genislik + izgaraBoşlukGenislik, yukseklik + izgaraBoşlukGenislik);
                 for (int i = x1; i < x2; i += izgaraBoşlukGenislik)
                 {
                     for (int j = y1; j < y2; j += izgaraBoşlukGenislik)
                     {
-                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + 6, j, izgaraKareGenislik, izgaraKareGenislik);
+                        g.Graphics.DrawRectangle(new Pen(Color.Red, 1), i + izgaraBoşlukGenislik, j, izgaraKareGenislik, izgaraKareGenislik);
                     }
                 }
             }
@@ -1217,7 +1215,8 @@ namespace KorOptik_v1
             else
             {
                 pictureBox1.Invalidate();
-                MessageBox.Show("Aralığın dışına çıktınız!");
+
+              //  MessageBox.Show("Aralığın dışına çıktınız!");
             }
             this.Cursor = Cursors.Default;
         }
@@ -2418,7 +2417,7 @@ namespace KorOptik_v1
             Form1 form1 = (Form1)Application.OpenForms["Form1"];
             form1.kolonIsimleriniGoruntule(formadiKalibre, dataGridViewOkunanlar, okunacakStandartAlanlarKalibre, dersAdlariKalibre, secilenStandartAlanlarIndexler);
 
-            Bitmap secilenForm = new Bitmap(pathsSecilen[gosterilenFormSirasi]);
+            Bitmap secilenForm = new Bitmap(kalibreEdilecekForm);
             Bitmap okunacakForm;
             Bitmap anaForm;
 
@@ -2440,42 +2439,42 @@ namespace KorOptik_v1
                 basX = tumFormlarinDeğerleriKalibre[gosterilenFormSirasi].getAdSoyadBaslangic().X + koseKareBaslangicNoktalari[0].X;
                 basY = tumFormlarinDeğerleriKalibre[gosterilenFormSirasi].getAdSoyadBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
 
-                binaryyap(okunacakForm, basX - 3, basY + 1, 20 * izgaraBoşlukGenislik, 29 * izgaraBoşlukGenislik);
-                String ogrAdi = form1.adsoyadOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
+                binaryyap(okunacakForm, basX, basY, 20 * izgaraBoşlukGenislik, 29 * izgaraBoşlukGenislik);
+                String ogrAdi = form1.adsoyadOku(okunacakForm, basX, basY, sikokumahassasiyeti);
 
                 ////öĞRENCİ NO OKUMA/////
 
                 basX = tumFormlarinDeğerleriKalibre[gosterilenFormSirasi].getOgrenciNoBaslangic().X + koseKareBaslangicNoktalari[0].X;
                 basY = tumFormlarinDeğerleriKalibre[gosterilenFormSirasi].getOgrenciNoBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
 
-                binaryyap(okunacakForm, basX - 3, basY + 1, 4 * izgaraBoşlukGenislik, 10 * izgaraBoşlukGenislik);
-                string ogrNumarasi = form1.ogrenciNoOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
+                binaryyap(okunacakForm, basX, basY, 4 * izgaraBoşlukGenislik, 10 * izgaraBoşlukGenislik);
+                string ogrNumarasi = form1.ogrenciNoOku(okunacakForm, basX, basY, sikokumahassasiyeti);
 
                 ////OKUL KODU OKUMA///////
 
                 basX = tumFormlarinDeğerleriKalibre[gosterilenFormSirasi].getOkulKoduBaslangic().X + koseKareBaslangicNoktalari[0].X;
                 basY = tumFormlarinDeğerleriKalibre[gosterilenFormSirasi].getOkulKoduBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
 
-                binaryyap(okunacakForm, basX - 3, basY + 1, 6 * izgaraBoşlukGenislik, 10 * izgaraBoşlukGenislik);
-                string okulkodu = form1.okulKoduOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
+                binaryyap(okunacakForm, basX, basY, 6 * izgaraBoşlukGenislik, 10 * izgaraBoşlukGenislik);
+                string okulkodu = form1.okulKoduOku(okunacakForm, basX, basY, sikokumahassasiyeti);
 
                 ///////KİTAPÇIK TÜRÜ OKUMA////////
 
                 basX = tumFormlarinDeğerleriKalibre[gosterilenFormSirasi].getKitapcikTuruBaslangic().X + koseKareBaslangicNoktalari[0].X;
                 basY = tumFormlarinDeğerleriKalibre[gosterilenFormSirasi].getKitapcikTuruBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
 
-                binaryyap(okunacakForm, basX - 3, basY + 1, 1 * izgaraBoşlukGenislik, 4 * izgaraBoşlukGenislik);
-                string kitTuru = form1.kitapcikTuruOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
+                binaryyap(okunacakForm, basX, basY, 1 * izgaraBoşlukGenislik, 4 * izgaraBoşlukGenislik);
+                string kitTuru = form1.kitapcikTuruOku(okunacakForm, basX, basY, sikokumahassasiyeti);
 
                 ///////SINIF-ŞUBE OKUMA//////////
 
                 basX = tumFormlarinDeğerleriKalibre[gosterilenFormSirasi].getSinifSubeBaslangic().X + koseKareBaslangicNoktalari[0].X;
                 basY = tumFormlarinDeğerleriKalibre[gosterilenFormSirasi].getSinifSubeBaslangic().Y + koseKareBaslangicNoktalari[0].Y;
 
-                binaryyap(okunacakForm, basX - 3, basY + 1, 1 * izgaraBoşlukGenislik, 12 * izgaraBoşlukGenislik);
-                binaryyap(okunacakForm, basX - 3 + izgaraBoşlukGenislik, basY + 1, 1 * izgaraBoşlukGenislik, 29 * izgaraBoşlukGenislik);
-                string sinif = form1.sinifOku(okunacakForm, basX - 3, basY + 1, sikokumahassasiyeti);
-                string sube = form1.subeOku(okunacakForm, basX - 3 + izgaraBoşlukGenislik, basY + 1, sikokumahassasiyeti);
+                binaryyap(okunacakForm, basX, basY, 1 * izgaraBoşlukGenislik, 12 * izgaraBoşlukGenislik);
+                binaryyap(okunacakForm, basX + izgaraBoşlukGenislik, basY, 1 * izgaraBoşlukGenislik, 29 * izgaraBoşlukGenislik);
+                string sinif = form1.sinifOku(okunacakForm, basX, basY, sikokumahassasiyeti);
+                string sube = form1.subeOku(okunacakForm, basX + izgaraBoşlukGenislik, basY, sikokumahassasiyeti);
 
                 //////////DERSLERİ OKUMA////////////
                 int sikSayisi = 0;
@@ -2500,8 +2499,8 @@ namespace KorOptik_v1
                     basX = tumFormlarinDeğerleriKalibre[gosterilenFormSirasi].getDersBaslangicNoktalari()[i].X + koseKareBaslangicNoktalari[0].X;
                     basY = tumFormlarinDeğerleriKalibre[gosterilenFormSirasi].getDersBaslangicNoktalari()[i].Y + koseKareBaslangicNoktalari[0].Y;
 
-                    binaryyap(okunacakForm, basX + 6 + izgaraBoşlukGenislik, basY, sikSayisi * izgaraBoşlukGenislik, sorusayisi * izgaraBoşlukGenislik);
-                    string cevap = form1.dersleriOku(okunacakForm, basX + 6+izgaraBoşlukGenislik, basY, okulTuruKalibre, sorusayisi, sikSayisi, sikokumahassasiyeti);
+                    binaryyap(okunacakForm, basX + izgaraBoşlukGenislik, basY, sikSayisi * izgaraBoşlukGenislik, sorusayisi * izgaraBoşlukGenislik);
+                    string cevap = form1.dersleriOku(okunacakForm, basX +izgaraBoşlukGenislik, basY, okulTuruKalibre, sorusayisi, sikSayisi, sikokumahassasiyeti);
                     cevaplar.Add(cevap);
                 }
 

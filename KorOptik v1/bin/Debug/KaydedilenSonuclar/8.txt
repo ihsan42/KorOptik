@@ -1,0 +1,2 @@
+Sıra|Ad-Soyad|Öğrenci No|Sınıf-Şube|Kitapçık Türü|Okul Kodu|&&&|Türkçe| | |Sosyal Bilgiler| | |Din Kültürü| | |İngilizce| | |Matematik| | |Fen Bilimleri| | |TOPLAM| | |
+1|MURAT ALTUN| 464|8B| |753938| |12|7|9,67|9|0|9|7|2|6,33|1|1|0,67|9|5|7,33|12|3|11|50|18|44|
